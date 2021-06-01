@@ -1,0 +1,397 @@
+<script>
+	$(window).on('load',function(){
+		var msj = "{modal_mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+	
+	function pulsar(e) {
+	  tecla = (document.all) ? e.keyCode : e.which;
+	  return (tecla != 13);
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="row">
+			<div class="col-md-12">
+        <div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Atención!</strong> {mensaje}
+        </div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4>Registrar ingreso de certificación</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" id="formularioDatos" method="post" action="/{app_name}/archivos/guardar"
+							enctype="multipart/form-data" onkeypress="return pulsar(event);">
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo de trabajo</label>
+								<div class="col-lg-3">
+									<select name="tipo_id" id="tipo_id" class="form-control" required aria-required="true" onChange="habilitaArchivos();">
+										<option value="">--Seleccionar--</option>
+										{slt_tipos_trabajo}
+									</select>
+								</div>
+								<label for="fecha" class="col-lg-2 control-label">Razón Social</label>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="denominacion" id="denominacion" required="" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo documento</label>
+								<div class="col-lg-3">
+									<select name="tipo_documento" id="tipo_documento" class="form-control">
+										<option value="CUIT">CUIT</option>
+										<option value="CUIL">CUIL</option>
+										<option value="DNI">DNI</option>
+									</select>
+								</div>
+								<label for="documento" class="col-lg-2 control-label">Número</label>
+								<div class="col-lg-5" style="padding-left: 0px;">
+									<div class="col-lg-11" style="padding-right: 0px; margin-right:0 px;">
+										<input onkeypress="if (event.keyCode == 45) event.returnValue = false;" type="number" class="form-control" name="documento" 
+													 id="documento" required="" placeholder="Número" onBlur="compruebaCUIT();" style="width: 90%; margin-right: 0px; padding-right: 0px;"/>
+									</div>
+									<div class="col-lg-1" style="padding-left: 0px; margin-left:0 px; font-size: 30px;">
+										<i class="fa fa-exclamation-circle" id="icon_exclamation" style="float:right;"></i>
+										<i class="fa fa-times-circle" id="icon_error" style="float:right; display: none;"></i>
+										<i class="fa fa-check-circle" id="icon_ok" style="float:right; display: none;"></i>
+									</div>
+								</div>
+								<!--<label for="fecha" class="col-lg-1 control-label">Matricula</label>
+								<div class="col-lg-2">
+									<input type="text" class="form-control" name="matricula" id="matricula" required="" />
+								</div> -->
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha desde</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Fecha hasta</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_cierre" id="fecha_cierre" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" style="padding-top: 0px;">Fecha informe - Certificación</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_informe" id="fecha_informe" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Comentarios</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="comentario" name="comentario" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>              
+              <div class="form-group" id="div_archivos"></div>
+              <div class="form-group">
+								<label class="col-lg-2 control-label" id="lbl_balance">Adjuntar Nota u Otros</label>
+								<div class="col-lg-3">
+									<input type="file" class="form-control" id="archivo_nota" name="archivo_nota" accept=".pdf"/>
+								</div>
+								<div class="col-lg-1">
+                  <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="Se debe agregar cuando se ingrese un trabajo con un DNI o un CUIT de tercero.">
+								</div>
+                <label class="col-lg-2 control-label" id="lbl_balance">Adjunta ANEXOS-DDJJ a Oblea Final?</label>
+								<div class="col-lg-4">
+								  <div class="radio">
+										<label>
+											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="1" checked>
+											Si
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="0">
+											No
+										</label>
+                    <label>
+                      <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
+										</label>
+									</div>	
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Comprobante pago</label>
+								<div class="col-lg-4">
+									<input type="file" class="form-control" id="comprobante_pago" name="comprobante_pago" accept=".pdf" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Método pago</label>
+								<div class="col-lg-4">
+									<div class="radio">
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="1" checked>
+											Depósito
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="2">
+											Transferencia
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="3">
+											Cheque
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Entidad Bancaria</label>
+								<div class="col-lg-4">
+									<select name="entidad_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_entidades}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Número Comprobante</label>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" id="numero_comprobante" name="numero_comprobante" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Número de Cuenta</label>
+								<div class="col-lg-4">
+									<select name="cuenta_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_cuentas}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Importe</label>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" id="importe" name="importe" required/>
+                  <label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
+                  <div class="radio">
+										<label style="font-size: 12px;">
+											<input type="radio" name="excedente" id="excedente" value="1">
+											Pago de Matrícula
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label style="font-size: 12px;">
+											<input type="radio" name="excedente" id="excedente" value="2">
+											Reintegro de Aranceles
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-7 col-lg-offset-5">
+                  <input type="hidden" name="firma_digital" id="firma_digital" value="1">
+									<button type="reset" class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+        <a href="/{app_name}/archivos/genera_comprobante" class="btn btn-info" style="display: {btn_comprobante_display};">Descargar Comprobante</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function() {
+    formularioDatos.documento.addEventListener("keypress", soloNumeros, false);
+  });
+  
+  function soloNumeros(e){
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+      e.preventDefault();
+    }
+  }
+  
+  function compruebaCUIT() {
+    var documento = document.getElementById("documento").value;
+    var tipo_documento = document.getElementById("tipo_documento").value;
+    var icon_exclamation = document.getElementById("icon_exclamation");
+    var icon_error = document.getElementById("icon_error");
+    var icon_ok = document.getElementById("icon_ok");
+		
+		var bandera = "";
+    if (documento == 0) {
+      bandera = "No";
+    } else {
+      if (tipo_documento == 'CUIL' || tipo_documento == 'CUIT') {
+        var path = '/{app_name}/archivos/verificar_cuit/' + documento;
+        bandera = $.ajax({
+            url: path,
+            dataType: 'text',
+            async: false
+          }).responseText;	
+      } else {      
+        var found = new Array(); 
+        if (documento > 1000000 && documento < 100000000) {
+          bandera = "Si";
+        } else {
+          bandera = "No";
+        }
+      }
+    }
+				
+		if (bandera == "Si") {
+			icon_exclamation.style.display = "none";
+			icon_error.style.display = "none";
+			icon_ok.style.display = "block";
+      icon_error.style.color = "#FF0000";
+      document.getElementById('btn_guardar').disabled = false;
+		} else {
+			icon_exclamation.style.display = "none";
+			icon_error.style.display = "block";
+			icon_ok.style.display = "none";
+      icon_error.style.color = "#FF0000";
+      document.getElementById('btn_guardar').disabled = true;
+		}	
+	}
+	
+	function compruebaEjercicio() {
+    var ejercicio = document.getElementById("ejercicio").value;
+		ejercicio = ejercicio.trim();
+		ejercicio = ejercicio.length;
+    
+    var documento = document.getElementById("documento").value;
+    documento = documento.trim();
+		documento = documento.length;
+    
+		var fecha_inicio = document.getElementById("fecha_inicio").value;
+		var fecha_ini = fecha_inicio;
+		fecha_inicio = fecha_inicio.trim();
+		fecha_inicio = fecha_inicio.length;
+    
+    var fecha_cierre = document.getElementById("fecha_cierre").value;
+		var fecha_fin = fecha_cierre;
+		fecha_cierre = fecha_cierre.trim();
+		fecha_cierre = fecha_cierre.length;
+    
+    var fecha_informe = document.getElementById("fecha_informe").value;
+		fecha_informe = fecha_informe.trim();
+		fecha_informe = fecha_informe.length;
+		
+		if (documento == 0) {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('documento').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar el documento.';
+			activaModal(msj);
+		}
+		
+		if (fecha_inicio.length == 0 || fecha_inicio == null || fecha_inicio == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_inicio').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de inicio.';
+			activaModal(msj);
+		}
+		
+		if (fecha_cierre.length == 0 || fecha_cierre == null || fecha_cierre == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_cierre').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de cierre.';
+			activaModal(msj);
+		}
+    
+    if (fecha_informe.length == 0 || fecha_informe == null || fecha_informe == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_informe').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de informe.';
+			activaModal(msj);
+		}
+    
+    if (fecha_ini > fecha_fin) {
+      document.getElementById('fecha_inicio').value = "";
+      document.getElementById('fecha_cierre').value = "";
+      document.getElementById('fecha_inicio').focus();
+      document.getElementById('fecha_cierre').focus();
+			var msj = 'La fecha de inicio no puede ser mayor a la de cierre.';
+			activaModal(msj);
+    }
+		
+		if (ejercicio == 0) {
+			document.getElementById('ejercicio').focus();
+			var msj = 'Por favor complete el número de ejercicio.';
+			activaModal(msj);
+		} else if (documento != 0 && fecha_inicio != 0 && fecha_cierre != 0) {
+			
+			var ejercicio = document.getElementById('ejercicio').value
+			var documento = document.getElementById('documento').value
+			var fecha_inicio = document.getElementById('fecha_inicio').value
+			var fecha_cierre = document.getElementById('fecha_cierre').value
+			var path = '/{app_name}/archivos/verificar_ejercicio/' + ejercicio + '/' + documento + '/' + fecha_inicio + '/' + fecha_cierre;
+			var bandera = "";
+			bandera = $.ajax({
+    			url: path,
+      		dataType: 'text',
+      		async: false
+      	}).responseText;	
+			
+			if (bandera == 'Existe') {
+				document.getElementById("ejercicio").value = "";
+				document.getElementById("documento").value = "";
+				document.getElementById("fecha_inicio").value = "";
+				document.getElementById("fecha_cierre").value = "";
+				document.getElementById('documento').focus();
+				var msj = 'Ya existe un documento que coincide con el que esta tratando de ingresar.';
+				activaModal(msj);
+			}
+		}
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+	
+	function roundToTwo(num) {    
+  	return +(Math.round(num + "e+2")  + "e-2");
+	}
+  
+  function habilitaArchivos() {
+		var tipotrabajo = document.getElementById("tipo_id");
+    var tipo_id = parseInt(tipotrabajo.options[tipotrabajo.selectedIndex].value);
+	
+    switch(tipo_id) {
+      case 3:
+        var bandera = 3;
+        break;
+      case 8:
+        var bandera = 2;
+        break;
+      default:
+        var bandera = 1;
+        break;
+    }
+    
+    var path = '/{app_name}/archivos/traer_formulario_archivo_ajax/' + bandera;
+    var formulario = $.ajax({
+      url: path,
+      dataType: 'text',
+      async: false
+    }).responseText;
+    
+    document.getElementById("div_archivos").innerHTML = formulario;
+	}
+  
+	function prueba() {
+		var valorControl = document.getElementById('activo_corriente').value;
+		var parseado = valorControl.replace(/\./g, '');
+		var parseado2 = parseado.toString().split('').reverse().join('').replace(/\d{3}(?=\d)/g, function(miles){ return miles +'.';})
+		document.getElementById('activo_corriente').value = parseado2.toString().split('').reverse().join('');
+	}
+</script>

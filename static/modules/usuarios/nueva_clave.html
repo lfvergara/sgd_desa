@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sistema de Gestión de Documentación</title>
+
+	  <!-- Google fonts locally-->
+    <link href="/{app_name}/static/theme/css/fonts.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="/{app_name}/static/theme/css/bootstrap.min.css" rel="stylesheet">
+
+  	<!-- Font Awesome -->
+  	<link href="/{app_name}/static/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- DataTable -->
+  	<link href="/{app_name}/static/theme/css/dataTables.bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTable select -->
+  	<link href="/{app_name}/static/theme/css/select.bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTable buttons extention -->
+  	<link href="/{app_name}/static/theme/css/buttons.bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+ <!-- <style>body { padding-top: 20px; } .starter-template { padding: 0px 15px; }</style>-->
+  <style>
+  /* Sticky footer styles
+	-------------------------------------------------- */
+	html {
+	  position: relative;
+	  min-height: 100%;
+	}
+	body {
+	  /* Margin bottom by footer height */
+	  padding-top: 20px;
+	  margin-bottom: 60px;
+	}
+	.starter-template {
+		padding: 20px 15px;
+	}
+	.footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  padding-top: 20px;
+	  /* Set the fixed height of the footer here */
+	  height: 60px;
+	  background-color: #f5f5f5;
+	}
+  </style>
+
+  </head>
+  <body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <h2 style="color: #fff;">Sistema de Gestión de Documentación</h2>
+			</div>
+		  </div>
+		</nav>
+<!-- Cuerpo -->
+	<div class="container">
+	<div class="starter-template">
+		<div class="page-header"></div>
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h4>{titulo}</h4>
+					</div>
+					<div class="panel-body">
+
+						<form class="form-horizontal" method="post" action="/{app_name}/usuarios/generar">
+							<div class="form-group">
+								<label class="col-lg-4 control-label">Usuario</label>
+								<div class="col-lg-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</span>
+										<input type="text" class="form-control" name="denominacion" id="denominacion" value="{denominacion}" readonly="" />
+                    <input type="hidden" class="form-control" name="usuario_id" id="usuario_id" value="{usuario_id}" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 control-label">Contraseña</label>
+								<div class="col-lg-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-unlock"></i>
+										</span>
+										<input type="password" class="form-control" name="clave" id="clave" required="" />
+									</div>
+								</div>
+							</div>
+              <div class="form-group">
+								<label class="col-lg-4 control-label">Repetir Contraseña</label>
+								<div class="col-lg-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-unlock-alt"></i>
+										</span>
+										<input type="password" class="form-control" name="reclave" id="reclave" required="" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-8 col-lg-offset-4">
+									<button type="submit" class="btn btn-success">Guardar</button>
+                  <a href="http://www.cpcelr.org.ar" class="btn btn-default">Salir</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- Cuerpo -->
+	<footer class="footer text-center">
+			&copy; Syntecom 2017
+		</footer>
+	<!-- Pie -->
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="/{app_name}/static/theme/js/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/{app_name}/static/theme/js/bootstrap.min.js"></script>
+	</body>
+	</html>

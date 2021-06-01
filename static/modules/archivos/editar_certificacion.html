@@ -1,0 +1,272 @@
+<script>
+	function pulsar(e) {
+	  tecla = (document.all) ? e.keyCode : e.which;
+	  return (tecla != 13);
+	}
+</script>
+
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4>Editar documentación</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/archivos/actualizar"
+							enctype="multipart/form-data" onkeypress="return pulsar(event);">
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo de trabajo</label>
+								<div class="col-lg-3">
+									<select name="tipo_id" class="form-control" required aria-required="true">
+										<option value="{tipo_id}">{tipo_trabajo}</option>
+										{slt_tipos_trabajo}
+									</select>
+								</div>
+								<label for="fecha" class="col-lg-2 control-label">Razón Social</label>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="denominacion" id="denominacion" value="{nombre}" required="" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Documento</label>
+								<div class="col-lg-2">
+									<select name="tipo_documento" class="form-control">
+										<option value="{tipo_documento}">{tipo_documento}</option>
+										<option value="CUIT">CUIT</option>
+										<option value="CUIL">CUIL</option>
+										<option value="DNI">DNI</option>
+									</select>
+								</div>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="documento" id="documento" value="{documento}" required="" />
+								</div>
+								<label for="fecha" class="col-lg-1 control-label">Matricula</label>
+								<div class="col-lg-2">
+									<input type="text" class="form-control" name="matricula" id="matricula" value="{matricula}" required="" readonly/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha desde</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{fecha_editar_inicio}" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Fecha hasta</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_cierre" id="fecha_cierre" value="{fecha_editar_cierre}" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" style="padding-top: 0px;">Fecha informe - Certificación</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_informe" id="fecha_informe" value="{fecha_editar_informe}" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Comentarios</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="comentario" name="comentario" value="{comentario}" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Método pago</label>
+								<div class="col-lg-4">
+									<div class="radio">
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="1" {opt_checked_deposito}>
+											Depósito
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="2" {opt_checked_transferencia}>
+											Transferencia
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="3" {opt_checked_cheque}>
+											Cheque
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Entidad Bancaria</label>
+								<div class="col-lg-4">
+									<select name="entidad_id" class="form-control">
+										<option value="{entidad_id}" selected>{entidad}</option>
+										{slt_entidades}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Número Comprobante</label>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" id="numero_comprobante" name="numero_comprobante" value="{numero_comprobante}" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Número de Cuenta</label>
+								<div class="col-lg-4">
+									<select name="cuenta_id" class="form-control">
+										<option value="{cuenta_id}" selected>{cuenta} ({numero_cuenta})</option>
+										{slt_cuentas}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Importe</label>
+								<div class="col-lg-4">
+									<input type="number" step="any" class="form-control" id="importe" name="importe" value="{importe}" required/>
+                  <div class="radio" style="font-size: 12px;">
+                    <input type="checkbox" name="excedente" value="1">&nbsp;&nbsp;Excedente de depósito sobre arancel. (Si el monto transferido excede el arancel tilde aquí!)
+                  </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-7 col-lg-offset-5">
+									<input type="hidden" name="archivo_id" value="{archivo_id}">
+									<button type="submit" class="btn btn-primary">Guardar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	function compruebaEjercicio() {
+    var ejercicio = document.getElementById("ejercicio").value;
+		ejercicio = ejercicio.trim();
+		ejercicio = ejercicio.length;
+    
+    var documento = document.getElementById("documento").value;
+    documento = documento.trim();
+		documento = documento.length;
+    
+		var fecha_inicio = document.getElementById("fecha_inicio").value;
+		var fecha_ini = fecha_inicio;
+		fecha_inicio = fecha_inicio.trim();
+		fecha_inicio = fecha_inicio.length;
+    
+    var fecha_cierre = document.getElementById("fecha_cierre").value;
+		var fecha_fin = fecha_cierre;
+		fecha_cierre = fecha_cierre.trim();
+		fecha_cierre = fecha_cierre.length;
+    
+    var fecha_informe = document.getElementById("fecha_informe").value;
+		fecha_informe = fecha_informe.trim();
+		fecha_informe = fecha_informe.length;
+		
+		if (documento == 0) {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('documento').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar el documento.';
+			activaModal(msj);
+		}
+		
+		if (fecha_inicio.length == 0 || fecha_inicio == null || fecha_inicio == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_inicio').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de inicio.';
+			activaModal(msj);
+		}
+		
+		if (fecha_cierre.length == 0 || fecha_cierre == null || fecha_cierre == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_cierre').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de cierre.';
+			activaModal(msj);
+		}
+    
+    if (fecha_informe.length == 0 || fecha_informe == null || fecha_informe == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_informe').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de informe.';
+			activaModal(msj);
+		}
+    
+    if (fecha_ini > fecha_fin) {
+      document.getElementById('fecha_inicio').value = "";
+      document.getElementById('fecha_cierre').value = "";
+      document.getElementById('fecha_inicio').focus();
+      document.getElementById('fecha_cierre').focus();
+			var msj = 'La fecha de inicio no puede ser mayor a la de cierre.';
+			activaModal(msj);
+    }
+		
+		if (ejercicio == 0) {
+			document.getElementById('ejercicio').focus();
+			var msj = 'Por favor complete el número de ejercicio.';
+			activaModal(msj);
+		} else if (documento != 0 && fecha_inicio != 0 && fecha_cierre != 0) {
+			
+			var ejercicio = document.getElementById('ejercicio').value
+			var documento = document.getElementById('documento').value
+			var fecha_inicio = document.getElementById('fecha_inicio').value
+			var fecha_cierre = document.getElementById('fecha_cierre').value
+			var path = '/{app_name}/archivos/verificar_ejercicio/' + ejercicio + '/' + documento + '/' + fecha_inicio + '/' + fecha_cierre;
+			var bandera = "";
+			bandera = $.ajax({
+    			url: path,
+      		dataType: 'text',
+      		async: false
+      	}).responseText;	
+			
+			if (bandera == 'Existe') {
+				document.getElementById("ejercicio").value = "";
+				document.getElementById("documento").value = "";
+				document.getElementById("fecha_inicio").value = "";
+				document.getElementById("fecha_cierre").value = "";
+				document.getElementById('documento').focus();
+				var msj = 'Ya existe un documento que coincide con el que esta tratando de ingresar.';
+				activaModal(msj);
+			}
+		}
+	}
+	
+	function sumar() {
+		var ac = parseFloat(document.getElementById("activo_corriente").value);
+		var anc = parseFloat(document.getElementById("activo_nocorriente").value);
+		var activo = ac + anc;
+		activo = roundToTwo(activo);
+		
+		var pc = parseFloat(document.getElementById("pasivo_corriente").value);
+		var pnc = parseFloat(document.getElementById("pasivo_nocorriente").value);
+		var pasivo = pc + pnc;
+		pasivo = roundToTwo(pasivo);
+		var pn = activo - pasivo;
+		pn = roundToTwo(pn);
+		
+		document.getElementById("pasivo").value = pasivo;
+		document.getElementById("activo").value = activo;
+		document.getElementById("patrimonio_neto").value = pn;
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+	
+	function roundToTwo(num) {    
+  	return +(Math.round(num + "e+2")  + "e-2");
+	}
+</script>

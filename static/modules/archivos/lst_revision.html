@@ -1,0 +1,23 @@
+<div class="col-md-6">
+  <div class="list-group">
+    <div href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><strong>El documento posee revisiones</strong></h5>
+      </div>
+      <small>{FECHA}</small>
+      <p class="mb-1">Respuesta matriculado: <small>{RESPUESTA}</small></p>            
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><strong>Se han realizado {INTENTOS} intentos.</strong></h5>
+        
+        <small><a href="#" onclick="mostrar_revision();">[VER REVISIONES]</a></small>
+      </div>
+      <p class="mb-1"><a href="/{app_name}/archivos/genera_comprobante_revision/{ARCHIVO_ID}">[DESCARGAR COMPROBANTE]</a></p>            
+    </div>
+  </div>
+</div>

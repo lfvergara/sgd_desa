@@ -1,0 +1,85 @@
+<script>
+	$(window).on('load',function() {
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="tab-pane fade active in" id="editar">
+			<div class="col-lg-12">
+        <div class="panel panel-success">
+          <div class="panel-heading"><h4>Agregar Opinión</h4></div>
+          <div class="panel-body">
+            <form class="form-horizontal" action="/{app_name}/opiniones/guardar" method="post">
+              <div class="form-group">
+                <label for="matriculado" class="col-lg-2 control-label">Matriculado</label>
+                <div class="col-lg-5">
+                  <input type="text" class="form-control" id="matriculado" name="matriculado" value="{matriculado}" readonly>
+                </div>
+                <label for="matricula" class="col-lg-2 control-label">Matricula</label>
+                <div class="col-lg-3">
+                  <input type="text" class="form-control" id="matricula" name="matricula" value="{matricula}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="correoelectronico" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-5">
+                  <input type="text" class="form-control" id="correoelectronico" name="correoelectronico" value="{correoelectronico}" readonly>
+                </div>
+                <label for="celular" class="col-lg-2 control-label">Celular</label>
+                <div class="col-lg-3">
+                  <input type="text" class="form-control" id="celular" name="celular" value="{celular}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="tipo" class="col-lg-2 control-label">Tema</label>
+                <div class="col-lg-10">
+                  <select name="opiniontipo_id" id="opiniontipo_id" class="form-control" required aria-required="true">
+										{slt_opinionestipos}
+									</select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="opinion" class="col-lg-2 control-label">Opinión</label>
+                <div class="col-lg-10">
+                  <textarea class="form-control" id="opinion" name="opinion" rows="10" onkeyup="countChars(this);" maxlength="500" required></textarea>
+                  <p id="charNum">0 caracteres escritos. <small style="color: #FF0000;">Máximo 500 caracteres!</small></p>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <input type="hidden" name="matriculado_id" value="{matriculado_id}">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function countChars(obj){
+    document.getElementById("charNum").innerHTML = obj.value.length + " caracteres escritos. <small style='color: #FF0000;'>Máximo 500 caracteres!</small>";
+  }
+</script>

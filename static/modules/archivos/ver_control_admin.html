@@ -1,0 +1,184 @@
+<div class="container-fluid">
+	<div class="starter-template">
+		<div class="page-header hidden-print"><h1>{titulo}</h1></div>
+			<div class="col-lg-4">
+				<div class="panel panel-warning hidden-print">
+					<div class="panel-heading">
+						<h4>
+							Datos del documento
+							<!--<div class="pull-right" style="margin-top: 0px; display: {gui_btn_print}">
+								<button class="btn btn-info btn-xs" onClick="window.print();"><i class="fa fa-print"></i></button>
+							</div>-->
+						</h4>
+					</div>
+					<div class="panel-body">
+						<p>Nombre: <strong>{nombre}</strong></p>
+						<p>Tipo de Trabajo: <strong>{tipo_trabajo}</strong></p>
+						<p>Nº Ejercicio: <strong>{ejercicio}</strong></p>
+						<p>Documento: <strong>{tipo_documento} {documento}</strong></p>
+						<p>Matricula: <strong>{matricula}</strong></p>
+						<p>Fecha Inicio: <strong>{fecha_inicio_resumen}</strong></p>
+						<p>Fecha Cierre: <strong>{fecha_cierre_resumen}</strong></p>
+						<p>Fecha Informe: <strong>{fecha_informe_resumen}</strong></p>
+					</div>
+				</div>
+			</div>
+      <div class="col-lg-4">
+				<div class="panel panel-warning hidden-print">
+					<div class="panel-heading">
+						<h4>
+							Detalle
+						</h4>
+					</div>
+					<div class="panel-body">
+            <p>
+							Activo Corriente: <strong>${activo_corriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Pasivo Corriente: <strong>${pasivo_corriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+            <p>
+							Activo No Corriente: <strong>${activo_nocorriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Pasivo No Corriente: <strong>${pasivo_nocorriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+            <p>
+							Activo: <strong>${activo}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Pasivo: <strong>${pasivo}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+            <p>
+							Patrimonio Neto: <strong>${patrimonio_neto}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Bienes de Uso: <strong>${bienes_uso}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+            <p>Reexpresión del valor de Origen de Bs de Uso: <strong>${origen_bienes_uso}</strong></p>
+            <p>Reexpresión de las depreciasiones acumuladas de Bs de Uso: <strong>${depreciacion_bienes_uso}</strong></p>
+            <p>Resultado de reexpresión  de Bs de Uso: <strong>${resultado_reexpresion_bienes_uso}</strong></p>
+            <p>
+							Ventas Netas: <strong>${venta_neta}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Resultado Final: <strong>${resultado_final}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+					</div>
+				</div>
+			</div>
+      <div class="col-lg-4">
+				<div class="panel panel-warning hidden-print">
+					<div class="panel-heading">
+						<h4>+ Información</h4>
+					</div>
+					<div class="panel-body">
+            <p>Entidad Bancaria: <strong>{entidad}</strong></p>
+            <p>Cuenta: <strong>{cuenta}</strong></p>
+            <p>Nro Cuenta: <strong>{numero_cuenta}</strong></p>
+            <p>Nro Comprobante: <strong>{numero_comprobante}</strong></p>
+            <p>Importe: <strong>${importe}</strong></p>
+            <p>Comentarios: <strong>{comentario}</strong></p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 hidden-print">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>
+							Historial de movimientos
+						</h4>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-hover ">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Estado</th>
+									<th>Fecha</th>
+									<th>Comentario</th>
+									<th class="hidden-print">Archivo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--repetir-->
+								<tr>
+									<td>{seguimiento_id}</td>
+									<td>{estado}</td>
+									<th>{fecha}</th>
+									<td>{comentario}</td>
+									<td class="hidden-print">
+										<a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank">
+											<i class="{icono}"></i>
+										</a>
+									</td>
+								</tr>
+								<!--repetir-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 visible-print" style="display: none;">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h4>Datos del documento</h4>
+					</div>
+					<div class="panel-body">
+						<p>Nombre: <strong>{nombre}</strong></p>
+						<p>Tipo de Trabajo: <strong>{tipo_trabajo}</strong></p>
+						<p>Número de Ejercicio: <strong>{ejercicio}</strong></p>
+						<p>Documento: <strong>{tipo_documento} {documento}</strong></p>
+						<p>Matrícula: <strong>{matricula}</strong></p>
+						<p>
+							Fecha Inicio: <strong>{fecha_inicio_resumen}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+							Fecha Cierre: <strong>{fecha_cierre_resumen}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</p>
+					</div>
+				</div>
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h4>Datos del comprobante de pago</h4>
+					</div>
+					<div class="panel-body">
+						<p>Método de Pago: <strong>{metodo_pago}</strong></p>
+						<p>Entidad Bancaria: <strong>{entidad}</strong></p>
+						<p>Cuenta: <strong>{cuenta}</strong></p>
+						<p>N° Cuenta: <strong>{numero_cuenta}</strong></p>
+						<p><strong>Importe: ${importe}</strong></p>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					{barcode}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function guardar() {
+		var estado_id = document.getElementById('estado_id').value;
+		var obs = document.getElementById('comentario').value;
+		obs = obs.trim();
+		obs = obs.length;
+		
+		if(estado_id==0) {
+			document.getElementById('txt_msj').innerHTML='Debe seleccionar un estado.';
+			$('#modal_msj').modal("show");
+			return false;	
+		} 
+		if(estado_id==3 && obs==0)  {
+			document.getElementById('txt_msj').innerHTML='Debe ingresar una observación para el estado seleccionado.';
+			$('#modal_msj').modal("show");
+			return false;	
+		}
+		document.datos.submit();
+		
+	}
+</script>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="javascript:document.getElementById('estado_id').focus();">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

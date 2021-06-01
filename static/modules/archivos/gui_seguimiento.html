@@ -1,0 +1,24 @@
+<!--repetir-->
+<tr>
+  <td>{seguimiento_id}</td>
+  <td>{estado}</td>
+  <th>{fecha}</th>
+  <td>{comentario}</td>
+  <td>
+    <div>
+      <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank" style="color: #3498db;">
+        <i class="{icono}" style="color: #3498db;display:{display_archivos}"></i>
+      </a>
+      <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{url_informe}" target="_blank" style="">
+         <i class="{icono_informe}" style="display: {display_informe};"></i>
+      </a>
+    </div>
+
+    <div style="display:{display_archivos_observado}">
+      <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank" style="color: #3498db;">
+        OBS: <i class="{icono}" style="color: #3498db;"></i>
+      </a>
+    </div>
+  </td>
+</tr>
+<!--repetir-->

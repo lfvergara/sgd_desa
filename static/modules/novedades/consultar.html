@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="starter-template">
+	   <div class="page-header"><h1>{titulo}</h1></div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+            <a href="/{app_name}/novedades/consultar/{novedad_id}" class="list-group-item list-group-item-action flex-column align-items-start active">
+              <div class="d-flex w-100 justify-content-between">
+                <h3 class="mb-1">{denominacion}</h3>
+                <small>{fecha}</small>
+              </div>
+              <p class="mb-1">{contenido}</p>
+              <hr />
+              <center><img style="width: 50%;" src="/{app_name}/novedades/ver_imagen/novedades/{novedad_id}"></center>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	$(window).on('load',function() {
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+	
+	function controlar() {
+		var pass = document.getElementById("nclave").value;
+		var re_pass = document.getElementById("re_nclave").value;
+
+		if (pass != re_pass) {
+			var msj = 'La contraseñas ingresadas no coinciden.';
+			document.getElementById("nclave").value = "";
+			document.getElementById("re_nclave").value = "";
+			activaModal(msj);
+		} else {
+			document.getElementById("form_edit_pass").submit();
+		}
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>

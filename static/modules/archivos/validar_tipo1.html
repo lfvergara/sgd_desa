@@ -1,0 +1,426 @@
+<script>
+	$(window).on('load',function(){
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+  
+  document.onkeypress = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }  
+
+  document.onmousedown = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }
+  
+  document.onkeydown = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }
+	
+	function pulsar(e) {
+	  tecla = (document.all) ? e.keyCode : e.which;
+	  return (tecla != 13);
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4>Registrar validación de documentación</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" id="formulario_guardar" method="post" action="/{app_name}/archivos/guardar_validacion_tipo1"
+							enctype="multipart/form-data" onkeypress="return pulsar(event);">
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo de trabajo</label>
+								<div class="col-lg-10">
+									<select name="tipo_id" id="tipo_id" class="form-control">
+										<option value="0">--Seleccionar--</option>
+										{slt_tipos_trabajo}
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Documento</label>
+								<div class="col-lg-2">
+									<select name="tipo_documento" class="form-control">
+										<option value="CUIT">CUIT</option>
+										<option value="CUIL">CUIL</option>
+										<option value="DNI">DNI</option>
+									</select>
+								</div>
+								<div class="col-lg-8">
+									<input type="text" class="form-control" name="documento" id="documento" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha inicio</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Fecha cierre</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_cierre" id="fecha_cierre" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha informe</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_informe" id="fecha_informe" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Nro. ejercicio</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="ejercicio" id="ejercicio" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Activo corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="activo_corriente" id="activo_corriente" required="" step="any" onChange="sumar();" value="0" min="0" />
+								</div>
+								<label class="col-lg-2 control-label">Activo no corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="activo_nocorriente" id="activo_nocorriente" required="" step="any" onchange="sumar();"  value="0" />
+								</div>
+								<label class="col-lg-1 control-label">Activo</label>
+								<div class="col-lg-3">
+									<input type="number" class="form-control" name="activo" id="activo" required="" readonly="true" step="any" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Pasivo corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="pasivo_corriente" id="pasivo_corriente" required="" step="any" onchange="sumar();"  value="0" min="0" />
+								</div>
+								<label class="col-lg-2 control-label">Pasivo no corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="pasivo_nocorriente" id="pasivo_nocorriente" required="" step="any" onchange="sumar();"  value="0" />
+								</div>
+								<label class="col-lg-1 control-label">Pasivo</label>
+								<div class="col-lg-3">
+									<input type="number" class="form-control" name="pasivo" id="pasivo" required="" readonly="true" step="any" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Patrimonio neto</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="patrimonio_neto" id="patrimonio_neto" required="" readonly="true" step="any" />
+								</div>
+								<label class="col-lg-2 control-label">Alta bienes de uso</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="bienes_uso" id="bienes_uso" required="" step="any" />
+								</div>
+							</div>							
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Ventas netas y/o ingresos</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="venta_neta" id="venta_neta" required="" step="any" />
+								</div>
+								<label class="col-lg-2 control-label">Resultado final</label>
+								<div class="col-lg-4">
+									<input type="number" step="any" class="form-control" name="resultado_final" id="resultado_final" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Código de Barras</label>
+								<div class="col-lg-10">
+									<input type="password" class="form-control" id="codigo_barras" name="codigo_barras" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-7 col-lg-offset-5">
+                  <input type="hidden" name="archivo_id" value="{verificar-archivo_id}">
+									<button type="reset" class="btn btn-default">Cancelar</button>
+									<button type="button" class="btn btn-primary" onClick="validarTrabajo();">Validar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal_revision" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active">{RESPUESTA}</a>
+          {lst_seguimientos}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	function sumar() {
+		var ac = parseFloat(document.getElementById("activo_corriente").value);
+		var anc = parseFloat(document.getElementById("activo_nocorriente").value);
+		var activo = ac + anc;
+		activo = roundToTwo(activo);
+		
+		var pc = parseFloat(document.getElementById("pasivo_corriente").value);
+		var pnc = parseFloat(document.getElementById("pasivo_nocorriente").value);
+		var pasivo = pc + pnc;
+		pasivo = roundToTwo(pasivo);
+		
+		var pn = activo - pasivo;
+		pn = roundToTwo(pn);
+		
+		document.getElementById("pasivo").value = pasivo;
+		document.getElementById("activo").value = activo;
+		document.getElementById("patrimonio_neto").value = pn;
+	}
+	
+	function roundToTwo(num) {    
+  	return +(Math.round(num + "e+2")  + "e-2");
+	}
+  
+  function mostrar_revision() {
+    $('#modal_revision').modal('show');
+  }
+  
+  function validarTrabajo() {
+    var array_completo = new Array();
+    var array_inconsistencia = new Array();
+    var flag_array_completo = 0;
+    var flag_array_inconsistencia = 0;
+    
+    var tipo = document.getElementById("tipo_id");
+    var tipo_id = tipo.options[tipo.selectedIndex].value;
+    if (tipo_id == null || tipo_id.length == 0 || tipo_id == "" || tipo_id == 0) {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor seleccione el tipo de trabajo.");
+    } else {
+        var obj_tipo_id = {verificar-tipo_id};
+        if (tipo_id != obj_tipo_id) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el tipo de trabajo.");
+        }
+    }
+    
+		var documento = document.getElementById("documento").value;
+    if (documento == null || documento.length == 0 || documento == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el número de documento.");
+    } else {
+        var obj_documento = {verificar-documento};
+        if (documento != obj_documento) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el número de documento.");
+        }
+    }
+    
+    var fecha_inicio = document.getElementById("fecha_inicio").value;
+    if (fecha_inicio == null || fecha_inicio.length == 0 || fecha_inicio == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de inicio.");
+    } else {
+        var obj_fecha_inicio = '{verificar-fecha_inicio}';
+        if (fecha_inicio.toString() != obj_fecha_inicio) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de inicio.");
+        }
+    }
+    
+    var fecha_cierre = document.getElementById("fecha_cierre").value;
+    if (fecha_cierre == null || fecha_cierre.length == 0 || fecha_cierre == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de cierre.");
+    } else {
+        var obj_fecha_cierre = '{verificar-fecha_cierre}';
+        if (fecha_cierre.toString() != obj_fecha_cierre) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de cierre.");
+        }
+    }
+    
+    var fecha_informe = document.getElementById("fecha_informe").value;
+    if (fecha_informe == null || fecha_informe.length == 0 || fecha_informe == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de informe.");
+    } else {
+        var obj_fecha_informe = '{verificar-fecha_informe}';
+        if (fecha_informe.toString() != obj_fecha_informe) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de informe.");
+        }
+    }
+    
+    var ejercicio = document.getElementById("ejercicio").value;
+    if (ejercicio == null || ejercicio.length == 0 || ejercicio == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el número de ejercicio.");
+    } else {
+        var obj_ejercicio = {verificar-ejercicio};
+        if (ejercicio != obj_ejercicio) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el número de ejercicio.");
+        }
+    }
+    
+    var activo_corriente = document.getElementById("activo_corriente").value;
+    if (activo_corriente == null || activo_corriente == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el activo corriente.");
+    } else {
+        var obj_activo_corriente = {verificar-activo_corriente};
+        if (activo_corriente != obj_activo_corriente) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el activo corriente.");
+        }
+    }
+    
+    var activo_nocorriente = document.getElementById("activo_nocorriente").value;
+    if (activo_nocorriente == null || activo_nocorriente == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el activo no corriente.");
+    } else {
+        var obj_activo_nocorriente = {verificar-activo_nocorriente};
+        if (activo_nocorriente != obj_activo_nocorriente) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el activo no corriente.");
+        }
+    }
+    
+    var pasivo_corriente = document.getElementById("pasivo_corriente").value;
+    if (pasivo_corriente == null || pasivo_corriente == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el pasivo corriente.");
+    } else {
+        var obj_pasivo_corriente = {verificar-pasivo_corriente};
+        if (pasivo_corriente != obj_pasivo_corriente) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el pasivo corriente.");
+        }
+    }
+    
+    var pasivo_nocorriente = document.getElementById("pasivo_nocorriente").value;
+    if (pasivo_nocorriente == null || pasivo_nocorriente == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el pasivo no corriente.");
+    } else {
+        var obj_pasivo_nocorriente = {verificar-pasivo_nocorriente};
+        if (pasivo_nocorriente != obj_pasivo_nocorriente) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el pasivo no corriente.");
+        }
+    }
+
+    var patrimonio_neto = document.getElementById("patrimonio_neto").value;
+    if (patrimonio_neto == null || patrimonio_neto == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el patrimonio neto.");
+    } else {
+        var obj_patrimonio_neto = {verificar-patrimonio_neto};
+        if (patrimonio_neto != obj_patrimonio_neto) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el patrimonio neto.");
+        }
+    }
+    
+    var bienes_uso = document.getElementById("bienes_uso").value;
+    if (bienes_uso == null || bienes_uso == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete los bienes de uso.");
+    } else {
+        var obj_bienes_uso = {verificar-bienes_uso};
+        if (bienes_uso != obj_bienes_uso) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en los bienes de uso.");
+        }
+    }
+    
+    var venta_neta = document.getElementById("venta_neta").value;
+    if (venta_neta == null || venta_neta == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la venta neta.");
+    } else {
+        var obj_venta_neta = {verificar-venta_neta};
+        if (venta_neta != obj_venta_neta) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la venta neta.");
+        }
+    }
+    
+    var resultado_final = document.getElementById("resultado_final").value;
+    if (resultado_final == null || resultado_final == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el resultado final.");
+    } else {
+        var obj_resultado_final = {verificar-resultado_final};
+        if (resultado_final != obj_resultado_final) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el resultado final.");
+        }
+    }
+    
+    var codigo_barras = document.getElementById("codigo_barras").value;
+    if (codigo_barras == null || codigo_barras == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el código de barras.");
+    } else {
+        var obj_codigo_barras = '*{verificar-codigo_barras}*';
+        obj_codigo_barras = obj_codigo_barras.toUpperCase();
+        if (codigo_barras.toString() != obj_codigo_barras.toString()) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el código de barras.");
+        }
+    }
+
+    if (flag_array_completo == 0) {
+        if (flag_array_inconsistencia == 0) {
+          document.getElementById("formulario_guardar").submit();
+        } else {
+          var mensaje_inconsistencia = array_inconsistencia.join("<br><br>");
+          $('#modal_msj').modal('show');
+          document.getElementById("txt_msj").innerHTML = mensaje_inconsistencia;  
+        }
+    } else {
+        var mensaje = array_completo.join("<br><br>");
+        $('#modal_msj').modal('show');
+        document.getElementById("txt_msj").innerHTML = mensaje;
+    }
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>

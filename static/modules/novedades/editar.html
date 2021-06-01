@@ -1,0 +1,120 @@
+<script>
+	$(window).on('load',function() {
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="tab-pane fade active in" id="editar">
+			<div class="col-lg-7">
+        <div class="panel panel-success">
+          <div class="panel-heading"><h4>Editar Novedad</h4></div>
+          <div class="panel-body">
+            <form class="form-horizontal" action="/{app_name}/novedades/actualizar" method="post">
+              <div class="form-group">
+                <label for="denominacion" class="col-lg-2 control-label">Novedad</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="denominacion" name="denominacion" value="{denominacion}" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contenido" class="col-lg-2 control-label">Contenido</label>
+                <div class="col-lg-10">
+                  <textarea class="form-control" id="contenido" name="contenido" rows="20" required>{contenido}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <input type="hidden" name="novedad_id" value="{novedad_id}">
+                  <button type="submit" class="btn btn-primary">Editar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+			</div>
+      <div class="col-lg-5">
+        <div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Agregar imagen</h4>
+					</div>
+					<div class="panel-body">
+				    <form class="form-horizontal" action="/{app_name}/novedades/guardar_archivo" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="archivo" class="col-lg-2 control-label">Buscar</label>
+                <div class="col-lg-10">
+                  <input type="file" class="form-control" id="archivo" name="archivo" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                  <input type="hidden" name="novedad_id" value="{novedad_id}">
+                  <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+              </div>
+            </form>
+					</div>
+				</div>
+        <div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Visor</h4>
+					</div>
+					<div class="panel-body">
+					  <img style="width: 90%;" src="/{app_name}/novedades/ver_imagen/novedades/{novedad_id}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      $('#tabla').DataTable( {
+				 "aaSorting": [[ 0, "asc" ]],
+         "iDisplayLength":5,
+          "language": {
+            "decimal":        ".",
+            "emptyTable":     "No hay datos disponibles",
+            "info":           "Mostrando _START_ al _END_ de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando 0 al 0 de 0 registros",
+            "infoFiltered":   "(filtrados de _MAX_ registros totales)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Ver _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Filtrar:",
+            "zeroRecords":    "No se encontraron registros coincidentes",
+            "paginate": {
+                "first":      "Inicio",
+                "last":       "Fin",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+          }
+      } );
+    } );
+</script>

@@ -1,0 +1,19 @@
+<div class="jumbotron" style="padding-top: 25px; padding-bottom: 25px;">
+  <h3 class="display-3" style="margin-top: 0px;">{tema}</h3>
+  <p class="lead" style="font-size: 12px; margin-bottom: 0px;"><strong> <i class="fa fa-user"></i> &nbsp;{matriculado}</strong> - <i class="fa fa-calendar-o"></i> &nbsp;{fecha}</p>
+  <hr class="my-4" style="margin-top: 0px;; margin-bottom: 5px;">
+  <p style="font-size: 14px;">{contenido}</p>
+  <p class="lead">
+    <div class="col-lg-5 col-lg-offset-7">
+      <div class="col-lg-4">
+        <a class="btn btn-primary btn-md" onClick="volverAdministrar();" role="button">Volver</a>
+      </div>
+      <div class="col-lg-4">
+          <a class="btn btn-success btn-md" href="/{app_name}/foros/guardar_estado_foro/{foro_id}/3" role="button">Cerrar</a>
+      </div>
+      <div class="col-lg-4">
+        <a class="btn btn-danger btn-md" href="/{app_name}/foros/guardar_estado_foro/{foro_id}/4" role="button">Rechazar</a>
+      </div>
+    </div>
+  </p>
+</div>

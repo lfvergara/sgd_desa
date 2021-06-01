@@ -1,0 +1,21 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h4>Respuesta</h4>
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal" action="/{app_name}/foros/guardar_nueva_respuesta" method="post">
+      <div class="form-group">
+        <label for="contenido" class="col-lg-1 control-label">Mensaje</label>
+        <div class="col-lg-11">
+          <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-2 col-lg-offset-10" style="text-align: right;">
+          <input type="hidden" name="foro_id" value="{foro_id}">
+          <button type="submit" class="btn btn-primary">Publicar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

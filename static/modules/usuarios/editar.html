@@ -1,0 +1,127 @@
+<script>
+	function verificaGrupo() {
+		var grupo = document.getElementById("grupo_id").value;
+		var divMatricula = document.getElementById("div_matricula");
+		if (grupo == 2) {
+			divMatricula.style.display = 'block';
+		} else {
+			divMatricula.style.display = 'none';
+		}
+	}
+	
+	function verificaUsuario() {
+  	var viejo_usuario = "{denominacion}";
+  	var usuario = document.getElementById("denominacion").value;
+		console.log(viejo_usuario);
+		var path = '/{app_name}/usuarios/verificar_usuario/' + usuario;
+		var bandera = "";
+		bandera = $.ajax({
+			url: path,
+			dataType: 'text',
+			async: false
+		}).responseText;	
+    
+		if (viejo_usuario != usuario) {
+			if (bandera == 'Existe') {
+				document.getElementById("denominacion").value = viejo_usuario;
+				document.getElementById('denominacion').focus();
+					var msj = 'Ya existe la denominación ingresada.';
+					activaModal(msj);
+			}
+		}
+	}
+	
+	function verificaMatricula() {
+  	var vieja_matricula = "{matricula}";
+  	var matricula = document.getElementById("matricula").value;
+		var path = '/{app_name}/usuarios/verificar_matricula/' + matricula;
+		var bandera = "";
+		bandera = $.ajax({
+			url: path,
+			dataType: 'text',
+			async: false
+		}).responseText;	
+    
+		if (vieja_matricula != matricula) {
+			if (bandera == 'Existe') {
+				document.getElementById("matricula").value = vieja_matricula;
+				document.getElementById('matricula').focus();
+					var msj = 'Ya existe la matrícula ingresada.';
+					activaModal(msj);
+			}
+		}
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="tab-pane fade active in" id="editar">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4>Editar usuario</h4>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" action="/{app_name}/usuarios/actualizar" method="post">
+						<div class="form-group">
+							<label for="denominacion" class="col-lg-2 control-label">Denominación</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="denominacion" id="denominacion" value="{denominacion}" onChange="verificaUsuario();">
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="denominacion" class="col-lg-2 control-label">Correo Electrónico</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="correoelectronico" id="correoelectronico" value="{correoelectronico}">
+							</div>
+						</div>
+						<input type="hidden" name="nivel" id="nivel" value="3" />
+						<input type="hidden" name="usuario_id" id="usuario_id" value="{usuario_id}" />
+						<div class="form-group">
+							<label for="medidor" class="col-lg-2 control-label">Grupo</label>
+							<div class="col-lg-10">
+								<select class="form-control" name="grupo_id" id="grupo_id" onChange="verificaGrupo();">>
+									<option value="{grupo_id}">{grupo}</option>
+									<!--grupos-->
+									<option value="{grupo_id}">{denominacion}</option>
+									<!--grupos-->
+								</select>
+							</div>
+						</div>
+						<div class="form-group" id="div_matricula" style="display: {display_matricula};">
+							<label for="matricula" class="col-lg-2 control-label">Matrícula</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="matricula" id="matricula" value="{matricula}" onChange="verificaMatricula();">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10 col-lg-offset-2">
+								<button type="submit" class="btn btn-primary">Guardar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

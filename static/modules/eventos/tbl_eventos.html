@@ -1,0 +1,13 @@
+<!--repetir-->
+<tr>
+  <td style="display: none;">{fecha}</td>
+  <td>{fecha_modificada}</td>
+  <td>{denominacion}</td>
+  <td>{ubicacion}</td>
+  <td style="text-align: right;">    
+    <button class="btn btn-info btn-xs" onClick="consultarEvento({evento_id});" title="Consultar"><i class="fa fa-eye fa-lg"></i></button>
+    <button class="btn btn-warning btn-xs" onClick="editarEvento({evento_id});" title="Editar"><i class="fa fa-edit fa-lg"></i></button>
+    <a class="btn btn-danger btn-xs" href="/{app_name}/eventos/eliminar/{evento_id}" title="Eliminar"><i class="fa fa-trash fa-lg"></i></a>
+  </td>
+</tr>
+<!--repetir-->

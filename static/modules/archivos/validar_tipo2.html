@@ -1,0 +1,266 @@
+<script>
+	$(window).on('load',function(){
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+  
+  document.onkeypress = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }  
+
+  document.onmousedown = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }
+  
+  document.onkeydown = function (event) {  
+    event = (event || window.event);  
+    if (event.keyCode == 123) {  
+      return false;  
+    }  
+  }
+	
+	function pulsar(e) {
+	  tecla = (document.all) ? e.keyCode : e.which;
+	  return (tecla != 13);
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4>Registrar validación de documentación</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" id="formulario_guardar" name="datos" method="post" action="/{app_name}/archivos/guardar_validacion_tipo2"
+							enctype="multipart/form-data" onkeypress="return pulsar(event);">
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo de trabajo</label>
+								<div class="col-lg-10">
+									<select name="tipo_id" id="tipo_id" class="form-control">
+										<option value="0">--Seleccionar--</option>
+										{slt_tipos_trabajo}
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Documento</label>
+								<div class="col-lg-2">
+									<select name="tipo_documento" class="form-control">
+										<option value="CUIT">CUIT</option>
+										<option value="CUIL">CUIL</option>
+										<option value="DNI">DNI</option>
+									</select>
+								</div>
+								<div class="col-lg-8">
+									<input type="text" class="form-control" name="documento" id="documento" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha desde</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Fecha hasta</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_cierre" id="fecha_cierre" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha informe</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_informe" id="fecha_informe" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Código de Barras</label>
+								<div class="col-lg-10">
+									<input type="password" class="form-control" id="codigo_barras" name="codigo_barras" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-7 col-lg-offset-5">
+                  <input type="hidden" name="archivo_id" value="{verificar-archivo_id}">
+									<button type="reset" class="btn btn-default">Cancelar</button>
+									<button type="button" class="btn btn-primary" onClick="validarTrabajo();">Validar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal_revision" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active">{RESPUESTA}</a>
+          {lst_seguimientos}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	function sumar() {
+		var ac = parseFloat(document.getElementById("activo_corriente").value);
+		var anc = parseFloat(document.getElementById("activo_nocorriente").value);
+		var activo = ac + anc;
+		activo = roundToTwo(activo);
+		
+		var pc = parseFloat(document.getElementById("pasivo_corriente").value);
+		var pnc = parseFloat(document.getElementById("pasivo_nocorriente").value);
+		var pasivo = pc + pnc;
+		pasivo = roundToTwo(pasivo);
+		
+		var pn = activo - pasivo;
+		pn = roundToTwo(pn);
+		
+		document.getElementById("pasivo").value = pasivo;
+		document.getElementById("activo").value = activo;
+		document.getElementById("patrimonio_neto").value = pn;
+	}
+	
+	function roundToTwo(num) {    
+  	return +(Math.round(num + "e+2")  + "e-2");
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+  
+  function mostrar_revision() {
+    $('#modal_revision').modal('show');
+  }
+	
+	function validarTrabajo() {
+    var array_completo = new Array();
+    var array_inconsistencia = new Array();
+    var flag_array_completo = 0;
+    var flag_array_inconsistencia = 0;
+    
+    var tipo = document.getElementById("tipo_id");
+    var tipo_id = tipo.options[tipo.selectedIndex].value;
+    if (tipo_id == null || tipo_id.length == 0 || tipo_id == "" || tipo_id == 0) {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor seleccione el tipo de trabajo.");
+    } else {
+        var obj_tipo_id = {verificar-tipo_id};
+        if (tipo_id != obj_tipo_id) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el tipo de trabajo.");
+        }
+    }
+    
+		var documento = document.getElementById("documento").value;
+    if (documento == null || documento.length == 0 || documento == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el número de documento.");
+    } else {
+        var obj_documento = {verificar-documento};
+        if (documento != obj_documento) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el número de documento.");
+        }
+    }
+    
+    var fecha_inicio = document.getElementById("fecha_inicio").value;
+    if (fecha_inicio == null || fecha_inicio.length == 0 || fecha_inicio == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de inicio.");
+    } else {
+        var obj_fecha_inicio = '{verificar-fecha_inicio}';
+        if (fecha_inicio.toString() != obj_fecha_inicio) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de inicio.");
+        }
+    }
+    
+    var fecha_cierre = document.getElementById("fecha_cierre").value;
+    if (fecha_cierre == null || fecha_cierre.length == 0 || fecha_cierre == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de cierre.");
+    } else {
+        var obj_fecha_cierre = '{verificar-fecha_cierre}';
+        if (fecha_cierre.toString() != obj_fecha_cierre) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de cierre.");
+        }
+    }
+    
+    var fecha_informe = document.getElementById("fecha_informe").value;
+    if (fecha_informe == null || fecha_informe.length == 0 || fecha_informe == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete la fecha de informe.");
+    } else {
+        var obj_fecha_informe = '{verificar-fecha_informe}';
+        if (fecha_informe.toString() != obj_fecha_informe) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en la fecha de informe.");
+        }
+    }
+    
+    var codigo_barras = document.getElementById("codigo_barras").value;
+    if (codigo_barras == null || codigo_barras == "") {
+        flag_array_completo = 1;
+        array_completo.push("<strong>[ERROR]</strong> Por favor complete el código de barras.");
+    } else {
+        var obj_codigo_barras = '*{verificar-codigo_barras}*';
+        obj_codigo_barras = obj_codigo_barras.toUpperCase();
+        if (codigo_barras.toString() != obj_codigo_barras.toString()) {
+          flag_array_inconsistencia = 1;
+          array_inconsistencia.push("<strong>[ERROR]</strong> Inconsistencia en el código de barras.");
+        }
+    }
+
+    if (flag_array_completo == 0) {
+        if (flag_array_inconsistencia == 0) {
+          document.getElementById("formulario_guardar").submit();
+        } else {
+          var mensaje_inconsistencia = array_inconsistencia.join("<br><br>");
+          $('#modal_msj').modal('show');
+          document.getElementById("txt_msj").innerHTML = mensaje_inconsistencia;  
+        }
+    } else {
+        var mensaje = array_completo.join("<br><br>");
+        $('#modal_msj').modal('show');
+        document.getElementById("txt_msj").innerHTML = mensaje;
+    }
+	}
+</script>

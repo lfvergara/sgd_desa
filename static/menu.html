@@ -1,0 +1,126 @@
+<script>
+  function despliegaSubMenu() {
+    document.getElementById("li_ingresar_con_caret").style.display = "none";
+    document.getElementById("li_ingresar_sin_caret").style.display = "block";
+    document.getElementById("ingresar_1").style.display = "block";
+    document.getElementById("ingresar_2").style.display = "none";
+    document.getElementById("ingresar_3").style.display = "block";
+    document.getElementById("menu_matriculados").style.display = "block";
+  }
+  
+  function contraeSubMenu() {
+    document.getElementById("li_ingresar_con_caret").style.display = "block";
+    document.getElementById("li_ingresar_sin_caret").style.display = "none";
+    document.getElementById("ingresar_1").style.display = "none";
+    document.getElementById("ingresar_2").style.display = "none";
+    document.getElementById("ingresar_3").style.display = "none";
+    document.getElementById("menu_matriculados").style.display = "block";
+  }
+</script> 
+<ul class="nav navbar-nav">
+  <li class="dropdown" style="display: {home};">
+		<a href="/{app_name}/reportes/panel" class="" role="button" aria-expanded="false" style="background: #E74C3C;">HOME</a>
+	</li>
+	<li class="dropdown" style="display: {administrativa};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administración <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+      <li><a href="/{app_name}/archivos/evaluar">Ingresar</a></li>
+      <!--  
+      <li style="  margin: .5rem 0; overflow: hidden; border-bottom: 1px solid #e9ecef;"><a href="/{app_name}/archivos/listar_validar/1">Validar Trabajos</a></li>
+      <li><a href="/{app_name}/archivos/validar/1">Validar EECC</a></li>
+      <li style="  margin: .5rem 0; overflow: hidden; border-bottom: 1px solid #e9ecef;"><a href="/{app_name}/archivos/validar_certificacion/1">Validar Otros</a></li>
+      <li><a href="/{app_name}/archivos/reportes">Reportes</a></li>
+      <li><a href="/{app_name}/auditor/listar">Auditor</a></li>
+      -->
+      <li style="display: {admin};"><a href="/{app_name}/matriculados/panel">Matriculados</a></li>
+      <li><a href="/{app_name}/matriculados/curriculums">Curriculums Matriculados</a></li>
+      <!--  
+      <li style="display: {admin}"><a href="/{app_name}/archivos/admin_control_archivos">Control de documentos</a></li>
+      -->
+      <li style="display: {admin}"><a href="/{app_name}/opiniones/exportar_dgip">Exportar Opiniones CPCE-DGIP</a></li>
+			<li style="display: {novedad};"><a href="/{app_name}/novedades/panel">Novedades</a></li>
+			<li style="display: {encuesta};"><a href="/{app_name}/encuestas/panel">Encuestas</a></li>
+      <li style="  margin: .5rem 0; overflow: hidden; border-top: 1px solid #e9ecef;"><a href="/{app_name}/archivos/buscar">Buscar</a></li>
+		</ul>
+	</li>
+	<li class="dropdown" style="display: {tecnica};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Secretaría Técnica <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/{app_name}/archivos/autorizar">Evaluar</a></li>
+			<li><a href="/{app_name}/archivos/legalizar">Legalizar</a></li>
+			<li><a href="/{app_name}/archivos/pendientes_firma">Pendientes de Firma</a></li>
+			<li><a href="/{app_name}/archivos/buscar">Buscar</a></li>
+		</ul>
+	</li>
+  <li class="dropdown" style="display: {asistente};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Asistente <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/{app_name}/archivos/legalizar">Legalizar</a></li>
+		</ul>
+	</li>
+  <li class="dropdown" style="display: {matriculados};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Matriculados <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu" id="menu_matriculados">
+      <li id="li_ingresar_con_caret"><a href="#" onClick="despliegaSubMenu();">Ingreso de Trabajos <span class="caret"></span></a></li>
+      <li id="li_ingresar_sin_caret" style="display: none;"><a href="#" onClick="contraeSubMenu();">Ingresar Trabajos <span class="dropup"><span class="caret"></span></span></a></li>
+      <li id="ingresar_1" style="display: none; margin: .5rem 0; overflow: hidden; border-top: 1px solid #e9ecef;"><a href="/{app_name}/archivos/ingresar_con_ajuste/1">Estados Contables</a></li>
+			<li id="ingresar_2" style="display: none;"><a href="/{app_name}/archivos/ingresar_con_ajuste/1">Estados Contables con Ajuste por Inflación</a></li>
+      <li id="ingresar_3" style="display: none; border-bottom: 1px solid #e9ecef;"><a href="/{app_name}/archivos/ingresar_certificacion/1">Otros Informes o Certificaciones</a></li>
+      <!--<li style="margin: .5rem 0; overflow: hidden; border-top: 1px solid #e9ecef;"><a href="/{app_name}/archivos/reingresar/1">Reingresar</a></li>-->
+      <!--<li><a href="/{app_name}/archivos/corregir/1">Modificar trabajo</a></li>-->
+      <li><a href="/{app_name}/archivos/consultar_buscar">Consultar</a></li>
+      <li><a href="/{app_name}/archivos/reingresar_documento/1">Documentos Pendientes</a></li>
+      <!--<li><a href="/{app_name}/archivos/aprobados">Aceptados</a></li>-->
+      <li><a href="/{app_name}/archivos/pendientes_usuario">A ingresar por Administración</a></li>
+      <li><a href="/{app_name}/archivos/pendientes_legalizar_usuario">Pendientes de Legalizar</a></li>
+      <li><a href="/{app_name}/archivos/intervenidos_usuario">Intervenidos</a></li>
+      <li><a href="/{app_name}/archivos/legalizados_usuario">Legalizados</a></li>
+      <li><a href="/{app_name}/archivos/buscar">Buscar</a></li>
+      <li style="margin: .5rem 0; overflow: hidden; border-top: 1px solid #e9ecef;"><a href="/{app_name}/maletin/panel">Maletín del Contador</a></li>
+			<!--<li style="display: {curriculum};"><a href="/{app_name}/matriculados/mi_curriculum">Mi Currículum</a></li>-->
+		</ul>
+	</li>
+  <li class="dropdown" style="display: {opinion};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Espacio de Diálogo <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+      <li style="display: {admin}"><a href="/{app_name}/opiniones/panel">Panel de Opiniones</a></li>
+			<li><a href="/{app_name}/opinionestipos/panel/1" style="display: {admin}">Panel Tipos de Opiniones</a></li>
+			<li><a href="/{app_name}/opiniones/agregar/1">Agregar Opinión</a></li>
+		</ul>
+	</li>
+  <li class="dropdown" style="display: {foro};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Foro <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+      <li style="display: {admin}"><a href="/{app_name}/foros/administrar">Gestión Foros</a></li>
+			<li><a href="/{app_name}/foros/m_panel">Ver Foros</a></li>
+			<li><a href="/{app_name}/foros/m_agregar">Agregar</a></li>
+		</ul>
+	</li>
+  <li class="dropdown" style="display: {desarrollador};">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dessarrollo <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/{app_name}/reportes/panel">Reportes</a></li>
+			<li><a href="/{app_name}/opiniones/panel">Panel de Opiniones</a></li>
+			<li><a href="/{app_name}/opiniones/agregar/1">Agregar Opinión</a></li>
+			<li><a href="/{app_name}/opiniones/dgip/1">CPCE-DGIP</a></li>
+			<li><a href="/{app_name}/opiniones/exportar_dgip">Exportar Opiniones CPCE-DGIP</a></li>
+			<li><a href="/{app_name}/opinionestipos/panel/1">Panel Tipos de Opiniones</a></li>
+		</ul>
+	</li>
+<li><a href="http://www.cpcelr.org.ar/{app_name}/static/modules/archivos/balance.pdf" download="Balance">Balance contable</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+	<li class="dropdown {usuarios}">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+			<span class="glyphicon glyphicon-user"></span>
+		</a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/{app_name}/usuarios/panel">HOME</a></li>
+			<li><a href="/{app_name}/usuarios/mis_datos" style="display: {mis_datos};">Mis Datos</a></li>
+			<li><a href="/{app_name}/usuarios/ver">Cambiar Clave</a></li>
+			<li style="display: {adm_usuario}"><a href="/{app_name}/usuarios/gestionar">Administrar</a></li>
+			<li><a href="/{app_name}/static/modules/usuarios/{manual_usuario}.pdf" target="_blank">Manual de Usuario</a></li>
+			<li><a href="/{app_name}/usuarios/salir">Salir</a></li>
+		</ul>
+	</li>
+</ul>

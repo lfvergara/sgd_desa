@@ -1,0 +1,114 @@
+<script>
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+		<div class="tab-pane fade active in" id="editar">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4>Información</h4>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" action="/{app_name}/usuarios/actualizar_matriculado" method="post">
+						<div class="form-group">
+							<label for="matricula" class="col-lg-2 control-label">Matrícula</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control" value="{matricula}" name="matricula" readonly>
+							</div>
+              <label for="documento" class="col-lg-2 control-label">Documento</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control" value="{documento}" name="documento" readonly>
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="apellido" class="col-lg-2 control-label">Apellido</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" value="{apellido}" name="apellido" readonly>
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="nombre" class="col-lg-2 control-label">Nombre</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" value="{nombre}" name="nombre" readonly>
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="telefono" class="col-lg-2 control-label">Teléfono</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control" id="telefono" name="telefono" maxlength="10" onblur="if(this.value.length > this.maxLength){this.value = this.value.slice(0, this.maxLength);}else{if(this.value.length < 10)alert('Por favor respete el formato. Ej: 3804xxxxxx. Gracias!');}" required>
+                <div class="radio" style="font-size: 12px;">
+                  Por favor, respetar el formato siguiente: <strong>3804XXXXXX</strong><br>
+                  Mostrar el teléfono en el sitio web del consejo? &nbsp;&nbsp;
+                  <label><input type="radio" name="telefono_visible_web" value="1" {telefono_check_si}>Si</label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;                
+                  <label><input type="radio" name="telefono_visible_web" value="0" {telefono_check_no}>No</label>
+                </div>
+							</div>
+              <label for="celular" class="col-lg-2 control-label">Celular</label>
+							<div class="col-lg-4">
+								<input type="text" class="form-control" name="celular" id="celular" maxlength="10" onblur="if(this.value.length > this.maxLength){this.value = this.value.slice(0, this.maxLength);}else{if(this.value.length < 10)alert('Por favor respete el formato. Ej: 3804xxxxxx. Gracias!');}" required>
+                <div class="radio" style="font-size: 12px;">
+                  Por favor, respetar el formato siguiente: <strong>3804XXXXXX</strong><br>
+                  Mostrar el celular en el sitio web del consejo? &nbsp;&nbsp;
+                  <label><input type="radio" name="celular_visible_web" value="1" {celular_check_si}>Si</label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;                
+                  <label><input type="radio" name="celular_visible_web" value="0" {celular_check_no}>No</label>
+                </div>
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="correoelectronico" class="col-lg-2 control-label">Email</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="correoelectronico" id="correoelectronico" required>
+                <div class="radio" style="font-size: 12px;">
+                  Mostrar el email en el sitio web del consejo? &nbsp;&nbsp;
+                  <label><input type="radio" name="correoelectronico_visible_web" value="1" {correoelectronico_check_si}>Si</label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;                
+                  <label><input type="radio" name="correoelectronico_visible_web" value="0" {correoelectronico_check_no}>No</label>
+                </div>
+							</div>
+						</div>
+            <div class="form-group">
+							<label for="direccion" class="col-lg-2 control-label">Dirección</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="direccion" id="direccion" required>
+                <div class="radio" style="font-size: 12px;">
+                  Mostrar la dirección en el sitio web del consejo? &nbsp;&nbsp;
+                  <label><input type="radio" name="direccion_visible_web" value="1" {direccion_check_si}>Si</label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;                
+                  <label><input type="radio" name="direccion_visible_web" value="0" {direccion_check_no}>No</label>
+                </div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10 col-lg-offset-2">
+                <input type="hidden" name="matriculado_id" value="{matriculado_id}">
+						    <button type="submit" class="btn btn-primary">Guardar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

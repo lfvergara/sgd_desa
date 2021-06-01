@@ -1,0 +1,50 @@
+<form class="form-horizontal" action="/sgd/matriculados/guardar_estudio_matriculado" method="post">
+  <div class="form-group">
+    <label for="titulacion" class="col-lg-3 control-label">Titulación</label>
+    <div class="col-lg-9">
+      <input type="text" class="form-control" name="titulacion" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="universidad" class="col-lg-3 control-label">Universidad</label>
+    <div class="col-lg-9">
+      <input type="text" class="form-control" name="universidad" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nota" class="col-lg-3 control-label">Nota</label>
+    <div class="col-lg-9">
+      <input type="text" class="form-control" name="nota" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="desde" class="col-lg-3 control-label">Desde</label>
+    <div class="col-lg-9">
+      <input type="date" class="form-control" name="desde" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="hasta" class="col-lg-3 control-label">Hasta</label>
+    <div class="col-lg-9">
+      <input type="date" class="form-control" name="hasta" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="actividades" class="col-lg-3 control-label">Actividades</label>
+    <div class="col-lg-9">
+      <textarea  class="form-control" name="actividades" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="descripcion" class="col-lg-3 control-label">Descripción</label>
+    <div class="col-lg-9">
+      <textarea  class="form-control" name="descripcion" rows="5"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-12" style="text-align: right;">
+      <input type="hidden" name="matriculado_id" value="{matriculado_id}">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+</form>

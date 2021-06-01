@@ -1,0 +1,18 @@
+<!--repetir-->
+<tr>
+  <td style="display: none;">{fecha}</td>
+  <td>{denominacion}</td>
+  <td>
+    {contenido} 
+    (<a href="/{app_name}/novedades/{activo_url}_novedad/{novedad_id}/1" style="font-size: 14px; color: #083e73; font-weight: bold;" title="{activo_text}"><small>{activo_text}</small></a>
+    <a href="/{app_name}/novedades/destacar_novedad/{novedad_id}/1" style="display: {display_destacar}; font-size: 14px; color: #083e73; font-weight: bold;" title="DESTACAR"><small>&nbsp;&nbsp;||&nbsp;&nbsp;{destacado_text}</small></a>)
+  </td>
+  <td><label class="btn btn-{destacado_class} btn-xs"><i class="fa fa-{destacado_icon} fa-lg"></i></label></td>
+  <td><label class="btn btn-{activo_class} btn-xs"><i class="fa fa-{activo_icon} fa-lg"></i> </label> </td>
+  <td style="text-align: right;">    
+    <a class="btn btn-info btn-xs" href="/{app_name}/novedades/consultar/{novedad_id}" title="Consultar"><i class="fa fa-eye fa-lg"></i></a>
+    <a class="btn btn-warning btn-xs" href="/{app_name}/novedades/editar/{novedad_id}" title="Editar"><i class="fa fa-edit fa-lg"></i></a>
+    <a class="btn btn-danger btn-xs" href="/{app_name}/novedades/eliminar/{novedad_id}" title="Eliminar"><i class="fa fa-trash fa-lg"></i></a>
+  </td>
+</tr>
+<!--repetir-->

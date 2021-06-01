@@ -1,0 +1,73 @@
+<script>	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+    	
+    <div class="col-lg-7">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h4>Agregar nuevo foro</h4>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" action="/{app_name}/foros/guardar_nuevo_foro" method="post">
+            <div class="form-group">
+              <label for="tema" class="col-lg-2 control-label">Foro</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="tema" name="tema" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contenido" class="col-lg-2 control-label">Contenido</label>
+              <div class="col-lg-10">
+                <textarea class="form-control" id="contenido" name="contenido" rows="20" required></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <input type="hidden" name="codigo" value="PEN">
+                <input type="hidden" name="denominacion" value="PENDIENTE">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+			  
+    <div class="col-lg-5">
+      <h4>Últimos 5 Foros Activos!</h4>
+      <div class="bs-component">
+        <ul class="list-group">
+          {lst_ultimos_cinco_activos}
+        </ul>
+      </div>
+    </div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>

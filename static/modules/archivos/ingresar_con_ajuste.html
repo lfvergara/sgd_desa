@@ -1,0 +1,709 @@
+<script>
+	$(window).on('load',function() {
+		var msj = "{modal_mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+	
+	function pulsar(e) {
+	  tecla = (document.all) ? e.keyCode : e.which;
+	  return (tecla != 13);
+	}
+</script>
+<div class='container'>
+	<div class='starter-template'>
+		<div class='page-header'><h1>{titulo}</h1></div>
+		<div class='row'>
+			<div class='col-md-12'>
+        <div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Atención!</strong> {mensaje}
+        </div>
+				<div class='panel panel-success'>
+					<div class='panel-heading'>
+						<h4>Registrar ingreso de documentación</h4>
+					</div>
+					<div class='panel-body'>
+						<form class="form-horizontal" name="datos" method="post" id="formularioDatos" action="/{app_name}/archivos/guardar"
+							enctype="multipart/form-data" onkeypress="return pulsar(event);">
+							<div class="form-group">
+								<label for="fecha" class="col-lg-2 control-label">Tipo de trabajo</label>
+								<div class="col-lg-3">
+									<select name="tipo_id" id="tipo_id" class="form-control" onChange="habilitaAjuste();" required aria-required="true">
+										<option value="">--Seleccionar--</option>
+										{slt_tipos_trabajo}
+									</select>
+								</div>
+								<label for="fecha" class="col-lg-2 control-label">Razón Social</label>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="denominacion" id="denominacion" required="" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="tipo_documento" class="col-lg-2 control-label">Tipo documento</label>
+								<div class="col-lg-3">
+									<select name="tipo_documento" id="tipo_documento" class="form-control">
+										<option value="CUIT">CUIT</option>
+										<option value="CUIL">CUIL</option>
+										<option value="DNI">DNI</option>
+									</select>
+								</div>
+								<label for="documento" class="col-lg-2 control-label">Número</label>
+								<div class="col-lg-5" style="padding-left: 0px;">
+									<div class="col-lg-11" style="padding-right: 0px; margin-right:0 px;">
+										<input onkeypress="if (event.keyCode == 45) event.returnValue = false;" type="number" class="form-control" name="documento" 
+													 id="documento" required="" placeholder="Número" onBlur="compruebaCUIT();" style="width: 90%; margin-right: 0px; padding-right: 0px;"/>
+									</div>
+									<div class="col-lg-1" style="padding-left: 0px; margin-left:0 px; font-size: 30px;">
+										<i class="fa fa-exclamation-circle" id="icon_exclamation" style="float:right;"></i>
+										<i class="fa fa-times-circle" id="icon_error" style="float:right; display: none; color: # FF0000;"></i>
+										<i class="fa fa-check-circle" id="icon_ok" style="float:right; display: none;"></i>
+									</div>
+								</div>
+								<!--<label for="fecha" class="col-lg-1 control-label">Matricula</label>
+								<div class="col-lg-2">
+									<input type="text" class="form-control" name="matricula" id="matricula" required="" />
+								</div>-->
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Fecha inicio</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Fecha cierre</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_cierre" id="fecha_cierre" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" style="padding-top: 0px;">Fecha informe - Certificación</label>
+								<div class="col-lg-4">
+									<input type="date" class="form-control" name="fecha_informe" id="fecha_informe" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Nro. ejercicio</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="ejercicio" id="ejercicio" onBlur="compruebaEjercicio();" required="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Activo corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="activo_corriente" id="activo_corriente" required="" step="any" onChange="cambio_valor(1);" value="0" min="0" />
+								</div>
+								<label class="col-lg-2 control-label">Activo no corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="activo_nocorriente" id="activo_nocorriente" required="" step="any" onchange="cambio_valor(2);"  value="0" />
+								</div>
+								<label class="col-lg-1 control-label">Activo</label>
+								<div class="col-lg-3">
+									<input type="number" class="form-control" name="activo" id="activo" required="" value="0" step="any" onChange="cambio_valor(3);" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Pasivo corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="pasivo_corriente" id="pasivo_corriente" required="" step="any" onChange="cambio_valor(4);" value="0" min="0" />
+								</div>
+								<label class="col-lg-2 control-label">Pasivo no corriente</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="pasivo_nocorriente" id="pasivo_nocorriente" required="" step="any" onChange="cambio_valor(5);" value="0" />
+								</div>
+								<label class="col-lg-1 control-label">Pasivo</label>
+								<div class="col-lg-3">
+									<input type="number" class="form-control" name="pasivo" id="pasivo" required="" value="0" onChange="cambio_valor(6);" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Patrimonio neto</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="patrimonio_neto" id="patrimonio_neto" required="" step="any" value="0" />
+								</div>
+								<label class="col-lg-2 control-label">Alta Bienes de Uso</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="bienes_uso" id="bienes_uso" required="" step="any" />
+								</div>
+							</div>
+              <div class="form-group">
+								<label class="col-lg-2 control-label">Reexpresión del Valor de Origen de Bs de Uso</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="origen_bienes_uso" id="reexpresion_origen" required="" step="any" onChange="sumar_reexpresion();" value="0" min="0" required readonly/>
+								</div>
+								<label class="col-lg-2 control-label">Reexpresión de las Depreciaciones Acumuladas de Bs de Uso</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="depreciacion_bienes_uso" id="reexpresion_depreciacion" required="" step="any" onchange="sumar_reexpresion();"  value="0" required readonly/>
+								</div>
+								<label class="col-lg-2 control-label">Resultado reexpresión de Bienes de Uso</label>
+								<div class="col-lg-2">
+									<input type="number" class="form-control" name="resultado_reexpresion_bienes_uso" id="reexpresion_resultado" required="" step="any" value="0" readonly="true" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Ventas netas y/o ingresos</label>
+								<div class="col-lg-4">
+									<input type="number" class="form-control" name="venta_neta" id="venta_neta" required="" step="any" value="0"/>
+								</div>
+								<label class="col-lg-2 control-label">Resultado final</label>
+								<div class="col-lg-4">
+									<input type="number" step="any" class="form-control" name="resultado_final" id="resultado_final" required="" step="any" value="0"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Comentarios</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="comentario" name="comentario" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" id="lbl_balance">Adjuntar EECC</label>
+								<div class="col-lg-4">
+									<input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf" required="" />
+								</div>
+                <label class="col-lg-2 control-label" id="lbl_informe">Adjuntar encargo profesional</label>
+								<div class="col-lg-4">
+									<input type="file" class="form-control" id="archivo_informe" name="archivo_informe" accept=".pdf" required="" />
+								</div>
+							</div>
+              <div class="form-group">
+								<label class="col-lg-2 control-label" id="lbl_nota">Adjuntar Nota u Otros</label>
+								<div class="col-lg-4">
+									<input type="file" class="form-control" id="archivo_nota" name="archivo_nota" accept=".pdf"/>
+								</div>
+                <label class="col-lg-2 control-label" id="lbl_balance_adjuntar">Adjunta EECC a Oblea Final?</label>
+								<div class="col-lg-4">
+								  <div class="radio">
+										<label>
+											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="1" checked>
+											Si
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="0">
+											No
+										</label>
+										<label>
+                      <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
+										</label>
+									</div>	
+								</div>								
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Comprobante pago</label>
+								<div class="col-lg-4">
+									<input type="file" class="form-control" id="comprobante_pago" name="comprobante_pago" accept=".pdf" required="" />
+								</div>
+								<label class="col-lg-2 control-label">Método pago</label>
+								<div class="col-lg-4">
+									<div class="radio">
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="1" checked>
+											Depósito
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="2">
+											Transferencia
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label>
+											<input type="radio" name="metodo_pago" id="metodo_pago" value="3">
+											Cheque
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Entidad Bancaria</label>
+								<div class="col-lg-4">
+									<select name="entidad_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_entidades}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Número Comprobante</label>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" id="numero_comprobante" name="numero_comprobante" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Número de Cuenta</label>
+								<div class="col-lg-4">
+									<select name="cuenta_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_cuentas}
+									</select>
+								</div>
+								<label class="col-lg-2 control-label">Importe</label>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" id="importe" name="importe" required/>
+                  <label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
+                  <div class="radio">
+										<label style="font-size: 12px;">
+											<input type="radio" name="excedente" id="excedente" value="1">
+											Pago de Matrícula
+										</label>
+										&nbsp;&nbsp;&nbsp;
+										<label style="font-size: 12px;">
+											<input type="radio" name="excedente" id="excedente" value="2">
+											Reintegro de Aranceles
+										</label>
+									</div>
+								</div>
+							</div>
+              <!--
+              <div class="form-group">
+								<label class="col-lg-12 control-label" style="text-align: center;">Tipo de Firma del Informe</label>
+								<div class="col-lg-12" style="text-align: center;">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="firma_digital" id="firma_digital" value="1" checked>
+                      Digital
+                    </label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label>
+                      <input type="radio" name="firma_digital" id="firma_digital" value="0">
+                      Hológrafa
+                    </label>
+                  </div>
+							  </div>
+								<div class="col-lg-12" style="text-align: center;"><hr></div>
+							</div>
+              -->
+							<div class="form-group">
+								<div class="col-lg-7 col-lg-offset-5">
+								  <input type="hidden" name="firma_digital" id="firma_digital" value="1">
+                  <button type="reset" class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-primary" id="btn_guardar" style="display: none;">Guardar</button>
+									<button type="button" class="btn btn-danger" id="btn_controlar" onClick="comprobacionFinal();">Controlar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+        <a href="/{app_name}/archivos/genera_comprobante" class="btn btn-info" style="display: {btn_comprobante_display};">Descargar Comprobante</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function() {
+    formularioDatos.documento.addEventListener("keypress", soloNumeros, false);
+  });
+  
+  var ac = 0;
+  var anc = 0;
+  var activo = 0;
+  
+  var pc = 0;
+  var pnc = 0;
+  var pasivo = 0;
+  
+  function cambio_valor(tipo) {
+    switch(tipo) {
+      case 1:
+        var temp_activo_corriente = document.getElementById('activo_corriente').value;
+        if (ac != temp_activo_corriente) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+      case 2:
+        var temp_activo_nocorriente = document.getElementById('activo_nocorriente').value;
+        if (anc != temp_activo_nocorriente) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+      case 3:
+        var temp_activo = document.getElementById('activo').value;
+        if (activo != temp_activo) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+      case 4:
+        var temp_pasivo_corriente = document.getElementById('pasivo_corriente').value;
+        if (pc != temp_pasivo_corriente) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+      case 5:
+        var temp_pasivo_corriente = document.getElementById('pasivo_corriente').value;
+        if (pnc != temp_pasivo_corriente) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+      case 1:
+        var temp_pasivo_corriente = document.getElementById('pasivo_corriente').value;
+        if (pasivo != temp_pasivo_corriente) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+        }
+        break;
+    }
+  }
+  
+  function comprobacionFinal() {
+    var temp_ac = parseFloat(document.getElementById("activo_corriente").value);
+    var temp_anc = parseFloat(document.getElementById("activo_nocorriente").value);
+    var temp_a = parseFloat(document.getElementById("activo").value);
+    var temp_resultado_activo = parseFloat(temp_ac + temp_anc);
+    
+    var temp_pc = parseFloat(document.getElementById("pasivo_corriente").value);
+    var temp_pnc = parseFloat(document.getElementById("pasivo_nocorriente").value);
+    var temp_p = parseFloat(document.getElementById("pasivo").value);
+    var temp_resultado_pasivo = parseFloat(temp_pc + temp_pnc);
+    
+    var temp_patrimonio_neto = parseFloat(document.getElementById("patrimonio_neto").value);
+    var temp_resultado_patrimonio_neto = parseFloat(temp_a - temp_p);
+    
+    var flag_activo = 0;
+    var flag_pasivo = 0;
+    var flag_patrimonio = 0;
+    
+    if(temp_ac == 0 && temp_anc == 0 && temp_a == 0) {
+      document.getElementById('btn_guardar').style.display = 'none';
+      document.getElementById('btn_controlar').style.display = 'inline-block';
+      activaModal('Por favor completar el activo.');
+      return false;
+    } else {
+      if(temp_resultado_activo == temp_a) {
+        flag_activo = 0;
+      } else {
+        flag_activo = 1;
+        document.getElementById('btn_guardar').style.display = 'none';
+        document.getElementById('btn_controlar').style.display = 'inline-block';
+        activaModal('Hay inconsistencia con el activo.');
+        return false;
+      }
+    }
+    
+    if(temp_pc == 0 && temp_pnc == 0 && temp_p == 0) {
+      document.getElementById('btn_guardar').style.display = 'none';
+      document.getElementById('btn_controlar').style.display = 'inline-block';
+      activaModal('Por favor completar el pasivo.');
+      return false;
+    } else {
+      if(temp_resultado_pasivo != temp_p) {
+        flag_pasivo = 1;
+        document.getElementById('btn_guardar').style.display = 'none';
+        document.getElementById('btn_controlar').style.display = 'inline-block';
+        activaModal('Hay inconsistencia con el pasivo.');
+        return false;
+      } else {
+        flag_pasivo = 0;
+      }
+    }
+    
+    if (temp_patrimonio_neto != temp_resultado_patrimonio_neto) {
+        flag_patrimonio = 1;
+        document.getElementById('btn_guardar').style.display = 'none';
+        document.getElementById('btn_controlar').style.display = 'inline-block';
+        activaModal('Hay inconsistencia con el patrimonio neto.');
+    } else {
+        flag_patrimonio = 0;
+    }
+      
+    
+    if(flag_activo == 0 && flag_pasivo == 0 && flag_patrimonio == 0) {
+      if (tipo_id == 37) {
+        
+        var temp_reexpresion_origen = parseFloat(document.getElementById("reexpresion_origen").value);
+        var temp_reexpresion_depreciacion = parseFloat(document.getElementById("reexpresion_depreciacion").value);
+        var temp_reexpresion_resultado = parseFloat(document.getElementById("reexpresion_resultado").value);
+        
+        var temp_resultado_reexpresion_resultado = activo - temp_reexpresion_origen;
+        temp_resultado_reexpresion_resultado = temp_resultado_reexpresion_resultado + temp_reexpresion_depreciacion;
+        
+        if (temp_reexpresion_resultado != temp_resultado_reexpresion_resultado) {
+          document.getElementById('btn_guardar').style.display = 'none';
+          document.getElementById('btn_controlar').style.display = 'inline-block';
+          activaModal('Hay inconsistencia con la reexpresión de bienes de uso.');
+        } else {
+          document.getElementById('btn_guardar').style.display = 'inline-block';
+          document.getElementById('btn_controlar').style.display = 'none';          
+        }
+      } else {
+        document.getElementById('btn_guardar').style.display = 'inline-block';
+        document.getElementById('btn_controlar').style.display = 'none';        
+      }
+      
+    }
+  }
+  
+  
+  function soloNumeros(e){
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+      e.preventDefault();
+    }
+  }
+  
+	function compruebaCUIT() {
+    var documento = document.getElementById("documento").value;
+    var tipo_documento = document.getElementById("tipo_documento").value;
+    var icon_exclamation = document.getElementById("icon_exclamation");
+    var icon_error = document.getElementById("icon_error");
+    var icon_ok = document.getElementById("icon_ok");
+		
+		var bandera = "";
+    if (documento == 0) {
+      bandera = "No";
+    } else {
+      if (tipo_documento == 'CUIL' || tipo_documento == 'CUIT') {
+        var path = '/{app_name}/archivos/verificar_cuit/' + documento;
+        bandera = $.ajax({
+            url: path,
+            dataType: 'text',
+            async: false
+          }).responseText;	
+      } else {      
+        var found = new Array(); 
+        if (documento > 1000000 && documento < 100000000) {
+          bandera = "Si";
+        } else {
+          bandera = "No";
+        }
+      }
+    }
+    
+		if (bandera == "Si") {
+			icon_exclamation.style.display = "none";
+			icon_error.style.display = "none";
+			icon_error.style.color = "#FF0000";
+			icon_ok.style.display = "block";
+      document.getElementById('btn_guardar').disabled = false;
+		} else {
+			icon_exclamation.style.display = "none";
+			icon_error.style.display = "block";
+			icon_error.style.color = "#FF0000";
+			icon_error.focus();
+			icon_ok.style.display = "none";
+      document.getElementById('btn_guardar').disabled = true;
+		}	
+	}
+	
+	function compruebaEjercicio() {
+    var tipotrabajo = document.getElementById("tipo_id");
+    var tipo_id = tipotrabajo.options[tipotrabajo.selectedIndex].value;
+    
+    var ejercicio = document.getElementById("ejercicio").value;
+		ejercicio = ejercicio.trim();
+		ejercicio = ejercicio.length;
+    
+    var documento = document.getElementById("documento").value;
+    documento = documento.trim();
+		documento = documento.length;
+    
+    var reexpresion_origen = document.getElementById("reexpresion_origen").value;
+		reexpresion_origen = reexpresion_origen.trim();
+		reexpresion_origen = reexpresion_origen.length;
+    
+    var reexpresion_depreciacion = document.getElementById("reexpresion_depreciacion").value;
+		reexpresion_depreciacion = reexpresion_depreciacion.trim();
+		reexpresion_depreciacion = reexpresion_depreciacion.length;
+    
+		var fecha_inicio = document.getElementById("fecha_inicio").value;
+		var fecha_ini = fecha_inicio;
+		fecha_inicio = fecha_inicio.trim();
+		fecha_inicio = fecha_inicio.length;
+    
+    var fecha_cierre = document.getElementById("fecha_cierre").value;
+		var fecha_fin = fecha_cierre;
+		fecha_cierre = fecha_cierre.trim();
+		fecha_cierre = fecha_cierre.length;
+    
+    var fecha_informe = document.getElementById("fecha_informe").value;
+		fecha_informe = fecha_informe.trim();
+		fecha_informe = fecha_informe.length;
+    
+		if (documento == 0) {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('documento').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar el documento.';
+			activaModal(msj);
+		}
+		
+		if (fecha_inicio.length == 0 || fecha_inicio == null || fecha_inicio == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_inicio').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de inicio.';
+			activaModal(msj);
+		}
+		
+		if (fecha_cierre.length == 0 || fecha_cierre == null || fecha_cierre == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_cierre').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de cierre.';
+			activaModal(msj);
+		}
+    
+    if (fecha_informe.length == 0 || fecha_informe == null || fecha_informe == '') {
+			document.getElementById("ejercicio").value = "";
+			document.getElementById('fecha_informe').focus();
+			var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la fecha de informe.';
+			activaModal(msj);
+		}
+    
+    if (fecha_ini > fecha_fin) {
+      document.getElementById('fecha_inicio').value = "";
+      document.getElementById('fecha_cierre').value = "";
+      document.getElementById('fecha_inicio').focus();
+      document.getElementById('fecha_cierre').focus();
+			var msj = 'La fecha de inicio no puede ser mayor a la de cierre.';
+			activaModal(msj);
+    }
+    
+    if (tipo_id == 37) {
+      if (reexpresion_origen == null || reexpresion_origen == '') {
+        document.getElementById("reexpresion_origen").value = 0;
+        document.getElementById('reexpresion_origen').focus();
+        var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la reexpresión del valor de origen de bienes de uso.';
+        activaModal(msj);
+      }
+
+      if (reexpresion_depreciacion == null || reexpresion_depreciacion == '') {
+        document.getElementById("reexpresion_depreciacion").value = 0;
+        document.getElementById('reexpresion_depreciacion').focus();
+        var msj = 'Recuerde que para validar el Número de Ejercicio es necesario completar la reexpresión de las depreciaciones acumuladas de bienes de uso.';
+        activaModal(msj);
+      }
+    }
+		
+		if (ejercicio == 0) {
+			document.getElementById('ejercicio').focus();
+			var msj = 'Por favor complete el número de ejercicio.';
+			activaModal(msj);
+		} else if (documento != 0 && fecha_inicio != 0 && fecha_cierre != 0) {
+			
+			var ejercicio = document.getElementById('ejercicio').value
+			var documento = document.getElementById('documento').value
+			var fecha_inicio = document.getElementById('fecha_inicio').value
+			var fecha_cierre = document.getElementById('fecha_cierre').value
+			var path = '/{app_name}/archivos/verificar_ejercicio/' + ejercicio + '/' + documento + '/' + fecha_inicio + '/' + fecha_cierre;
+			var bandera = "";
+			bandera = $.ajax({
+    			url: path,
+      		dataType: 'text',
+      		async: false
+      	}).responseText;	
+			
+			if (bandera == 'Existe') {
+				document.getElementById("ejercicio").value = "";
+				document.getElementById("documento").value = "";
+				document.getElementById("fecha_inicio").value = "";
+				document.getElementById("fecha_cierre").value = "";
+				document.getElementById('documento').focus();
+				var msj = 'Ya existe un documento que coincide con el que esta tratando de ingresar.';
+				activaModal(msj);
+			}
+		}
+	}
+  
+  function habilitaAjuste() {
+		var tipotrabajo = document.getElementById("tipo_id");
+    var tipo_id = tipotrabajo.options[tipotrabajo.selectedIndex].value;
+		
+    if (tipo_id == 37) {
+		  document.getElementById("reexpresion_origen").readOnly = false;
+      document.getElementById("reexpresion_depreciacion").readOnly = false;
+      document.getElementById("reexpresion_resultado").readOnly = false;
+      document.getElementById("reexpresion_origen").required = true;
+      document.getElementById("reexpresion_depreciacion").required = true;      
+      document.getElementById("reexpresion_resultado").required = true;      
+      sumar_reexpresion();
+    } else {
+      document.getElementById("reexpresion_origen").readOnly = true;
+      document.getElementById("reexpresion_depreciacion").readOnly = true;
+      document.getElementById("reexpresion_resultado").readOnly = true;
+      document.getElementById("reexpresion_origen").required = false;
+      document.getElementById("reexpresion_depreciacion").required = false;
+      document.getElementById("reexpresion_resultado").required = false;
+      document.getElementById("reexpresion_origen").value = 0;
+      document.getElementById("reexpresion_depreciacion").value = 0;
+      document.getElementById("reexpresion_resultado").value = 0;
+    }
+    
+    if (tipo_id == 2) {
+      document.getElementById('lbl_balance').innerHTML = 'Adjuntar MANIFESTACION BIENES y SITUACION PATRIMONIAL';
+      document.getElementById('lbl_balance_adjuntar').innerHTML = 'Adjunta MANIFESTACION BIENES y SITUACION PATRIMONIAL a Oblea Final?';
+    } else {
+      document.getElementById('lbl_balance').innerHTML = 'Adjuntar EECC';
+      document.getElementById('lbl_balance_adjuntar').innerHTML = 'Adjunta EECC a Oblea Final?';
+    }
+	}
+	
+	function sumar() {
+    var tipotrabajo = document.getElementById("tipo_id");
+    var tipo_id = tipotrabajo.options[tipotrabajo.selectedIndex].value;
+    
+		var ac = parseFloat(document.getElementById("activo_corriente").value);
+		var anc = parseFloat(document.getElementById("activo_nocorriente").value);
+		var activo = ac + anc;
+		activo = roundToTwo(activo);
+		
+		var pc = parseFloat(document.getElementById("pasivo_corriente").value);
+		var pnc = parseFloat(document.getElementById("pasivo_nocorriente").value);
+		var pasivo = pc + pnc;
+		pasivo = roundToTwo(pasivo);
+		
+		var pn = activo - pasivo;
+		pn = roundToTwo(pn);
+		
+		document.getElementById("activo").value = activo;
+		document.getElementById("pasivo").value = pasivo;
+		document.getElementById("patrimonio_neto").value = pn;
+		
+    if (tipo_id == 37) {
+      sumar_reexpresion();
+    } 
+	}
+  
+  function sumar_reexpresion() {
+		var vrobu = parseFloat(document.getElementById("reexpresion_origen").value);
+		var vrdbu = parseFloat(document.getElementById("reexpresion_depreciacion").value);
+		var vrrbu = parseFloat(document.getElementById("reexpresion_resultado").value);
+		var activo = parseFloat(document.getElementById("activo").value);
+		if (activo == 0) {
+      var nuevo_vrrbu = 0;
+    } else {
+      var nuevo_vrrbu = activo - vrobu;
+      nuevo_vrrbu = nuevo_vrrbu + vrdbu;
+    } 
+		//document.getElementById("reexpresion_resultado").value = nuevo_vrrbu;
+		document.getElementById("reexpresion_resultado").value = 0;
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+	
+	function roundToTwo(num) {    
+  	return +(Math.round(num + "e+2")  + "e-2");
+	}
+	
+	function prueba() {
+		var valorControl = document.getElementById('activo_corriente').value;
+		var parseado = valorControl.replace(/\./g, '');
+		var parseado2 = parseado.toString().split('').reverse().join('').replace(/\d{3}(?=\d)/g, function(miles){ return miles +'.';})
+		document.getElementById('activo_corriente').value = parseado2.toString().split('').reverse().join('');
+	}
+</script>

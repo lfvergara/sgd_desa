@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="starter-template">
+	   <div class="page-header"><h1>{titulo}</h1></div>
+      <div class="row">
+
+        <div class="col-lg-6">
+          <div class="panel panel-info">
+           <div class="panel-heading"><h4>Información del Usuario</h4></div>
+           <div class="panel-body">
+             <p>Usuario: <strong>{sesion.denominacion}</strong></p>
+             <!--<p>Nivel: <strong>{sesion.nivel}</strong></p>-->
+             <p>Grupo: <strong>{sesion.grupo}</strong></p>
+           </div>
+         </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="panel panel-primary">
+           <div class="panel-heading"><h4>Cambiar contraseña</h4></div>
+           <div class="panel-body">
+             <form class="form-horizontal" name="datos" id="form_edit_pass" action="/{app_name}/usuarios/cambiar_token" method="post">
+               <div class="form-group">
+                 <label class="col-lg-4 control-label">Nueva contraseña</label>
+                 <div class="col-lg-8">
+                   <input type="password" class="form-control" id="nclave" name="nclave" />
+                 </div>
+               </div>
+               <div class="form-group">
+                 <label class="col-lg-4 control-label">Repetir nueva contraseña</label>
+                 <div class="col-lg-8">
+                   <input type="password" class="form-control" id="re_nclave" name="re_nclave" />
+                 </div>
+               </div>
+               <div class="form-group">
+                 <div class="col-lg-8 col-lg-offset-4">
+									 <input type="hidden" name="denominacion" value="{sesion.denominacion}">
+									 <input type="hidden" name="usuario_id" value="{sesion.usuario_id}">
+                   <button type="button" class="btn btn-danger" onClick="controlar();">Aceptar</button>
+                 </div>
+               </div>
+             </form>
+           </div>
+         </div>
+        </div>
+      </div>
+   </div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	$(window).on('load',function() {
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+	
+	function controlar() {
+		var pass = document.getElementById("nclave").value;
+		var re_pass = document.getElementById("re_nclave").value;
+
+		if (pass != re_pass) {
+			var msj = 'La contraseñas ingresadas no coinciden.';
+			document.getElementById("nclave").value = "";
+			document.getElementById("re_nclave").value = "";
+			activaModal(msj);
+		} else {
+			document.getElementById("form_edit_pass").submit();
+		}
+	}
+	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>

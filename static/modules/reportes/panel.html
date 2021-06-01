@@ -1,0 +1,217 @@
+<!-- Chart.js -->
+<script src="{theme_path}/js/Chart.js"></script>
+<div class="container" style="width: 1600px;">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+    
+		<div class="row">
+			<div class="col-md-12">
+        <div class="alert alert-dismissible alert-danger" >
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Atención!</strong> Estimado administrador, hemos habilitado en versión <strong>DEMO desde el 24/02/2019 al 03/03/2019,</strong> nuestro PANEL mejorado! Por favor no dude en contactarse con su proveedor en caso de querer contar con nuestra nueva herramienta. Gracias!
+        </div>
+		  <div/>
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Reporte por estado de documentación</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/reportes/descargar_estado_archivo">
+							<div class="form-group">
+							  <label for="fecha" class="col-lg-2 control-label">Estado</label>
+								<div class="col-lg-7">
+									<select name="estado_id" id="estado_id" class="form-control" required aria-required="true">
+										<option value="">--Seleccionar--</option>
+										{slt_estado}
+									</select>
+								</div>
+                <div class="col-lg-2">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Exportar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h4>Currículums de matriculados</h4>
+          </div>
+          <div class="panel-body">
+			      <div class="col-md-7" style="border-right: solid #BDBDBD 1px;">
+              <form class="form-horizontal" action="/{app_name}/matriculados/buscar_curriculum" method="post">
+                <div class="form-group">
+                  <label for="edad" class="col-lg-4 control-label">Edad</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" name="edad">
+                      <option value="99" selected>Todas</option>
+                      <option value="18-25">18-25</option>
+                      <option value="26-33">26-33</option>
+                      <option value="34-40">34-40</option>
+                      <option value="41-48">41-48</option>
+                      <option value="49-55">49-55</option>
+                      <option value="56-99">56 o más</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="provincia" class="col-lg-4 control-label">Provincia</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" name="provincia_id">
+                      <option value="99" selected>Todas</option>
+                      {slt_provincias}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="localidad" class="col-lg-4 control-label">Localidad</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" name="localidad" id="localidad">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="universidad" class="col-lg-4 control-label">Universidad</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" name="universidad" id="universidad">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="estudio" class="col-lg-4 control-label">Titulación</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" name="estudio" id="estudio">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="curso" class="col-lg-4 control-label">Curso</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" name="curso" id="curso">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="idioma" class="col-lg-4 control-label">Idioma</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" name="idioma_id">
+                      <option value="99" selected>Todos</option>
+                      {slt_idiomas}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                  </div>
+                </div>
+              </form>  
+            </div>
+			      <div class="col-md-5">
+              <h5>Matriculados con CV cargados</h5>
+              <span class="badge badge-pill badge-danger" style="font-size: 40px; background-color: #E74C3C; width: 100%;">{cantidad_curriculums_matriculados}</span>
+              <button type="button" class="btn btn-primary btn-xs" onclick="location.href='/{app_name}/reportes/descargar_matriculados_con_cv'" style="width: 100%; margin-top: 5px;"> <i class="fa fa-file-excel-o"></i> Exportar</button>
+              <hr />
+              <h5>Matriculados actualizados</h5>
+              <span class="badge badge-pill badge-danger" style="font-size: 40px; background-color: #E74C3C; width: 100%;">{cantidad_matriculados_actualizados}</span>
+              <button type="button" class="btn btn-primary btn-xs" onclick="location.href='/{app_name}/reportes/descargar_matriculados_actualizados'" style="width: 100%; margin-top: 5px;"> <i class="fa fa-file-excel-o"></i> Exportar</button>
+              <hr />
+            </div>            
+          </div>
+        </div>	
+			</div>
+			<div class="col-md-4">
+        <div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Reporte por actualización de matriculado</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/reportes/descargar_matriculado_estado_actualizacion">
+							<div class="form-group">
+							  <label for="fecha" class="col-lg-2 control-label">Estado</label>
+								<div class="col-lg-6">
+									<select name="actualizado" id="actualizado" class="form-control" required aria-required="true">
+										<option value="2">ACTUALIZADO</option>
+										<option value="0">NO ACTUALIZADO</option>
+										<option value="all">TODOS</option>
+									</select>
+								</div>
+                <div class="col-lg-2">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Exportar</button>
+								</div>
+							</div>
+						</form>
+					  <hr />
+            <h4><i class="fa fa-bar-chart-o"></i> Estadísticas</h4>
+            <div class="col-lg-12">
+              <div class="panel">
+                <div class="panel-body" style="padding: 5px;">
+                  <div id="canvas-holder">
+                    <canvas id="chartPieMatriculados" style="margin-left: 50px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+					</div>
+				</div>
+        <div class="alert alert-dismissible alert-info" style="display: {alert_encuesta_display};">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Atención!</strong> No hay una encuesta activa!
+        </div>
+        <div class="panel panel-warning hidden-print" style="display: {panel_encuesta_display};">
+					<div class="panel-heading">
+						<h4>Encuesta activa</h4>
+            <div class="pull-right" style="margin-top: -30px;">
+              <button class="btn btn-primary btn-xs" onclick="location.href='/{app_name}/reportes/descargar_resultado_encuesta/{encuesta_id}'"><i class="fa fa-file-excel-o"></i> Exportar</button>
+            </div>
+					</div>
+					<div class="panel-body">
+						<p><strong>{encuesta}</strong></p>
+            <p><strong>Fecha: {fecha}</strong></p>
+						<hr />
+            {lst_graficos_encuesta}
+					</div>
+				</div>
+			</div>
+      <div class="col-md-3">
+        <div class="panel panel-danger hidden-print" style="display: {panel_encuesta_display};">
+					<div class="panel-heading">
+						<h4>Novedades auditor (Últimas 5)</h4>
+					</div>
+					<div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Acción</th>
+                  <th scope="col">Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tbl_auditor}
+              </tbody>
+            </table>
+            <button type="button" class="btn btn-primary btn-xs" onclick="location.href='/{app_name}/auditor/listar'" style="width: 100%; margin-top: 5px;"> <i class="fa fa-eye"></i> Ver todos</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  {lst_data_grafico}
+</script>
+<script>
+  var pieDataMatriculados = [
+    {
+      value: {cantidad_matriculados_actualizados},
+      color:"#2c3e50",
+      highlight: "#0c62ab",
+      label: "ACTUALIZADOS"
+    },
+    {
+      value: {cantidad_matriculados_desactualizados},
+      color:"#E74C3C",
+      highlight: "#0c62ab",
+      label: "DESACTUALIZADOS"
+    }
+  ];
+  var ctxm = document.getElementById("chartPieMatriculados").getContext("2d");
+  window.myPie = new Chart(ctxm).Pie(pieDataMatriculados);	
+</script>
