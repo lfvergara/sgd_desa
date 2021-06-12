@@ -1,2 +1,0 @@
-creamos archivo
-
