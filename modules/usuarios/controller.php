@@ -14,7 +14,11 @@ class UsuariosController {
 		$this->model = new Usuarios();
 		$this->view = new UsuariosView();
 	}
-
+    
+    function login() {
+        $this->view->mostrar_error("Nombre de usuario o clave incorrectos.");
+    }
+    
 	function gestionar() {
     SessionHandling::check();
 		$usuarios = $this->model->listar();
