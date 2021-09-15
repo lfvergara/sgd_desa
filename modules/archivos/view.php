@@ -354,7 +354,6 @@ class ArchivosView extends View{
     	}
     
     	$matriculado = $this->set_dict($matriculado[0]);
-    	print_r($seguimiento);
 		$gui_seguimiento = $this->render_regex('repetir', $gui_seguimiento, $seguimiento);
 		$render = str_replace("{seguimiento}", $gui_seguimiento, $gui);
 		$render = str_replace("{icono_comprobante}", $icono_comprobante, $render);
