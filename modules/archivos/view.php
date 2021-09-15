@@ -746,7 +746,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function consultar_legalizado($datos, $seguimiento, $estado_id) {
+  	function consultar_legalizado($datos, $seguimiento, $estado_id) {
 		$gui_html = ($tipo == 1) ? "ver_legalizado" : "ver_certificacion_legalizada";
 		$gui = file_get_contents("static/modules/archivos/{$gui_html}.html");
 		$gui_tbl_seguimiento = file_get_contents("static/modules/archivos/tbl_seguimiento_legalizado.html");
@@ -776,7 +776,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function consultar_control_admin($datos, $seguimiento, $estado_id) {
+  	function consultar_control_admin($datos, $seguimiento, $estado_id) {
 		$tipo = $datos["tipo"];
 		$gui_html = ($tipo == 1) ? "ver_control_admin" : "ver_certificacion_control_admin";
 		$gui = file_get_contents("static/modules/archivos/{$gui_html}.html");
@@ -795,15 +795,15 @@ class ArchivosView extends View{
 			}
 		}
     
-    if ($estado_id == 6) {
-      $gui_barcode = file_get_contents("static/modules/archivos/barcode.html");
-		  $gui_btn_print = "block";
-      $gui = str_replace('{barcode}', $gui_barcode, $gui);
-    } else {
-		  $gui_btn_print = "none";
-      $msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
-      $gui = str_replace('{barcode}', $msj, $gui);    
-    }
+	    if ($estado_id == 6) {
+	      	$gui_barcode = file_get_contents("static/modules/archivos/barcode.html");
+			$gui_btn_print = "block";
+	      	$gui = str_replace('{barcode}', $gui_barcode, $gui);
+	    } else {
+			$gui_btn_print = "none";
+	      	$msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
+	      	$gui = str_replace('{barcode}', $msj, $gui);    
+	    }
 		
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
@@ -831,7 +831,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_formulario_validar_tipo2($tipos_trabajo, $archivo, $array_verificar) {
+  	function mostrar_formulario_validar_tipo2($tipos_trabajo, $archivo, $array_verificar) {
 		$gui = file_get_contents("static/modules/archivos/validar_tipo2.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -849,7 +849,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_formulario_validar($tipos_trabajo, $array_msj) {
+  	function mostrar_formulario_validar($tipos_trabajo, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/validar.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -922,10 +922,10 @@ class ArchivosView extends View{
 		$slt_estado = file_get_contents("static/common/slt_estados.html");
 		$menu = file_get_contents("static/menu.html");
 		
-    $slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
+    	$slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
-    $btn_display = (!empty($datos)) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$btn_display = (!empty($datos)) ? "block;" : "none;";
     
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
@@ -937,7 +937,7 @@ class ArchivosView extends View{
 		$render = $this->render($contador_estados, $render);
 		$render = str_replace('{slt_estado}', $slt_estado, $render);
 		$render = str_replace('{estado_id}', $estado_id, $render);
-    $render = str_replace('{theme_path}', THEME_PATH, $render);
+    	$render = str_replace('{theme_path}', THEME_PATH, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
@@ -974,12 +974,13 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_consultar_buscar($datos=array(), $estados) {
+  	function mostrar_consultar_buscar($datos=array(), $estados) {
 		$gui = file_get_contents("static/modules/archivos/consultar_buscar.html");
-    $slt_estado = file_get_contents("static/common/slt_estados.html");
+		$gui_tbl_consultar = file_get_contents("static/modules/archivos/tbl_consultar_buscar.html");
+    	$slt_estado = file_get_contents("static/common/slt_estados.html");
 		$menu = file_get_contents("static/menu.html");
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
         
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
@@ -996,29 +997,30 @@ class ArchivosView extends View{
 		
 		$dict = array("{titulo}"=>"Consultar documentos", "{administrador}"=>$administrador_display);
 
-    $slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
-		$render = $this->render_regex('repetir', $gui, $datos);
-    $render = str_replace('{slt_estado}', $slt_estado, $render);
+    	$slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
+		$gui_tbl_consultar = $this->render_regex('repetir', $gui_tbl_consultar, $datos);
+    	$render = str_replace('{tbl_consultar}', $gui_tbl_consultar, $gui);
+    	$render = str_replace('{slt_estado}', $slt_estado, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
   
-  function traer_formulario_archivo_ajax($bandera) {
-    switch ($bandera) {
-      case 1:
-		    $gui = file_get_contents("static/modules/archivos/div_archivos_1.html");
-        break;
-      case 2:
-		    $gui = file_get_contents("static/modules/archivos/div_archivos_2.html");
-        break;
-      case 3:
-		    $gui = file_get_contents("static/modules/archivos/div_archivos_3.html");
-        break;
-      default:
-		    $gui = file_get_contents("static/modules/archivos/div_archivos_1.html");
-        break;
-    }
+  	function traer_formulario_archivo_ajax($bandera) {
+    	switch ($bandera) {
+      		case 1:
+		    	$gui = file_get_contents("static/modules/archivos/div_archivos_1.html");
+        		break;
+	      	case 2:
+			    $gui = file_get_contents("static/modules/archivos/div_archivos_2.html");
+	        	break;
+      		case 3:
+		    	$gui = file_get_contents("static/modules/archivos/div_archivos_3.html");
+        		break;
+      		default:
+		    	$gui = file_get_contents("static/modules/archivos/div_archivos_1.html");
+        	break;
+    	}
       
 		print $gui;
 	}
