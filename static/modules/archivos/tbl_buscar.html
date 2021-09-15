@@ -1,0 +1,22 @@
+<!--repetir-->
+<tr>
+	<td>{archivo_id}</td>
+	<td>{denominacion}</td>
+	<td>{estado}</td>
+	<td>{fecha}</td>
+	<td>{comentario}</td>
+	<td>
+		<a class="btn btn-warning btn-xs {icono}" href="/{app_name}/archivos/leer/{archivo_id}/{seguimiento_id}" target="_blank">
+			<i class="fa fa-file"></i>
+		</a>
+	</td>
+	<td style=" width: 75px;">
+		<a class="btn btn-primary btn-xs" href="/{app_name}/archivos/consultar/{archivo_id}/{estado_id}" style="margin-left: 5%;">
+			<i class="fa fa-eye"></i>
+		</a>
+        <a onClick="modalEliminar({archivo_id},{estado_id});" class="btn btn-danger btn-xs" style="display: {administrador}; float: left;">
+          	<i class="fa fa-trash-o"></i>
+        </a>
+	</td>
+</tr>
+<!--repetir-->

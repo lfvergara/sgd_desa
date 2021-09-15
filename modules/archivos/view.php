@@ -908,12 +908,13 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_form_buscar($datos=array(), $estados) {
+  	function mostrar_form_buscar($datos=array(), $estados) {
 		$gui = file_get_contents("static/modules/archivos/buscar.html");
-    $slt_estado = file_get_contents("static/common/slt_estados.html");
+		$tbl_buscar = file_get_contents("static/modules/archivos/tbl_buscar.html");
+    	$slt_estado = file_get_contents("static/common/slt_estados.html");
 		$menu = file_get_contents("static/menu.html");
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
         
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
@@ -930,9 +931,10 @@ class ArchivosView extends View{
 		
 		$dict = array("{titulo}"=>"Buscar documento", "{administrador}"=>$administrador_display);
 
-    $slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
-		$render = $this->render_regex('repetir', $gui, $datos);
-    $render = str_replace('{slt_estado}', $slt_estado, $render);
+    	$slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
+		$tbl_buscar = $this->render_regex('repetir', $tbl_buscar, $datos);
+		$render = str_replace("{tbl_buscar}", $tbl_buscar, $gui);
+    	$render = str_replace('{slt_estado}', $slt_estado, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
