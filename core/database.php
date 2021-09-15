@@ -16,5 +16,4 @@ function execute_query($sql, $datos=array()) {
 
      return ($registros_leidos) ? $registros_leidos : $id_ingresado;
 }
-
 ?>

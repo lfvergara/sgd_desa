@@ -106,9 +106,11 @@ class UsuariosController {
   }
   
 	function verificar() {
+//	    print_r('Hola');exit;
 		$this->model->denominacion = filter_input(INPUT_POST, "denominacion");
 		$this->model->clave = filter_input(INPUT_POST, "clave");
-    
+	
+       
     $evaluacion = $this->model->evaluar();
     if($evaluacion == 0) $this->view->mostrar_error("Nombre de usuario o clave incorrectos.");
     if($evaluacion == 1) {
