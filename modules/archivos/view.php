@@ -670,6 +670,7 @@ class ArchivosView extends View{
   
   	function mostrar_intervenidos($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_intervenidos.html");
+		$gui_tbl_intervenidos = file_get_contents("static/modules/archivos/tbl_intervenidos.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -677,7 +678,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos intervenidos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$gui_tbl_intervenidos = $this->render_regex('repetir', $gui_tbl_intervenidos, $datos);
+		$render = str_replace('{tbl_intervenidos}', $gui_tbl_intervenidos, $gui);
 		$render = $this->render($dict, $render);
     	$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
