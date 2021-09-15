@@ -722,6 +722,7 @@ class ArchivosView extends View{
   function consultar_legalizado($datos, $seguimiento, $estado_id) {
 		$gui_html = ($tipo == 1) ? "ver_legalizado" : "ver_certificacion_legalizada";
 		$gui = file_get_contents("static/modules/archivos/{$gui_html}.html");
+		$gui_tbl_seguimiento = file_get_contents("static/modules/archivos/tbl_seguimiento_legalizado.html");
 		$menu = file_get_contents("static/menu.html");
 		$tipo = $datos["tipo"];
 		
@@ -738,9 +739,10 @@ class ArchivosView extends View{
 			}
 		}
     
-    $dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
+    	$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
-		$render = $this->render_regex('repetir', $gui, $seguimiento);
+		$gui_tbl_seguimiento = $this->render_regex('repetir', $gui_tbl_seguimiento, $seguimiento);
+		$render = str_replace("{tbl_seguimiento}", $gui_tbl_seguimiento, $gui);
 		$render = str_replace("{gui_btn_print}", $gui_btn_print, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
