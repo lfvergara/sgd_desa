@@ -81,23 +81,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!--repetir-->
-								<tr>
-									<td>{usuario_id}</td>
-									<td>{usuario}</td>
-									<td>{correoelectronico}</td>
-									<td>{token}</td>
-									<td>{nivel}</td>
-									<td>{grupo}</td>
-									<td>{matricula}</td>
-									<td>
-                      <a class="btn btn-warning btn-xs" href="/{app_name}/usuarios/editar/{usuario_id}"><i class="fa fa-pencil fa-lg"></i></a>
-											<a class="btn btn-danger btn-xs" href="/{app_name}/usuarios/blanquear/{usuario_id}">
-												<i class="fa fa-chain-broken fa-lg"></i>
-											</a>
-                  </td>
-								</tr>
-								<!--repetir-->
+								{tbl_mantenimiento}
 							</tbody>
 						</table>
 					</div>
@@ -116,7 +100,7 @@
 									<input type="text" class="form-control" name="denominacion" id="denominacion" onChange="verificaUsuario();" placeholder="Ingrese el nombre de inicio de sesión">
 								</div>
 							</div>
-              <div class="form-group">
+              				<div class="form-group">
 								<label for="denominacion" class="col-lg-2 control-label">Correo Electrónico</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" name="correoelectronico" id="correoelectronico" placeholder="Ingrese el correo electrónico">
@@ -127,10 +111,8 @@
 								<label for="medidor" class="col-lg-2 control-label">Grupo</label>
 								<div class="col-lg-10">
 									<select class="form-control" name="grupo_id" id="grupo_id" onChange="verificaGrupo();">
-                    <!--grupos-->
-                    <option value="{grupo_id}">{denominacion}</option>
-                    <!--grupos-->
-                  </select>
+					                    {slt_grupos}
+				                  	</select>
 								</div>
 							</div>
 							<div class="form-group" id="div_matricula" style="display: none;">

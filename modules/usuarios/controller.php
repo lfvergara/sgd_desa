@@ -20,7 +20,7 @@ class UsuariosController {
     }
     
 	function gestionar() {
-    SessionHandling::check();
+    	SessionHandling::check();
 		$usuarios = $this->model->listar();
 		$grupos = new GruposController();
 		$this->view->mostrar_mantenimiento($usuarios, $grupos->model->listar());
