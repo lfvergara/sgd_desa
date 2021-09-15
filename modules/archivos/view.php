@@ -623,6 +623,7 @@ class ArchivosView extends View{
 	
 	function mostrar_pendientes($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_pendientes.html");
+		$gui_tbl_pendientes = file_get_contents("static/modules/archivos/tbl_pendientes_usuario.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -630,7 +631,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$gui_tbl_pendientes = $this->render_regex('repetir', $gui_tbl_pendientes, $datos);
+		$render = str_replace('{tbl_pendientes}', $gui_tbl_pendientes, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
