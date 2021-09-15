@@ -269,7 +269,7 @@ class ArchivosView extends View{
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
     
-    $matriculado = $this->set_dict($matriculado[0]);
+    	$matriculado = $this->set_dict($matriculado[0]);
 		$gui_seguimiento = $this->render_regex('repetir', $gui_seguimiento, $seguimiento);
 		$render = str_replace("{seguimiento}", $gui_seguimiento, $gui);
 		$render = str_replace("{icono_comprobante}", $icono_comprobante, $render);
@@ -278,21 +278,21 @@ class ArchivosView extends View{
 		$render = str_replace("{nota_url}", $nota_url, $render);
 		$render = str_replace("{slt_entidades}", $gui_slt_entidades, $render);
 		$render = str_replace("{slt_cuentas}", $gui_slt_cuentas, $render);
-    $render = $this->render($matriculado, $render);
+    	$render = $this->render($matriculado, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
   
-  function mostrar_detalle_autorizar($datos, $seguimiento, $matriculado, $intentos) {
-    if($intentos > 1) {
-		  $gui = file_get_contents("static/modules/archivos/mostrar_detalle_autorizar_observado.html");
-    } else {
-		  $gui = file_get_contents("static/modules/archivos/mostrar_detalle_autorizar.html");
-    }
+  	function mostrar_detalle_autorizar($datos, $seguimiento, $matriculado, $intentos) {
+	    if($intentos > 1) {
+			  $gui = file_get_contents("static/modules/archivos/mostrar_detalle_autorizar_observado.html");
+	    } else {
+			  $gui = file_get_contents("static/modules/archivos/mostrar_detalle_autorizar.html");
+	    }
       
       
-    $gui_seguimiento = file_get_contents("static/modules/archivos/gui_seguimiento.html");
+    	$gui_seguimiento = file_get_contents("static/modules/archivos/gui_seguimiento.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -302,36 +302,36 @@ class ArchivosView extends View{
 		for ($i=0; $i < count($seguimiento); $i++) {
 			$archivo = $seguimiento[$i]['seguimiento_id'];
 			if ($seguimiento[$i]['estado'] == 'Observado' OR $seguimiento[$i]['estado'] == 'Pendiente revisión') {
-        if(FileHandler::check_file($carpeta, $archivo)==true) {
-          $seguimiento[$i]['icono'] = "fa fa-file";
-          $seguimiento[$i]['display_archivos'] = "none";
-          $seguimiento[$i]['display_archivos_observado'] = "inline-block";
-        } else {
-          $seguimiento[$i]['icono'] = ""; 
-          $seguimiento[$i]['display_archivos'] = "none";
-          $seguimiento[$i]['display_archivos_observado'] = "none";
-        }
-      } else {
-        if(FileHandler::check_file($carpeta, $archivo)==true) {
-          $seguimiento[$i]['icono'] = "fa fa-file";
-          $seguimiento[$i]['display_archivos'] = "inline-block";
-        } else {
-          $seguimiento[$i]['icono'] = ""; 
-          $seguimiento[$i]['display_archivos'] = "none";
-        }
+		        if(FileHandler::check_file($carpeta, $archivo)==true) {
+		          	$seguimiento[$i]['icono'] = "fa fa-file";
+		          	$seguimiento[$i]['display_archivos'] = "none";
+		          	$seguimiento[$i]['display_archivos_observado'] = "inline-block";
+		    	} else {
+		          	$seguimiento[$i]['icono'] = ""; 
+		        	$seguimiento[$i]['display_archivos'] = "none";
+		          	$seguimiento[$i]['display_archivos_observado'] = "none";
+		        }
+      		} else {
+		        if(FileHandler::check_file($carpeta, $archivo)==true) {
+		          $seguimiento[$i]['icono'] = "fa fa-file";
+		          $seguimiento[$i]['display_archivos'] = "inline-block";
+		        } else {
+		          $seguimiento[$i]['icono'] = ""; 
+		          $seguimiento[$i]['display_archivos'] = "none";
+		        }
 
-        if(FileHandler::check_file($carpeta, 'informe')==true) {
-          $seguimiento[$i]['icono_informe'] = "fa fa-file";
-          $seguimiento[$i]['url_informe'] = "informe";
-          $seguimiento[$i]['display_informe'] = "inline-block";
-        } else {
-          $seguimiento[$i]['icono_informe'] = "";
-          $seguimiento[$i]['url_informe'] = "#";
-          $seguimiento[$i]['display_informe'] = "none";
-        }
+		        if(FileHandler::check_file($carpeta, 'informe')==true) {
+		          $seguimiento[$i]['icono_informe'] = "fa fa-file";
+		          $seguimiento[$i]['url_informe'] = "informe";
+		          $seguimiento[$i]['display_informe'] = "inline-block";
+		        } else {
+		          $seguimiento[$i]['icono_informe'] = "";
+		          $seguimiento[$i]['url_informe'] = "#";
+		          $seguimiento[$i]['display_informe'] = "none";
+		        }
         
-        $seguimiento[$i]['display_archivos_observado'] = "none";
-      }
+        		$seguimiento[$i]['display_archivos_observado'] = "none";
+      		}
 		}	
 		
 		if(FileHandler::check_file($carpeta, 'comprobante_pago')==true) {
@@ -342,18 +342,19 @@ class ArchivosView extends View{
 			$comprobante_url = "#";
 		}
   
-    if ($html == 'ver') {
-      $msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
-      $gui = str_replace('{barcode}', $msj, $gui); 
-    }
+    	if ($html == 'ver') {
+      		$msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
+      		$gui = str_replace('{barcode}', $msj, $gui); 
+    	}
     
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
-    if (empty($matriculado[0])) {
-      $matriculado[0] = array('correoelectronico'=>'','telefono'=>'','celular'=>'');
-    }
+    	if (empty($matriculado[0])) {
+      		$matriculado[0] = array('correoelectronico'=>'','telefono'=>'','celular'=>'');
+    	}
     
-    $matriculado = $this->set_dict($matriculado[0]);
+    	$matriculado = $this->set_dict($matriculado[0]);
+    	print_r($seguimiento);
 		$gui_seguimiento = $this->render_regex('repetir', $gui_seguimiento, $seguimiento);
 		$render = str_replace("{seguimiento}", $gui_seguimiento, $gui);
 		$render = str_replace("{icono_comprobante}", $icono_comprobante, $render);
@@ -477,6 +478,7 @@ class ArchivosView extends View{
 	
 	function mostrar_listado_autorizacion($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_autorizaciones.html");
+		$gui_tbl_autorizaciones = file_get_contents("static/modules/archivos/tbl_autorizaciones.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -484,7 +486,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$gui_tbl_autorizaciones = $this->render_regex('repetir', $gui_tbl_autorizaciones, $datos);
+		$render = str_replace("{tbl_autorizaciones}", $gui_tbl_autorizaciones, $gui);
 		$render = $this->render($dict, $render);
 		$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
@@ -493,6 +496,7 @@ class ArchivosView extends View{
   
   function mostrar_listado_autorizacion_usuario($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_autorizaciones_usuario.html");
+		$gui_tbl_autorizaciones = file_get_contents("static/modules/archivos/tbl_autorizaciones_usuario.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -500,7 +504,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$gui_tbl_autorizaciones = $this->render_regex('repetir', $gui_tbl_autorizaciones, $datos);
+		$render = str_replace("{tbl_autorizaciones}", $gui_tbl_autorizaciones, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
