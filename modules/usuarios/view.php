@@ -303,6 +303,7 @@ class UsuariosView extends View{
 		$dict = array("{titulo}"=>"Generar clave");
 		$dict = array_merge($dict, $datos);
     	$gui = str_replace('{app_name}', APP_NAME, $gui);
+    	$gui = str_replace('{theme_path}', THEME_PATH, $gui);
 		print $this->render($dict, $gui);
 	}
 }
