@@ -101,7 +101,7 @@ class ArchivosController {
 		$cantidad_pendientes = $this->model->cantidad_pendientes();
 
     $dm = new Delegacion();
-    $delegaciones = $dm->listar;
+    $delegaciones = $dm->listar();
 
 		$this->view->mostrar_formulario_ingresar_con_ajuste($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones);
 	}
@@ -149,7 +149,7 @@ class ArchivosController {
     $cantidad_pendientes = $this->model->cantidad_pendientes();
 
     $dm = new Delegacion();
-    $delegaciones = $dm->listar;
+    $delegaciones = $dm->listar();
 
 		$this->view->mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones);
 	}
