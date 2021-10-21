@@ -3,3 +3,5 @@ CREATE TABLE IF NOT EXISTS delegacion (
         AUTO_INCREMENT PRIMARY KEY
     , denominacion VARCHAR(250)
 ) ENGINE=InnoDb;
+
+INSERT INTO delegacion(denominacion) VALUES ('La Rioja'), ('Chilecito');
