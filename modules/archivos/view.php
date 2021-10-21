@@ -29,7 +29,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_formulario_ingresar_con_ajuste($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes) {
+  	function mostrar_formulario_ingresar_con_ajuste($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones) {
 		$gui = file_get_contents("static/modules/archivos/ingresar_con_ajuste.html");
 		$menu = file_get_contents("static/menu.html");
       
@@ -41,36 +41,40 @@ class ArchivosView extends View{
 		
 		$gui_slt_cuentas = file_get_contents("static/common/slt_cuentas.html");
 		$gui_slt_cuentas = $this->render_regex('repetir', $gui_slt_cuentas, $cuentas);
+
+		$gui_slt_delegaciones = file_get_contents("static/common/slt_delegaciones.html");
+		$gui_slt_delegaciones = $this->render_regex('repetir', $gui_slt_delegaciones, $delegaciones);
 		
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
 		    
-    $cantidad_pendientes = $cantidad_pendientes[0]['CANTIDAD'];
-    if ($cantidad_pendientes > 0) {
-      $plural = ($cantidad_pendientes > 1) ? "s" : "";
-      $plural_final = ($cantidad_pendientes > 1) ? "de los mismos" : "del mismo";
-      $mensaje = "Ud posee {$cantidad_pendientes} trabajo{$plural} pendiente{$plural} de su intervención. Por favor regularice la situación {$plural_final}.";
-      $msj_class = "danger";
-      $display_alert = "block";
-    } else {
-      $mensaje = "";
-      $msj_class = "";
-      $display_alert = "none";
-    }
-		
-    $array_mensaje = array("{mensaje}"=>$mensaje, "{msj_class}"=>$msj_class, "{display_alert}"=>$display_alert);
+	    $cantidad_pendientes = $cantidad_pendientes[0]['CANTIDAD'];
+	    if ($cantidad_pendientes > 0) {
+	      $plural = ($cantidad_pendientes > 1) ? "s" : "";
+	      $plural_final = ($cantidad_pendientes > 1) ? "de los mismos" : "del mismo";
+	      $mensaje = "Ud posee {$cantidad_pendientes} trabajo{$plural} pendiente{$plural} de su intervención. Por favor regularice la situación {$plural_final}.";
+	      $msj_class = "danger";
+	      $display_alert = "block";
+	    } else {
+	      $mensaje = "";
+	      $msj_class = "";
+	      $display_alert = "none";
+	    }
+			
+	    $array_mensaje = array("{mensaje}"=>$mensaje, "{msj_class}"=>$msj_class, "{display_alert}"=>$display_alert);
 		$dict = array("{titulo}"=>"Encargo Profesional");
-    $array_final = array_merge($dict, $array_mensaje);
+    	$array_final = array_merge($dict, $array_mensaje);
 		$render = $this->render($array_final, $gui);
 		$render = str_replace('{slt_tipos_trabajo}', $gui_slt_tipos_trabajo, $render);
 		$render = str_replace('{slt_entidades}', $gui_slt_entidades, $render);
 		$render = str_replace('{slt_cuentas}', $gui_slt_cuentas, $render);
+		$render = str_replace('{slt_delegaciones}', $gui_slt_delegaciones, $render);
 		$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
 	
-	function mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes) {
+	function mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones) {
 		$gui = file_get_contents("static/modules/archivos/ingresar_certificacion.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -85,27 +89,31 @@ class ArchivosView extends View{
 		
 		$gui_slt_cuentas = file_get_contents("static/common/slt_cuentas.html");
 		$gui_slt_cuentas = $this->render_regex('repetir', $gui_slt_cuentas, $cuentas);
+
+		$gui_slt_delegaciones = file_get_contents("static/common/slt_delegaciones.html");
+		$gui_slt_delegaciones = $this->render_regex('repetir', $gui_slt_delegaciones, $delegaciones);
     
-    $cantidad_pendientes = $cantidad_pendientes[0]['CANTIDAD'];
-    if ($cantidad_pendientes > 0) {
-      $plural = ($cantidad_pendientes > 1) ? "s" : "";
-      $plural_final = ($cantidad_pendientes > 1) ? "de los mismos" : "del mismo";
-      $mensaje = "Ud posee {$cantidad_pendientes} trabajo{$plural} pendiente{$plural} de su intervención. Por favor regularice la situación {$plural_final}.";
-      $msj_class = "danger";
-      $display_alert = "block";
-    } else {
-      $mensaje = "";
-      $msj_class = "";
-      $display_alert = "none";
-    }
-		
-    $array_mensaje = array("{mensaje}"=>$mensaje, "{msj_class}"=>$msj_class, "{display_alert}"=>$display_alert);
+	    $cantidad_pendientes = $cantidad_pendientes[0]['CANTIDAD'];
+	    if ($cantidad_pendientes > 0) {
+	      $plural = ($cantidad_pendientes > 1) ? "s" : "";
+	      $plural_final = ($cantidad_pendientes > 1) ? "de los mismos" : "del mismo";
+	      $mensaje = "Ud posee {$cantidad_pendientes} trabajo{$plural} pendiente{$plural} de su intervención. Por favor regularice la situación {$plural_final}.";
+	      $msj_class = "danger";
+	      $display_alert = "block";
+	    } else {
+	      $mensaje = "";
+	      $msj_class = "";
+	      $display_alert = "none";
+	    }
+			
+	    $array_mensaje = array("{mensaje}"=>$mensaje, "{msj_class}"=>$msj_class, "{display_alert}"=>$display_alert);
 		$dict = array("{titulo}"=>"Encargo Profesional");
-    $array_final = array_merge($dict, $array_mensaje);
+    	$array_final = array_merge($dict, $array_mensaje);
 		$render = $this->render($array_final, $gui);
 		$render = str_replace('{slt_tipos_trabajo}', $gui_slt_tipos_trabajo, $render);
 		$render = str_replace('{slt_entidades}', $gui_slt_entidades, $render);
 		$render = str_replace('{slt_cuentas}', $gui_slt_cuentas, $render);
+		$render = str_replace('{slt_delegaciones}', $gui_slt_delegaciones, $render);
 		$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;

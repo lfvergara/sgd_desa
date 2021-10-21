@@ -15,10 +15,10 @@
 		<div class='page-header'><h1>{titulo}</h1></div>
 		<div class='row'>
 			<div class='col-md-12'>
-        <div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Atención!</strong> {mensaje}
-        </div>
+		        <div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
+		            <button type="button" class="close" data-dismiss="alert">&times;</button>
+		            <strong>Atención!</strong> {mensaje}
+		        </div>
 				<div class='panel panel-success'>
 					<div class='panel-heading'>
 						<h4>Registrar ingreso de documentación</h4>
@@ -60,10 +60,6 @@
 										<i class="fa fa-check-circle" id="icon_ok" style="float:right; display: none;"></i>
 									</div>
 								</div>
-								<!--<label for="fecha" class="col-lg-1 control-label">Matricula</label>
-								<div class="col-lg-2">
-									<input type="text" class="form-control" name="matricula" id="matricula" required="" />
-								</div>-->
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Fecha inicio</label>
@@ -123,7 +119,7 @@
 									<input type="number" class="form-control" name="bienes_uso" id="bienes_uso" required="" step="any" />
 								</div>
 							</div>
-              <div class="form-group">
+              				<div class="form-group">
 								<label class="col-lg-2 control-label">Reexpresión del Valor de Origen de Bs de Uso</label>
 								<div class="col-lg-2">
 									<input type="number" class="form-control" name="origen_bienes_uso" id="reexpresion_origen" required="" step="any" onChange="sumar_reexpresion();" value="0" min="0" required readonly/>
@@ -158,17 +154,17 @@
 								<div class="col-lg-4">
 									<input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf" required="" />
 								</div>
-                <label class="col-lg-2 control-label" id="lbl_informe">Adjuntar encargo profesional</label>
+                				<label class="col-lg-2 control-label" id="lbl_informe">Adjuntar encargo profesional</label>
 								<div class="col-lg-4">
 									<input type="file" class="form-control" id="archivo_informe" name="archivo_informe" accept=".pdf" required="" />
 								</div>
 							</div>
-              <div class="form-group">
+              				<div class="form-group">
 								<label class="col-lg-2 control-label" id="lbl_nota">Adjuntar Nota u Otros</label>
 								<div class="col-lg-4">
 									<input type="file" class="form-control" id="archivo_nota" name="archivo_nota" accept=".pdf"/>
 								</div>
-                <label class="col-lg-2 control-label" id="lbl_balance_adjuntar">Adjunta EECC a Oblea Final?</label>
+                				<label class="col-lg-2 control-label" id="lbl_balance_adjuntar">Adjunta EECC a Oblea Final?</label>
 								<div class="col-lg-4">
 								  <div class="radio">
 										<label>
@@ -181,7 +177,7 @@
 											No
 										</label>
 										<label>
-                      <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
+                      					<img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
 										</label>
 									</div>	
 								</div>								
@@ -235,8 +231,8 @@
 								<label class="col-lg-2 control-label">Importe</label>
 								<div class="col-lg-4">
 									<input type="text" class="form-control" id="importe" name="importe" required/>
-                  <label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
-                  <div class="radio">
+                  					<label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
+                 					<div class="radio">
 										<label style="font-size: 12px;">
 											<input type="radio" name="excedente" id="excedente" value="1">
 											Pago de Matrícula
@@ -249,29 +245,19 @@
 									</div>
 								</div>
 							</div>
-              <!--
-              <div class="form-group">
-								<label class="col-lg-12 control-label" style="text-align: center;">Tipo de Firma del Informe</label>
-								<div class="col-lg-12" style="text-align: center;">
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="firma_digital" id="firma_digital" value="1" checked>
-                      Digital
-                    </label>
-                    &nbsp;&nbsp;&nbsp;
-                    <label>
-                      <input type="radio" name="firma_digital" id="firma_digital" value="0">
-                      Hológrafa
-                    </label>
-                  </div>
-							  </div>
-								<div class="col-lg-12" style="text-align: center;"><hr></div>
+							<div class="form-group">
+								<label class="col-lg-2 control-label">Delegación</label>
+								<div class="col-lg-4">
+									<select name="delegacion_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_delegaciones}
+									</select>
+								</div>
 							</div>
-              -->
 							<div class="form-group">
 								<div class="col-lg-7 col-lg-offset-5">
-								  <input type="hidden" name="firma_digital" id="firma_digital" value="1">
-                  <button type="reset" class="btn btn-default">Cancelar</button>
+								  	<input type="hidden" name="firma_digital" id="firma_digital" value="1">
+                  					<button type="reset" class="btn btn-default">Cancelar</button>
 									<button type="submit" class="btn btn-primary" id="btn_guardar" style="display: none;">Guardar</button>
 									<button type="button" class="btn btn-danger" id="btn_controlar" onClick="comprobacionFinal();">Controlar</button>
 								</div>

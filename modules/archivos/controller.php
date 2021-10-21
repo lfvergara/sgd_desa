@@ -1,6 +1,7 @@
 <?php
 require_once "modules/archivos/view.php";
 require_once "modules/archivos/model.php";
+require_once "modules/delegacion/model.php";
 require_once "tools/PHPExcel/array2excel.php";
 require_once "tools/array2pdf.php";
 
@@ -98,7 +99,11 @@ class ArchivosController {
 		$entidades = $this->model->listar_entidades();
 		$cuentas = $this->model->listar_cuentas();
 		$cantidad_pendientes = $this->model->cantidad_pendientes();
-		$this->view->mostrar_formulario_ingresar_con_ajuste($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes);
+
+    $dm = new Delegacion();
+    $delegaciones = $dm->listar;
+
+		$this->view->mostrar_formulario_ingresar_con_ajuste($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones);
 	}
 	  
 	function ingresar_certificacion($argumentos) {
@@ -142,7 +147,11 @@ class ArchivosController {
 		$entidades = $this->model->listar_entidades();
 		$cuentas = $this->model->listar_cuentas();
     $cantidad_pendientes = $this->model->cantidad_pendientes();
-		$this->view->mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes);
+
+    $dm = new Delegacion();
+    $delegaciones = $dm->listar;
+
+		$this->view->mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes, $delegaciones);
 	}
 	
 	function guardar() {

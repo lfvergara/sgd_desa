@@ -15,10 +15,10 @@
 		<div class="page-header"><h1>{titulo}</h1></div>
 		<div class="row">
 			<div class="col-md-12">
-        <div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Atención!</strong> {mensaje}
-        </div>
+        		<div class="alert alert-dismissible alert-{msj_class}" style="display: {display_alert}">
+		            <button type="button" class="close" data-dismiss="alert">&times;</button>
+		            <strong>Atención!</strong> {mensaje}
+		        </div>
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h4>Registrar ingreso de certificación</h4>
@@ -51,8 +51,7 @@
 								<label for="documento" class="col-lg-2 control-label">Número</label>
 								<div class="col-lg-5" style="padding-left: 0px;">
 									<div class="col-lg-11" style="padding-right: 0px; margin-right:0 px;">
-										<input onkeypress="if (event.keyCode == 45) event.returnValue = false;" type="number" class="form-control" name="documento" 
-													 id="documento" required="" placeholder="Número" onBlur="compruebaCUIT();" style="width: 90%; margin-right: 0px; padding-right: 0px;"/>
+										<input onkeypress="if (event.keyCode == 45) event.returnValue = false;" type="number" class="form-control" name="documento" id="documento" required="" placeholder="Número" onBlur="compruebaCUIT();" style="width: 90%; margin-right: 0px; padding-right: 0px;"/>
 									</div>
 									<div class="col-lg-1" style="padding-left: 0px; margin-left:0 px; font-size: 30px;">
 										<i class="fa fa-exclamation-circle" id="icon_exclamation" style="float:right;"></i>
@@ -60,10 +59,6 @@
 										<i class="fa fa-check-circle" id="icon_ok" style="float:right; display: none;"></i>
 									</div>
 								</div>
-								<!--<label for="fecha" class="col-lg-1 control-label">Matricula</label>
-								<div class="col-lg-2">
-									<input type="text" class="form-control" name="matricula" id="matricula" required="" />
-								</div> -->
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">Fecha desde</label>
@@ -87,18 +82,18 @@
 									<input type="text" class="form-control" id="comentario" name="comentario" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"/>
 								</div>
 							</div>              
-              <div class="form-group" id="div_archivos"></div>
-              <div class="form-group">
+				            <div class="form-group" id="div_archivos"></div>
+			              	<div class="form-group">
 								<label class="col-lg-2 control-label" id="lbl_balance">Adjuntar Nota u Otros</label>
 								<div class="col-lg-3">
 									<input type="file" class="form-control" id="archivo_nota" name="archivo_nota" accept=".pdf"/>
 								</div>
 								<div class="col-lg-1">
-                  <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="Se debe agregar cuando se ingrese un trabajo con un DNI o un CUIT de tercero.">
+              						<img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="Se debe agregar cuando se ingrese un trabajo con un DNI o un CUIT de tercero.">
 								</div>
-                <label class="col-lg-2 control-label" id="lbl_balance">Adjunta ANEXOS-DDJJ a Oblea Final?</label>
+            					<label class="col-lg-2 control-label" id="lbl_balance">Adjunta ANEXOS-DDJJ a Oblea Final?</label>
 								<div class="col-lg-4">
-								  <div class="radio">
+							  		<div class="radio">
 										<label>
 											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="1" checked>
 											Si
@@ -108,8 +103,8 @@
 											<input type="radio" name="adjunta_estadocontable" id="adjunta_estadocontable" value="0">
 											No
 										</label>
-                    <label>
-                      <img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
+                						<label>
+                  							<img src="/{app_name}/static/images/ayuda.png" height="30" width="30" style="margin-right: 5px;" title="¿Desea adjuntar la documentación del cliente a la oblea final?">
 										</label>
 									</div>	
 								</div>
@@ -163,8 +158,8 @@
 								<label class="col-lg-2 control-label">Importe</label>
 								<div class="col-lg-4">
 									<input type="text" class="form-control" id="importe" name="importe" required/>
-                  <label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
-                  <div class="radio">
+				                  	<label class="col-lg-12 control-label" style="font-size: 12px; text-align: left;">Excedente de depósito sobre arancel</label>
+				                  	<div class="radio">
 										<label style="font-size: 12px;">
 											<input type="radio" name="excedente" id="excedente" value="1">
 											Pago de Matrícula
@@ -178,8 +173,17 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-lg-2 control-label">Delegación</label>
+								<div class="col-lg-4">
+									<select name="delegacion_id" class="form-control" required>
+										<option value="">Seleccionar</option>
+										{slt_delegaciones}
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-lg-7 col-lg-offset-5">
-                  <input type="hidden" name="firma_digital" id="firma_digital" value="1">
+              						<input type="hidden" name="firma_digital" id="firma_digital" value="1">
 									<button type="reset" class="btn btn-default">Cancelar</button>
 									<button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
 								</div>
