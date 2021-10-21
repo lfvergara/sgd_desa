@@ -5,3 +5,4 @@ CREATE TABLE IF NOT EXISTS delegacion (
 ) ENGINE=InnoDb;
 
 INSERT INTO delegacion(denominacion) VALUES ('La Rioja'), ('Chilecito');
+ALTER TABLE `archivos` ADD `delegacion_id` INT NOT NULL DEFAULT '1' AFTER `codigo_barras`, ADD INDEX (`delegacion_id`);
