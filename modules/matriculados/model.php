@@ -40,20 +40,17 @@ class Matriculados {
     $this->localidad = '';
     $this->fecha_nacimiento = '';
     $this->actualizacion = 0;
+    $this->terminos_condiciones = 0;
   }
 
   function save() {
     if($this->matriculado_id == 0){
-			$sql = "INSERT INTO matriculados (documento, matricula, apellido, nombre, correoelectronico, correoelectronico_visible_web, telefono, telefono_visible_web,
-              celular, celular_visible_web, direccion, direccion_visible_web) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			$datos = array($this->documento, $this->matricula, $this->apellido, $this->nombre, $this->correoelectronico, $this->correoelectronico_visible_web, $this->telefono, $this->telefono_visible_web,
-                     $this->celular, $this->celular_visible_web, $this->direccion, $this->direccion_visible_web);
+			$sql = "INSERT INTO matriculados (documento, matricula, apellido, nombre, correoelectronico, correoelectronico_visible_web, telefono, telefono_visible_web, celular, celular_visible_web, direccion, direccion_visible_web, terminos_condiciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			$datos = array($this->documento, $this->matricula, $this->apellido, $this->nombre, $this->correoelectronico, $this->correoelectronico_visible_web, $this->telefono, $this->telefono_visible_web, $this->celular, $this->celular_visible_web, $this->direccion, $this->direccion_visible_web, $this->terminos_condiciones);
       $this->matriculado_id = execute_query($sql, $datos);
 		} else {
-			$sql = "UPDATE matriculados SET documento = ?, matricula = ?, apellido = ?, nombre = ?, correoelectronico = ?, correoelectronico_visible_web = ?, telefono = ?, telefono_visible_web = ?,
-              celular = ?, celular_visible_web = ?, direccion = ?, direccion_visible_web = ? WHERE matriculado_id = ?";
-			$datos = array($this->documento, $this->matricula, $this->apellido, $this->nombre, $this->correoelectronico, $this->correoelectronico_visible_web, $this->telefono, $this->telefono_visible_web,
-                     $this->celular, $this->celular_visible_web, $this->direccion, $this->direccion_visible_web, $this->matriculado_id);
+			$sql = "UPDATE matriculados SET documento = ?, matricula = ?, apellido = ?, nombre = ?, correoelectronico = ?, correoelectronico_visible_web = ?, telefono = ?, telefono_visible_web = ?, celular = ?, celular_visible_web = ?, direccion = ?, direccion_visible_web = ?, terminos_condiciones = ? WHERE matriculado_id = ?";
+			$datos = array($this->documento, $this->matricula, $this->apellido, $this->nombre, $this->correoelectronico, $this->correoelectronico_visible_web, $this->telefono, $this->telefono_visible_web, $this->celular, $this->celular_visible_web, $this->direccion, $this->direccion_visible_web, $this->terminos_condiciones, $this->matriculado_id);
 			execute_query($sql, $datos);
 		}
   }
@@ -400,7 +397,5 @@ class Matriculados {
 		$datos = array(2);
     return execute_query($sql, $datos);
   }
-  
-  
 }
 ?>
