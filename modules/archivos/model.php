@@ -863,7 +863,8 @@ class Archivos {
 					s.seguimiento_id,
 					f.comentario,
 					s.estado_id,
-					e.denominacion AS estado
+					e.denominacion AS estado,
+					d.denominacion AS delegacion
 				FROM
 					archivos f INNER JOIN
 					seguimiento s ON f.archivo_id = s.archivo_id INNER JOIN
@@ -872,7 +873,8 @@ class Archivos {
 					 GROUP BY archivo_id
 					) m ON s.seguimiento_id = m.max_sid INNER JOIN
 					estados e ON s.estado_id = e.estado_id INNER JOIN
-					usuarios u ON s.usuario_id = u.usuario_id
+					usuarios u ON s.usuario_id = u.usuario_id INNER JOIN
+					delegacion d ON f.delegacion_id = d.delegacion_id
 				WHERE
 					s.estado_id = (1)";
 		return execute_query($sql);
