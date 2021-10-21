@@ -1067,12 +1067,14 @@ class Archivos {
 				  	f.resultado_reexpresion_bienes_uso,
 					f.comentario,
 	              	f.adjunta_estadocontable,
-	              	f.firma_digital
+	              	f.firma_digital,
+	              	d.denominacion AS delegacion
 				FROM
 					archivos f LEFT JOIN
 					entidades e ON f.entidad = e.entidad_id LEFT JOIN
 					tipos t ON f.tipo_id = t.tipo_id INNER JOIN
-					cuentas c ON f.cuenta_id = c.cuenta_id
+					cuentas c ON f.cuenta_id = c.cuenta_id INNER JOIN
+					delegacion d ON f.delegacion_id = d.delegacion_id
 				WHERE
 					f.archivo_id = ?";
 		$datos = array($this->archivo_id);
