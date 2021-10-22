@@ -92,6 +92,7 @@ class Array2PDFAttach {
         break;
       case 8:
         if(FileHandler::check_file($archivo_id, $ultima_presentacion)==true) $flag_ultimapresentacion = 1;
+        print_r($flag_ultimapresentacion);exit;
         if ($flag_ultimapresentacion == 1) {
           $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
           $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
@@ -103,7 +104,6 @@ class Array2PDFAttach {
           $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
           $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
           $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
-          print_r($archivo2);exit;
           $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
           $result = shell_exec($script." 2>&1");
         }    
