@@ -10,6 +10,7 @@ class Array2PDFAttach {
     $protocolo = $protocolo . '_' . date('Y');
     $nombre_final = $protocolo . "_" . $denominacion . ".pdf";
     if(FileHandler::check_file($archivo_id, 'informe')==true) $flag_informe = 1;
+    print_r($flag_informe);exit;
     
     switch ($tipoarchivo) {
       case 3:
@@ -92,7 +93,6 @@ class Array2PDFAttach {
         break;
       case 8:
         if(FileHandler::check_file($archivo_id, $ultima_presentacion)==true) $flag_ultimapresentacion = 1;
-        print_r($flag_ultimapresentacion);exit;
         if ($flag_ultimapresentacion == 1) {
           $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
           $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
