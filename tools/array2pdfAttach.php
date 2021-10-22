@@ -10,8 +10,8 @@ class Array2PDFAttach {
     $protocolo = $protocolo . '_' . date('Y');
     $nombre_final = $protocolo . "_" . $denominacion . ".pdf";
     if(FileHandler::check_file($archivo_id, 'informe')==true) $flag_informe = 1;
-    print_r($flag_informe);exit;
     
+    print_r($tipoarchivo);exit;
     switch ($tipoarchivo) {
       case 3:
         $flag_anexo = 0;
