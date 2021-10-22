@@ -914,7 +914,8 @@ class Archivos {
 		                us.grupo_id IN (1,3,4)
               		ORDER BY
                 		se.seguimiento_id DESC
-              		LIMIT 1) AS autorizador
+              		LIMIT 1) AS autorizador,
+              		d.denominacion AS delegacion
             	FROM
               		archivos f INNER JOIN
               		seguimiento s ON f.archivo_id = s.archivo_id INNER JOIN
@@ -924,7 +925,8 @@ class Archivos {
               		) m ON s.seguimiento_id = m.max_sid INNER JOIN
               		estados e ON s.estado_id = e.estado_id INNER JOIN
               		usuarios u ON s.usuario_id = u.usuario_id INNER JOIN
-              		tipos t ON f.tipo_id = t.tipo_id
+              		tipos t ON f.tipo_id = t.tipo_id INNER JOIN 
+              		delegacion d ON f.delegacion_id = d.delegacion_id
             	WHERE
               		s.estado_id IN (2,3)
             	ORDER BY
@@ -966,7 +968,8 @@ class Archivos {
                 		us.grupo_id IN (1,3,4)
               		ORDER BY
                 		se.seguimiento_id DESC
-              		LIMIT 1) AS autorizador
+              		LIMIT 1) AS autorizador,
+              		d.denominacion AS delegacion
             	FROM
               		archivos f INNER JOIN
               		seguimiento s ON f.archivo_id = s.archivo_id INNER JOIN
@@ -976,7 +979,8 @@ class Archivos {
               		) m ON s.seguimiento_id = m.max_sid INNER JOIN
               		estados e ON s.estado_id = e.estado_id INNER JOIN
               		usuarios u ON s.usuario_id = u.usuario_id INNER JOIN
-              		tipos t ON f.tipo_id = t.tipo_id
+              		tipos t ON f.tipo_id = t.tipo_id INNER JOIN 
+              		delegacion d ON f.delegacion_id = d.delegacion_id
             	WHERE
               		s.estado_id IN (2,3) AND
               		u.usuario_id = ?
