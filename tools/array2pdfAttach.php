@@ -11,7 +11,6 @@ class Array2PDFAttach {
     $nombre_final = $protocolo . "_" . $denominacion . ".pdf";
     if(FileHandler::check_file($archivo_id, 'informe')==true) $flag_informe = 1;
     
-    print_r($tipoarchivo);exit;
     switch ($tipoarchivo) {
       case 3:
         $flag_anexo = 0;
@@ -130,6 +129,7 @@ class Array2PDFAttach {
             copy($ini_ruta_oblea, $fin_ruta_oblea);
           }          
         } else {
+    print_r($adjunta_estadocontable);exit;
           if($adjunta_estadocontable == 1) {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
