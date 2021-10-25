@@ -391,5 +391,9 @@ class UsuariosController {
 		$this->model->actualizar_token();
 		header("Location: /" . APP_NAME . "/usuarios/ver/1");
 	}
+
+	function ver_terminos_condiciones() {
+     	FileHandler::get_file("documentos/terminos_condiciones");
+  	}
 }
 ?>
