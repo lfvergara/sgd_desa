@@ -184,6 +184,14 @@ class Usuarios {
 		}
 		return $this->matricula;
   }	
+
+  function verificar_termino_condiciones() {
+    $sql = "SELECT terminos_condiciones FROM matriculados WHERE matricula = ?";
+    $datos = array($this->matricula);
+    $rst = execute_query($sql, $datos);
+    $terminos_condiciones = (is_array($rst) AND !empty($rst)) ? $rst[0]['terminos_condiciones'] : 0;
+    return $terminos_condiciones;
+  } 
 	
 	function verificar_denominacion() {
     $sql = "SELECT denominacion FROM usuarios WHERE denominacion = ?";

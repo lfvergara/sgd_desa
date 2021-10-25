@@ -1672,6 +1672,7 @@ class ArchivosController {
       FileHandler::save_file($archivo_oblea, $archivo_id, 'obleaLegalizada'); 
       $this->envia_email_estado_documento('Documento Legalizado/Oblea Disponible', $detalle_email, $archivo_id);
     }
+    
     header("Location: /" . APP_NAME . "/archivos/consultar/{$archivo_id}/8");
   }
   
