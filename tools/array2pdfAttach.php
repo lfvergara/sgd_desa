@@ -129,7 +129,7 @@ class Array2PDFAttach {
             copy($ini_ruta_oblea, $fin_ruta_oblea);
           }          
         } else {
-    print_r($adjunta_estadocontable);exit;
+    
           if($adjunta_estadocontable == 1) {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
