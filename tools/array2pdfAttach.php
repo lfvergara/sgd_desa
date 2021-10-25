@@ -145,7 +145,6 @@ class Array2PDFAttach {
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
-            print_r($script);exit;
             $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
