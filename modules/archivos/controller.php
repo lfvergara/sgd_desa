@@ -59,8 +59,8 @@ class ArchivosController {
   
   function ingresar_con_ajuste($argumentos) {
 		SessionHandling::check();
-
     SessionHandling::actualizar();
+
 		switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{modal_mensaje}"=>"",

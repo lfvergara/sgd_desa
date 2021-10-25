@@ -97,10 +97,15 @@ class SessionHandling {
   
   static function actualizar() {
     $flag = $_SESSION["sesion.actualizacion"];
-    if($flag == 0 OR $flag == 2) {
-      return false; 
+    $terminos_condiciones = $_SESSION["sesion.terminos_condiciones"];
+    if ($terminos_condiciones != 2) {
+      header("Location: /" . APP_NAME . "/usuarios/panel");
     } else {
-      header("Location: /" . APP_NAME . "/usuarios/actualizar_informacion");
+      if($flag == 0 OR $flag == 2) {
+        return false; 
+      } else {
+        header("Location: /" . APP_NAME . "/usuarios/actualizar_informacion");
+      }
     }
   }
 

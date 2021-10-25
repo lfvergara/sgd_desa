@@ -94,11 +94,13 @@ class Usuarios {
               g.denominacion AS grupo,
 							m.matricula,
 							m.matricula_id,
-              u.actualizacion
+              u.actualizacion,
+              ma.terminos_condiciones
             FROM
               usuarios u INNER JOIN
               grupos g ON u.grupo_id = g.grupo_id LEFT JOIN
-							matriculas m ON u.usuario_id = m.usuario_id
+							matriculas m ON u.usuario_id = m.usuario_id LEFT JOIN
+              matriculados ma ON m.matricula = ma.matricula
             WHERE
               token = ?";
     $datos = array($this->token);
