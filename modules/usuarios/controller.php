@@ -263,7 +263,7 @@ class UsuariosController {
   
   	function panel() {
 		SessionHandling::check();
-		//SessionHandling::actualizar();
+		SessionHandling::actualizar();
 	    $usuario_id = $_SESSION["sesion.usuario_id"];
 	    $matricula = $_SESSION["sesion.matricula"];
     

@@ -98,6 +98,7 @@ class SessionHandling {
   static function actualizar() {
     $flag = $_SESSION["sesion.actualizacion"];
     $terminos_condiciones = $_SESSION["sesion.terminos_condiciones"];
+    print_r($terminos_condiciones);exit;
     if ($terminos_condiciones != 2) {
       header("Location: /" . APP_NAME . "/usuarios/panel");
     } else {
