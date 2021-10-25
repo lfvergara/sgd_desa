@@ -5,6 +5,7 @@ require_once "tools/attachmentFiles.php";
 class Array2PDFAttach {
   function attachPDF($archivo_id, $ultima_presentacion, $adjunta_estadocontable, $tipoarchivo, $denominacion, $protocolo) {
     $jar = '/srv/website/' . APP_NAME . '/tools/UtilPDF/UtilPDF.jar';
+    print_r($jar);exit;
     $flag_informe = 0;
     //$protocolo = str_replace("/","_",$protocolo);
     $protocolo = $protocolo . '_' . date('Y');
