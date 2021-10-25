@@ -45,13 +45,13 @@ class Array2PDFAttach {
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/obleaTemporal.pdf";
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
 
             $archivo1 = FILES_PATH . $archivo_id . "/obleaTemporal.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
@@ -65,7 +65,7 @@ class Array2PDFAttach {
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
 
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
           }
         } else {
@@ -81,7 +81,7 @@ class Array2PDFAttach {
             $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
 
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
@@ -103,7 +103,7 @@ class Array2PDFAttach {
           $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
           $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
           $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
-          $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+          $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
           $result = shell_exec($script." 2>&1");
         }    
         break;
@@ -121,7 +121,7 @@ class Array2PDFAttach {
             $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
 
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
@@ -138,13 +138,14 @@ class Array2PDFAttach {
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/obleaTemporal.pdf";
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
 
             $archivo1 = FILES_PATH . $archivo_id . "/obleaTemporal.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            print_r($script);exit;
             $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
@@ -154,7 +155,7 @@ class Array2PDFAttach {
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
-            $script = '/usr/bin/java -jar "'.$jar.'" ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
           }
         }
