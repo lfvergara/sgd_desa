@@ -4,8 +4,7 @@ require_once "tools/attachmentFiles.php";
 
 class Array2PDFAttach {
   function attachPDF($archivo_id, $ultima_presentacion, $adjunta_estadocontable, $tipoarchivo, $denominacion, $protocolo) {
-    $jar = '/srv/website/' . APP_NAME . '/tools/UtilPDF/UtilPDF.jar';
-    print_r($jar);exit;
+    $jar = '/srv/websites/' . APP_NAME . '/tools/UtilPDF/UtilPDF.jar';
     $flag_informe = 0;
     //$protocolo = str_replace("/","_",$protocolo);
     $protocolo = $protocolo . '_' . date('Y');
@@ -130,7 +129,7 @@ class Array2PDFAttach {
             copy($ini_ruta_oblea, $fin_ruta_oblea);
           }          
         } else {
-          print_r($adjunta_estadocontable);exit;
+          
           if($adjunta_estadocontable == 1) {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
