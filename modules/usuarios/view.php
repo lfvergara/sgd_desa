@@ -208,9 +208,17 @@ class UsuariosView extends View{
 	}
   
  	function mostrar_panel_novedades($datos, $novedades, $eventos) {
-    	$gui = file_get_contents("static/modules/usuarios/mostrar_panel_novedades.html");
+		$session_grupo_id = $_SESSION['sesion.grupo_id'];
+		if(1 == $session_grupo_id || 99 == $session_grupo_id) {
+    		$gui = file_get_contents("static/modules/usuarios/adm_mostrar_panel_novedades.html");
+    	} else {
+    		$gui = file_get_contents("static/modules/usuarios/mostrar_panel_novedades.html");
+    	}
+
 		$tbl_documentos_pendientes = file_get_contents("static/modules/usuarios/tbl_documentos_pendientes_small.html");
 		$lst_novedades = file_get_contents("static/modules/usuarios/lst_novedades.html");
+
+
     	if (is_array($eventos) AND !empty($eventos)) {
 		  	$lst_eventos = file_get_contents("static/modules/usuarios/lst_eventos.html");
       		$lst_eventos = $this->render_regex('repetir', $lst_eventos, $eventos);
