@@ -259,7 +259,7 @@ class MatriculadosView extends View{
 		print $this->render($dict, $gui);
 	}
 
-  function listar_terminos_condiciones() {
+  function listar_terminos_condiciones($matriculados) {
     $gui = file_get_contents("static/modules/matriculados/listar_terminos_condiciones.html");
     $gui_tbl_matriculados = file_get_contents("static/modules/matriculados/tbl_matriculados_terminos_condiciones.html");
     $menu = file_get_contents("static/menu.html");
