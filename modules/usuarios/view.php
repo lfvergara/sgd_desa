@@ -175,7 +175,7 @@ class UsuariosView extends View{
 		print $this->render_template($menu, $render);
 	}
   
-  	function mostrar_panel($datos) {
+  	function mostrar_panel($datos, $contador_terminos_condiciones) {
 		$gui = file_get_contents("static/modules/usuarios/mostrar_panel.html");
 		$tbl_documentos_pendientes = file_get_contents("static/modules/usuarios/tbl_documentos_pendientes.html");
 		$menu = file_get_contents("static/menu.html");
@@ -204,10 +204,11 @@ class UsuariosView extends View{
     
 		$render = $this->render($dict, $gui);
 		$render = str_replace("{tbl_documentos_pendientes}", $tbl_documentos_pendientes, $render);
+		$render = str_replace("{contador_terminos_condiciones}", $contador_terminos_condiciones, $render);
     	print $this->render_template($menu, $render);
 	}
   
- 	function mostrar_panel_novedades($datos, $novedades, $eventos) {
+ 	function mostrar_panel_novedades($datos, $novedades, $eventos, $contador_terminos_condiciones) {
 		$session_grupo_id = $_SESSION['sesion.grupo_id'];
 		if(1 == $session_grupo_id || 99 == $session_grupo_id) {
     		$gui = file_get_contents("static/modules/usuarios/adm_mostrar_panel_novedades.html");
@@ -281,6 +282,7 @@ class UsuariosView extends View{
 	    $render = $this->render($dict, $gui);
 	    $render = $this->render($destacado, $render);
 		$render = str_replace("{tbl_documentos_pendientes}", $tbl_documentos_pendientes, $render);
+		$render = str_replace("{contador_terminos_condiciones}", $contador_terminos_condiciones, $render);
 		$render = str_replace("{lst_novedades}", $lst_novedades, $render);
 		$render = str_replace("{lst_eventos}", $lst_eventos, $render);
     	print $this->render_template($menu, $render);

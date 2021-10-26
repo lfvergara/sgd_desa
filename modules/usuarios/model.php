@@ -366,9 +366,18 @@ class Usuarios {
 	}
 
   function guardar_terminos_condiciones() {
-    $sql = "UPDATE matriculados SET terminos_condiciones = 1 WHERE matriculado_id = ?";
-    $datos = array($this->matriculado_id);
+    $sql = "UPDATE matriculados SET terminos_condiciones = ? WHERE matriculado_id = ?";
+    $datos = array(1, $this->matriculado_id);
     execute_query($sql, $datos);    
+  }
+
+  function contador_terminos_condiciones() {
+    $this->get_token();
+    $sql = "SELECT count(*) AS cantidad FROM matriculados WHERE terminos_condiciones = ?";
+    $datos = array(1);
+    $rst = execute_query($sql, $datos);
+    $rst = (is_array($rst) AND !empty($rst)) ? $rst[0]['cantidad'] : 0;
+    return $rst;
   }
 }
 ?>

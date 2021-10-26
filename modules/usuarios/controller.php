@@ -167,7 +167,7 @@ class UsuariosController {
 	    $this->model->usuario_id = $usuario_id;
 		$this->model->matricula = $matricula;
 		$terminos_condiciones = $this->model->verificar_termino_condiciones();
-		
+
 	    if ($terminos_condiciones == 0) {
 		    $flag = $this->model->verificar_matricula_matriculado();
 		    $this->model->matriculado_id = $flag;
@@ -301,6 +301,7 @@ class UsuariosController {
 	    
 	    $encuesta_id = $this->model->verificar_encuesta_activa();
 	    $eventos = $this->model->traer_eventos();
+	    $contador_terminos_condiciones = $this->model->contador_terminos_condiciones();
 	    
 	    if (is_array($encuesta_id)) {
       		$encuesta_id = $encuesta_id[0]['encuesta_id'];
@@ -326,16 +327,16 @@ class UsuariosController {
       		} else {
         
         		if (is_array($novedades) AND !empty($novedades)) {
-          			$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
+          			$this->view->mostrar_panel_novedades($datos, $novedades, $eventos, $contador_terminos_condiciones);
         		} else {
-          			$this->view->mostrar_panel($datos);            
+          			$this->view->mostrar_panel($datos, $contador_terminos_condiciones);
         		}
       		}
     	} else { 
       		if (is_array($novedades) AND !empty($novedades)) {
-        		$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
+        		$this->view->mostrar_panel_novedades($datos, $novedades, $eventos, $contador_terminos_condiciones);
       		} else {
-        		$this->view->mostrar_panel($datos);            
+        		$this->view->mostrar_panel($datos, $contador_terminos_condiciones);
       		}
     	}	
 	}
