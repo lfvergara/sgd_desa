@@ -11,10 +11,11 @@ class MaletinController {
 	}
   
 	function panel() {
-    SessionHandling::check();
-    //SessionHandling::checkGrupo('1,4,99');
+	    SessionHandling::check();
+	    SessionHandling::actualizar();
+	    //SessionHandling::checkGrupo('1,4,99');
 		$maletines = $this->model->traer_maletines();
-    $this->view->panel($maletines);
+	    $this->view->panel($maletines);
 	}	
 }
 ?>

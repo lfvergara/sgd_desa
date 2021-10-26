@@ -865,6 +865,7 @@ class ArchivosController {
   
   function pendientes_legalizar_usuario() {
 		SessionHandling::check();
+    SessionHandling::actualizar();
     $this->model->estado_id = 9;
 		$estado = "Pendientes de Legalizar";
 		$datos = $this->model->listar_legalizar_usuario();
@@ -873,6 +874,7 @@ class ArchivosController {
   
   function legalizados_usuario() {
 		SessionHandling::check();
+    SessionHandling::actualizar();
     $this->model->estado_id = 8;
 		$estado = "Documentos Legalizados";
 		$datos = $this->model->listar_estado_usuario();
@@ -881,6 +883,7 @@ class ArchivosController {
   
   function intervenidos_usuario($argumentos) {
 		SessionHandling::check();
+    SessionHandling::actualizar();
     switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
@@ -1672,7 +1675,7 @@ class ArchivosController {
       FileHandler::save_file($archivo_oblea, $archivo_id, 'obleaLegalizada'); 
       $this->envia_email_estado_documento('Documento Legalizado/Oblea Disponible', $detalle_email, $archivo_id);
     }
-    
+
     header("Location: /" . APP_NAME . "/archivos/consultar/{$archivo_id}/8");
   }
   

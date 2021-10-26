@@ -12,6 +12,7 @@ class ForosController {
   
 	function m_agregar() {
     SessionHandling::check();
+    SessionHandling::actualizar();
     
     $this->model->codigo = 'ACT';
     $temp_activos = $this->model->traer_foros_estados();
@@ -236,6 +237,7 @@ class ForosController {
   
   function m_consultar($argumentos) {
     SessionHandling::check();
+    SessionHandling::actualizar();
     
     $foro_id = $argumentos[0];
     $this->model->foro_id = $foro_id;
@@ -249,6 +251,7 @@ class ForosController {
   
    function m_panel() {
     SessionHandling::check();
+    SessionHandling::actualizar();
     
     $this->model->codigo = 'ACT';
     $this->model->activo = 1;
@@ -257,12 +260,6 @@ class ForosController {
     
     $this->view->m_panel($activos);
 	}	
-  
-  
-  
-  
-  
-  
   
   /*************************************************************************************************************************************** */
   

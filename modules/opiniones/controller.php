@@ -24,6 +24,7 @@ class OpinionesController {
   
   function agregar($argumentos) {
     SessionHandling::check();
+    SessionHandling::actualizar();
     $mensaje_id = $argumentos[0];
     
     switch($mensaje_id) {
