@@ -166,8 +166,8 @@ class UsuariosController {
 
 	    $this->model->usuario_id = $usuario_id;
 		$this->model->matricula = $matricula;
-		$usuario = $this->model->verificar_termino_condiciones();
-
+		$terminos_condiciones = $this->model->verificar_termino_condiciones();
+		
 	    if ($terminos_condiciones == 0) {
 		    $flag = $this->model->verificar_matricula_matriculado();
 		    $this->model->matriculado_id = $flag;
