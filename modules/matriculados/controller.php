@@ -405,5 +405,17 @@ class MatriculadosController {
     $matriculados = $this->model->listar_terminos_condiciones();
     $this->view->listar_terminos_condiciones($matriculados);
   }
+
+  function ver_terminos_condiciones($argumentos) {
+    $matriculado_id = $argumentos[0];
+    $this->model->matriculado_id = $matriculado_id;
+    $matriculado = $this->model->get();
+    $this->view->ver_terminos_condiciones($matriculado);
+  }
+
+  function ver_terminos_condiciones($argumentos) {
+    $matriculado_id = $argumentos[0];
+    FileHandler::get_file("matriculados/{$matriculado_id}/terminos_condiciones");
+  }
 }
 ?>

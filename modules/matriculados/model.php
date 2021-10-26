@@ -136,7 +136,8 @@ class Matriculados {
               m.celular,
               m.celular_visible_web,
               m.direccion,
-              m.direccion_visible_web
+              m.direccion_visible_web,
+              m.terminos_condiciones
             FROM
               matriculados m
             WHERE

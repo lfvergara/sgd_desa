@@ -275,5 +275,39 @@ class MatriculadosView extends View{
     $render = $this->render($dict, $render);
     print $this->render_template($menu, $render);
   }
+
+  function ver_terminos_condiciones($matriculado) {
+    $gui = file_get_contents("static/modules/matriculados/ver_terminos_condiciones.html");
+    $menu = file_get_contents("static/menu.html");
+    
+    $restricciones = $this->genera_menu();
+    $menu = $this->render($restricciones, $menu);
+    $dict = array("{titulo}"=>"Ver términos y condiciones");
+    
+    $terminos_condiciones = $matriculado['terminos_condiciones'];
+    
+    switch($terminos_condiciones) {
+      case 0:
+        $matriculado['txt_estado'] = 'Pendiente de Subir';
+        break;
+      case 1:
+        $matriculado['txt_estado'] = 'Pendiente de Controlar';
+        break;
+      case 2:
+        $matriculado['txt_estado'] = 'Aceptado';
+        break;
+      case 3:
+        $matriculado['txt_estado'] = 'Rechazado';
+        break;
+      default:
+        $matriculado['txt_estado'] = 'Pendiente de Subir';
+        break;
+    }
+    
+    $matriculado = $this->set_dict($matriculado);
+    $render = $this->render($matriculado, $gui);
+    $render = $this->render($dict, $render);
+    print $this->render_template($menu, $render);
+  }
 }
 ?>
