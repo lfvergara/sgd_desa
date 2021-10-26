@@ -102,6 +102,26 @@ class Matriculados {
     return execute_query($sql, $datos);
   }
 
+  function listar_terminos_condiciones() {
+    $sql = "SELECT
+              m.matriculado_id,
+              m.documento,
+              m.matricula,
+              m.apellido,
+              m.nombre,
+              m.correoelectronico,
+              m.telefono,
+              m.celular,
+              m.direccion
+            FROM
+              matriculados m
+            WHERE
+              m.terminos_condiciones = 1
+            ORDER BY
+              m.apellido ASC";
+    return execute_query($sql);
+  }
+
   function get() {
     $sql = "SELECT
               m.matriculado_id,

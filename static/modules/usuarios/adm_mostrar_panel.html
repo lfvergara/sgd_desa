@@ -20,13 +20,18 @@
         </div>
         <div class="col-lg-5">
           <div class="panel panel-primary">
-           <div class="panel-heading"><h4>Términos y Condiciones</h4></div>
-           <div class="panel-body">
+           <div class="panel-heading">
+              <h4>Términos y Condiciones</h4>
+              <div class="pull-right" style="margin-top: 0px;">
+                <button class="btn btn-info btn-xs" onClick="location.href='/{app_name}/matriculados/listar_terminos_condiciones'"><i class="fa fa-eye"></i></button>
+              </div>
+            </div>
+            <div class="panel-body">
               <div class="col-lg-12">
                 <p>Existe/n <strong>{contador_terminos_condiciones}</strong> archivo/s de términos y condiciones pendientes de controlar.</p>
               </div>
-           </div>
-         </div>
+            </div>
+          </div>
         </div>
         <div class="col-lg-12">
           <div class="alert alert-dismissible alert-{msj_class}">

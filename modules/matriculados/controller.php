@@ -397,5 +397,13 @@ class MatriculadosController {
     
     ExcelReport()->extraer_informe($array_exportacion, "Reporte de Matriculados");
   }
+
+  function listar_terminos_condiciones() {
+    SessionHandling::check();
+    SessionHandling::checkGrupo('1,99');
+    $this->model->terminos_condiciones = 1;
+    $matriculados = $this->model->listar_terminos_condiciones();
+    $this->view->listar_terminos_condiciones($matriculados);
+  }
 }
 ?>

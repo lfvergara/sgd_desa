@@ -255,10 +255,25 @@ class MatriculadosView extends View{
   
 	function mostrar_error($mensaje) {
 		$gui = file_get_contents("static/modules/usuarios/login.html");
-
 		$dict = array("{titulo}"=>"Error", "{mostrar}"=>"show", "{mensaje}"=>$mensaje);
-
 		print $this->render($dict, $gui);
 	}
+
+  function listar_terminos_condiciones() {
+    $gui = file_get_contents("static/modules/matriculados/listar_terminos_condiciones.html");
+    $gui_tbl_matriculados = file_get_contents("static/modules/matriculados/tbl_matriculados_terminos_condiciones.html");
+    $menu = file_get_contents("static/menu.html");
+    
+    $restricciones = $this->genera_menu();
+    $menu = $this->render($restricciones, $menu);
+    $dict = array("{titulo}"=>"Términos y Condiciones Actualizados");
+    
+    if(!is_array($matriculados)){$matriculados=array();}
+    
+    $gui_tbl_matriculados = $this->render_regex("repetir", $gui_tbl_matriculados, $matriculados);
+    $render = str_replace('{tbl_matriculados}', $gui_tbl_matriculados, $gui);
+    $render = $this->render($dict, $render);
+    print $this->render_template($menu, $render);
+  }
 }
 ?>

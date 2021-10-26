@@ -58,11 +58,9 @@ class NovedadesController {
   
   function consultar($argumentos) {
     SessionHandling::check();
-    $novedad_id = $argumentos[0];
-    
+    $novedad_id = $argumentos[0];    
     $this->model->novedad_id = $novedad_id;
-		$novedad = $this->model->get();   
-    
+		$novedad = $this->model->get();    
     $this->view->consultar($novedad);
 	}	
   
@@ -163,7 +161,6 @@ class NovedadesController {
     $this->model->eliminar();
     FileHandler::delete_novedad_files($novedad_id);
     header("Location: /" . APP_NAME . "/novedades/panel");
-  }
-  
+  }  
 }
 ?>
