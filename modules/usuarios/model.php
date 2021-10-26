@@ -29,6 +29,7 @@ class Usuarios {
     $this->direccion_visible_web = 0;
     $this->encuesta_id = 0;
     $this->pregunta_id = 0;
+    $this->terminos_condiciones = 0;
   }
 
   function save() {
@@ -363,5 +364,11 @@ class Usuarios {
 		$rst = execute_query($sql);
 		return $rst;
 	}
+
+  function guardar_terminos_condiciones() {
+    $sql = "UPDATE matriculados SET terminos_condiciones = 1 WHERE matriculado_id = ?";
+    $datos = array($this->matriculado_id);
+    execute_query($sql, $datos);    
+  }
 }
 ?>

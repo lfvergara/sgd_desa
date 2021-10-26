@@ -111,6 +111,18 @@ class UsuariosView extends View{
 		$render = $this->render($dict, $render);
 		print $this->render_template($menu, $render);
 	}
+
+	function mostrar_panel_espera_confirmacion() {
+		$gui = file_get_contents("static/modules/usuarios/panel_espera_confirmacion_terminos.html");
+		$menu = file_get_contents("static/menu.html");
+		
+		$restricciones = $this->genera_menu();
+		$menu = $this->render($restricciones, $menu);
+		$dict = array("{titulo}"=>"Actualización de Términos y Condiciones");
+    
+    	$render = $this->render($dict, $gui);
+		print $this->render_template($menu, $render);
+	}
   
   	function informacion_matriculado($usuario, $matriculado, $array_modal) {
 		$gui = file_get_contents("static/modules/usuarios/informacion_matriculado.html");

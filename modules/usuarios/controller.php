@@ -393,6 +393,28 @@ class UsuariosController {
 		header("Location: /" . APP_NAME . "/usuarios/ver/1");
 	}
 
+	function guardar_terminos_condiciones() {
+		$mimes_permitidos = "application/pdf";
+    	$limite_filesize = 20 * 1048576;
+
+    	$matriculado_id = filter_input(INPUT_POST, 'matriculado_id');
+    	$terminos_condiciones = $_FILES['archivo_informe'];
+    	$this->model->terminos_condiciones = $terminos_condiciones;
+      	$formato = $terminos_condiciones['type'];
+        $tamanio = $terminos_condiciones['size'];
+
+    	if ($formato == $mimes_permitidos) {
+            if ($tamanio < $limite_filesize) {
+              	$this->model->guardar_terminos_condiciones();
+				FileHandler::save_file($terminos_condiciones, $matriculado_id, 'terminos_condiciones');
+            } else {
+              	header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones/1");
+            }
+      	} else {
+            header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones/2");
+        }
+	}
+
 	function ver_terminos_condiciones() {
      	FileHandler::get_file("documentos/terminos_condiciones");
   	}
