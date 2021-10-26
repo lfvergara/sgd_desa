@@ -406,7 +406,8 @@ class UsuariosController {
     	if ($formato == $mimes_permitidos) {
             if ($tamanio < $limite_filesize) {
               	$this->model->guardar_terminos_condiciones();
-				FileHandler::save_file($terminos_condiciones, $matriculado_id, 'terminos_condiciones');
+				FileHandler::save_file($terminos_condiciones, "matriculados/{$matriculado_id}", 'terminos_condiciones');
+              	header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones");
             } else {
               	header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones/1");
             }
