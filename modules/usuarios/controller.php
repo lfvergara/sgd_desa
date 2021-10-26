@@ -399,7 +399,7 @@ class UsuariosController {
 
     	$matriculado_id = filter_input(INPUT_POST, 'matriculado_id');
     	$terminos_condiciones = $_FILES['terminos_condiciones'];
-    	$this->model->terminos_condiciones = $terminos_condiciones;
+    	$this->model->matriculado_id = $matriculado_id;
       	$formato = $terminos_condiciones['type'];
         $tamanio = $terminos_condiciones['size'];
 
