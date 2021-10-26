@@ -96,16 +96,21 @@ class SessionHandling {
   }
   
   static function actualizar() {
+    $session_grupo_id = $_SESSION['sesion.grupo_id'];
     $flag = $_SESSION["sesion.actualizacion"];
     $terminos_condiciones = $_SESSION["sesion.terminos_condiciones"];
-    if ($terminos_condiciones != 2) {
-      header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones");
-    } else {
-      if($flag == 0 OR $flag == 2) {
-        return false; 
+    if ($session_grupo_id == 2) {
+      if ($terminos_condiciones != 2) {
+        header("Location: /" . APP_NAME . "/usuarios/actualizar_terminos_condiciones");
       } else {
-        header("Location: /" . APP_NAME . "/usuarios/actualizar_informacion");
+        if($flag == 0 OR $flag == 2) {
+          return false; 
+        } else {
+          header("Location: /" . APP_NAME . "/usuarios/actualizar_informacion");
+        }
       }
+    } else {
+      return false;
     }
   }
 
