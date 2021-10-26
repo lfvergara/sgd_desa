@@ -112,6 +112,21 @@ class UsuariosView extends View{
 		print $this->render_template($menu, $render);
 	}
 
+	function actualizar_rechazado_terminos_condiciones($matriculado) {
+		$gui = file_get_contents("static/modules/usuarios/actualizar_rechazado_terminos_condiciones.html");
+		$menu = file_get_contents("static/menu.html");
+		
+		$restricciones = $this->genera_menu();
+		$menu = $this->render($restricciones, $menu);
+		$dict = array("{titulo}"=>"Actualización de Términos y Condiciones");
+    
+    	$matriculado = $this->set_dict($matriculado);
+		$render = $this->render($matriculado, $gui);
+		$render = $this->render($dict, $render);
+		$render = $this->render($dict, $render);
+		print $this->render_template($menu, $render);
+	}
+
 	function mostrar_panel_espera_confirmacion() {
 		$gui = file_get_contents("static/modules/usuarios/panel_espera_confirmacion_terminos.html");
 		$menu = file_get_contents("static/menu.html");

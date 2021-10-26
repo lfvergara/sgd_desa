@@ -168,13 +168,28 @@ class UsuariosController {
 		$this->model->matricula = $matricula;
 		$terminos_condiciones = $this->model->verificar_termino_condiciones();
 
-	    if ($terminos_condiciones == 0) {
-		    $flag = $this->model->verificar_matricula_matriculado();
-		    $this->model->matriculado_id = $flag;
-		    $matriculado = $this->model->get_matriculado();
-  			$this->view->actualizar_terminos_condiciones($matriculado);
-	    } else {
-	    	$this->view->mostrar_panel_espera_confirmacion();    		
+		switch ($terminos_condiciones) {
+			case 0:
+			    $flag = $this->model->verificar_matricula_matriculado();
+			    $this->model->matriculado_id = $flag;
+			    $matriculado = $this->model->get_matriculado();
+	  			$this->view->actualizar_terminos_condiciones($matriculado);
+				break;
+			case 1:
+	    		$this->view->mostrar_panel_espera_confirmacion();
+	    		break;
+    		case 3:
+	    		$flag = $this->model->verificar_matricula_matriculado();
+			    $this->model->matriculado_id = $flag;
+			    $matriculado = $this->model->get_matriculado();
+	  			$this->view->actualizar_rechazado_terminos_condiciones($matriculado);
+	    		break;
+			default:
+				$flag = $this->model->verificar_matricula_matriculado();
+			    $this->model->matriculado_id = $flag;
+			    $matriculado = $this->model->get_matriculado();
+	  			$this->view->actualizar_terminos_condiciones($matriculado);
+				break;	    
 		}
   	}
   
