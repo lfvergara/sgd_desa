@@ -413,7 +413,7 @@ class MatriculadosController {
     $this->view->ver_terminos_condiciones($matriculado);
   }
 
-  function ver_terminos_condiciones($argumentos) {
+  function ver_archivo_terminos_condiciones($argumentos) {
     $matriculado_id = $argumentos[0];
     FileHandler::get_file("matriculados/{$matriculado_id}/terminos_condiciones");
   }
