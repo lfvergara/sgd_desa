@@ -157,6 +157,26 @@ class UsuariosController {
 	    $matriculado = $this->model->get_matriculado();
 	    $this->view->actualizar_informacion_matriculado($usuario, $matriculado);
   	}
+
+  	function actualizar_terminos_condiciones() {
+		SessionHandling::check();
+    
+	    $usuario_id = $_SESSION["sesion.usuario_id"];
+	    $matricula = $_SESSION["sesion.matricula"];
+
+	    $this->model->usuario_id = $usuario_id;
+		$this->model->matricula = $matricula;
+		$usuario = $this->model->verificar_termino_condiciones();
+
+	    if ($terminos_condiciones == 0) {
+		    $flag = $this->model->verificar_matricula_matriculado();
+		    $this->model->matriculado_id = $flag;
+		    $matriculado = $this->model->get_matriculado();
+  			$this->view->actualizar_terminos_condiciones($matriculado);
+	    } else {
+	    	$this->view->mostrar_panel_espera_confirmacion();    		
+		}
+  	}
   
   	function mis_datos($argumentos) {
 		SessionHandling::check();
@@ -264,9 +284,6 @@ class UsuariosController {
   	function panel() {
 		SessionHandling::check();
 		SessionHandling::actualizar();
-	    $usuario_id = $_SESSION["sesion.usuario_id"];
-	    $matricula = $_SESSION["sesion.matricula"];
-    
 	    $nm = new Novedades();
 	    $novedades = $nm->listar_novedades_activas();
     
@@ -285,58 +302,42 @@ class UsuariosController {
 	    $encuesta_id = $this->model->verificar_encuesta_activa();
 	    $eventos = $this->model->traer_eventos();
 	    
-		$this->model->usuario_id = $usuario_id;
-		$this->model->matricula = $matricula;
-		$usuario = $this->model->verificar_termino_condiciones();
+	    if (is_array($encuesta_id)) {
+      		$encuesta_id = $encuesta_id[0]['encuesta_id'];
+      		$matricula_id = $_SESSION["sesion.matricula_id"];
+      		$this->model->encuesta_id = $encuesta_id;
+      		$this->model->matricula_id = $matricula_id;
+      		$encuestaresultado_id = $this->model->verificar_encuestaresultado();
+      
+      		if (!is_array($encuestaresultado_id)) {
+        		$this->model->encuesta_id = $encuesta_id;
+        		$encuesta = $this->model->traer_encuesta();
+		        $preguntas = $this->model->traer_preguntas_encuesta();
+		        $respuestas = array();
+		        foreach ($preguntas as $clave=>$valor) {
+		          	$pregunta_id = $valor['pregunta_id'];
+		          	$this->model->pregunta_id = $pregunta_id;
+		          	$respuestas = $this->model->traer_respuestas_pregunta();
+		          	$respuestas = (!is_array($respuestas)) ? array() : $respuestas;
+		          	$preguntas[$clave]['respuestas'] = $respuestas;
+		        }
 
-	    if ($terminos_condiciones == 0) {
-		    $flag = $this->model->verificar_matricula_matriculado();
-		    $this->model->matriculado_id = $flag;
-		    $matriculado = $this->model->get_matriculado();
-  			$this->view->actualizar_terminos_condiciones($matriculado);
-	    } else {
-	    	if ($terminos_condiciones == 1) {
-  				$this->view->mostrar_panel_espera_confirmacion();
-    		} else {
-
-		    	if (is_array($encuesta_id)) {
-		      		$encuesta_id = $encuesta_id[0]['encuesta_id'];
-		      		$matricula_id = $_SESSION["sesion.matricula_id"];
-		      		$this->model->encuesta_id = $encuesta_id;
-		      		$this->model->matricula_id = $matricula_id;
-		      		$encuestaresultado_id = $this->model->verificar_encuestaresultado();
-		      
-		      		if (!is_array($encuestaresultado_id)) {
-		        		$this->model->encuesta_id = $encuesta_id;
-		        		$encuesta = $this->model->traer_encuesta();
-				        $preguntas = $this->model->traer_preguntas_encuesta();
-				        $respuestas = array();
-				        foreach ($preguntas as $clave=>$valor) {
-				          	$pregunta_id = $valor['pregunta_id'];
-				          	$this->model->pregunta_id = $pregunta_id;
-				          	$respuestas = $this->model->traer_respuestas_pregunta();
-				          	$respuestas = (!is_array($respuestas)) ? array() : $respuestas;
-				          	$preguntas[$clave]['respuestas'] = $respuestas;
-				        }
-
-		        		$this->view->mostrar_panel_encuesta($encuesta, $preguntas);
-		      		} else {
-		        
-		        		if (is_array($novedades) AND !empty($novedades)) {
-		          			$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
-		        		} else {
-		          			$this->view->mostrar_panel($datos);            
-		        		}
-		      		}
-		    	} else { 
-		      		if (is_array($novedades) AND !empty($novedades)) {
-		        		$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
-		      		} else {
-		        		$this->view->mostrar_panel($datos);            
-		      		}
-		    	}
-	    	}
-		}	
+        		$this->view->mostrar_panel_encuesta($encuesta, $preguntas);
+      		} else {
+        
+        		if (is_array($novedades) AND !empty($novedades)) {
+          			$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
+        		} else {
+          			$this->view->mostrar_panel($datos);            
+        		}
+      		}
+    	} else { 
+      		if (is_array($novedades) AND !empty($novedades)) {
+        		$this->view->mostrar_panel_novedades($datos, $novedades,$eventos);
+      		} else {
+        		$this->view->mostrar_panel($datos);            
+      		}
+    	}	
 	}
   
   	function editar($argumentos) {
