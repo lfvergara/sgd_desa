@@ -398,7 +398,7 @@ class UsuariosController {
     	$limite_filesize = 20 * 1048576;
 
     	$matriculado_id = filter_input(INPUT_POST, 'matriculado_id');
-    	$terminos_condiciones = $_FILES['archivo_informe'];
+    	$terminos_condiciones = $_FILES['terminos_condiciones'];
     	$this->model->terminos_condiciones = $terminos_condiciones;
       	$formato = $terminos_condiciones['type'];
         $tamanio = $terminos_condiciones['size'];
