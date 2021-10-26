@@ -418,5 +418,11 @@ class Matriculados {
 		$datos = array(2);
     return execute_query($sql, $datos);
   }
+
+  function actualizar_estado_terminos_condiciones() {
+    $sql = "UPDATE matriculados SET terminos_condiciones = ? WHERE matriculado_id = ?";
+    $datos = array($this->terminos_condiciones, $this->matriculado_id);
+    execute_query($sql, $datos);
+  }
 }
 ?>

@@ -413,6 +413,15 @@ class MatriculadosController {
     $this->view->ver_terminos_condiciones($matriculado);
   }
 
+  function actualizar_estado_terminos_condiciones($argumentos) {
+    $matriculado_id = $argumentos[0];
+    $terminos_condiciones = $argumentos[1];
+    $this->model->matriculado_id = $matriculado_id;
+    $this->model->terminos_condiciones = $terminos_condiciones;
+    $matriculado = $this->model->actualizar_estado_terminos_condiciones();
+    header("Location: /" . APP_NAME . "/matriculados/ver_terminos_condiciones/{$matriculado_id}");
+  }
+
   function ver_archivo_terminos_condiciones($argumentos) {
     $matriculado_id = $argumentos[0];
     FileHandler::get_file("matriculados/{$matriculado_id}/terminos_condiciones");
