@@ -146,7 +146,7 @@ class EmailHelper extends View {
             $gui = str_replace("{documento_detalle}", $documento_detalle, $gui);
             $gui = str_replace("{estado}", 'Legalizado', $gui);
             $gui = str_replace("{theme_path}", THEME_PATH, $gui);
-            print_r($url_documento);exit;
+            //print_r($url_documento);exit;
             $destinatario = $datos_matriculado[0]['correoelectronico'];
             $datos = $this->set_dict($datos);
             $gui = $this->render($datos, $gui);      
