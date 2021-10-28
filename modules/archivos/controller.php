@@ -1527,7 +1527,7 @@ class ArchivosController {
 		      $this->model->actualizar_firmadigital($archivo_id, $firma_digital);
         }
         # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
+        $this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
 			}
 		} else {
       if ($estado_id == 2 ) {
@@ -1599,6 +1599,9 @@ class ArchivosController {
         $archivo["usuario"] = $_SESSION["sesion.denominacion"];
         Array2PDF()->createObleaPDF($archivo);
         $this->unificar_oblea();
+
+        $this->envia_email_documento_legalizado('Documento Legalizado', $detalle_email, $archivo);
+
 				header("Location: /" . APP_NAME . "/archivos/ver/{$archivo_id}/10");
 				break;
       case '11':
@@ -2000,13 +2003,42 @@ class ArchivosController {
     $session_grupo_id = $_SESSION['sesion.grupo_id'];
     $session_usuario_id = $_SESSION['sesion.usuario_id'];
     //if ($session_grupo_id == 99 || $session_usuario_id == 994) {
-      $datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
-      if (!empty($datos_matriculado)) {
-        if ($datos_matriculado[0]['correoelectronico'] != ' ') {
-          $emailHelper = new EmailHelper();
-          $emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);
-        }
+    $datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
+    if (!empty($datos_matriculado)) {
+      if ($datos_matriculado[0]['correoelectronico'] != ' ') {
+        $emailHelper = new EmailHelper();
+        $emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);
       }
+    }
+  }
+
+  function envia_email_documento_legalizado($estado, $documento_detalle, $archivo) {
+    SessionHandling::check();
+    require_once "tools/mailhandling.php";
+    $session_grupo_id = $_SESSION['sesion.grupo_id'];
+    $session_usuario_id = $_SESSION['sesion.usuario_id'];
+    //if ($session_grupo_id == 99 || $session_usuario_id == 994) {
+    $archivo_id = $archivo['numero_trabajo'];
+
+    $this->model->archivo_id = $archivo_id;
+    $archivo = $this->model->get();
+    $denominacion = str_replace(" ", "", $archivo["nombre"]);
+    $denominacion = trim($denominacion);
+    $protocolo = $this->model->traer_intervencion_archivo($archivo_id);
+
+
+    $protocolo = $protocolo . '_' . date('Y');
+    $nombre_documento = $protocolo . "_" . $denominacion . ".pdf";
+    $url_documento = FILES_PATH . $archivo_id . "/{$nombre_documento}";
+
+
+    $datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
+    if (!empty($datos_matriculado)) {
+      if ($datos_matriculado[0]['correoelectronico'] != ' ') {
+        $emailHelper = new EmailHelper();
+        $emailHelper->envia_email_documento_legalizado($datos_matriculado, $documento_detalle, $nombre_documento, $url_documento);
+      }
+    }
   }
 }
 ?>
