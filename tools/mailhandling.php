@@ -186,7 +186,7 @@ class EmailHelper extends View {
                     array(
                         'path' => $url_documento,
                         'type' => "application/pdf",
-                        'name' => $nombre_documento,
+                        'name' => $nombre_documento
                     )
                 )
             );
