@@ -1599,10 +1599,7 @@ class ArchivosController {
         $archivo["usuario"] = $_SESSION["sesion.denominacion"];
         Array2PDF()->createObleaPDF($archivo);
         $this->unificar_oblea();
-
-        $this->envia_email_documento_legalizado('Documento Legalizado', $detalle_email, $archivo);
-
-				header("Location: /" . APP_NAME . "/archivos/ver/{$archivo_id}/10");
+        header("Location: /" . APP_NAME . "/archivos/ver/{$archivo_id}/10");
 				break;
       case '11':
 				$this->model->guardar_protocolo();
@@ -1669,14 +1666,21 @@ class ArchivosController {
     $archivo_id = filter_input(INPUT_POST, 'archivo_id');
     $this->model->archivo_id = $archivo_id;
     $archivo = $this->model->get();
+
+    $denominacion = str_replace(" ", "", $archivo["nombre"]);
+    $denominacion = trim($denominacion);
+    $protocolo = $this->model->traer_intervencion_archivo($archivo_id);
+    $protocolo = $protocolo . '_' . date('Y');
+    $nombre_documento = $protocolo . "_" . $denominacion . ".pdf";
+
     $detalle_email = "Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
 		if($_FILES['archivo_oblea']['error']==0) {
       $archivo_oblea = $_FILES['archivo_oblea'];
       $formato = $archivo['type'];
       $tamano = $archivo['size'];
       $limite_filesize = 20 * 1048576;
-      FileHandler::save_file($archivo_oblea, $archivo_id, 'obleaLegalizada'); 
-      $this->envia_email_estado_documento('Documento Legalizado/Oblea Disponible', $detalle_email, $archivo_id);
+      FileHandler::save_file($archivo_oblea, $archivo_id, $nombre_documento); 
+      $this->envia_email_documento_legalizado('Documento Legalizado/Oblea Disponible', $detalle_email, $archivo_id);
     }
 
     header("Location: /" . APP_NAME . "/archivos/consultar/{$archivo_id}/8");
@@ -2012,14 +2016,12 @@ class ArchivosController {
     }
   }
 
-  function envia_email_documento_legalizado($estado, $documento_detalle, $archivo) {
+  function envia_email_documento_legalizado($estado, $documento_detalle, $archivo_id) {
     SessionHandling::check();
     require_once "tools/mailhandling.php";
     $session_grupo_id = $_SESSION['sesion.grupo_id'];
     $session_usuario_id = $_SESSION['sesion.usuario_id'];
     //if ($session_grupo_id == 99 || $session_usuario_id == 994) {
-    $archivo_id = $archivo['numero_trabajo'];
-
     $this->model->archivo_id = $archivo_id;
     $archivo = $this->model->get();
     $denominacion = str_replace(" ", "", $archivo["nombre"]);
