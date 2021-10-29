@@ -1527,7 +1527,7 @@ class ArchivosController {
 		      $this->model->actualizar_firmadigital($archivo_id, $firma_digital);
         }
         # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        $this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
+        //$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
 			}
 		} else {
       if ($estado_id == 2 ) {

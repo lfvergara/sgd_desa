@@ -146,7 +146,7 @@ class EmailHelper extends View {
             $gui = str_replace("{documento_detalle}", $documento_detalle, $gui);
             $gui = str_replace("{estado}", 'Legalizado', $gui);
             $gui = str_replace("{theme_path}", THEME_PATH, $gui);
-            //print_r($url_documento);exit;
+            
             $destinatario = $datos_matriculado[0]['correoelectronico'];
             $datos = $this->set_dict($datos);
             $gui = $this->render($datos, $gui);      
@@ -154,6 +154,10 @@ class EmailHelper extends View {
             $asunto = "Actualización de Estado en Documento";
             $array_final[] = array('email'=>$destinatario,'type'=>'to');
       
+            $attachment = file_get_contents($url_documento);
+            $attachment_encoded = base64_encode($attachment); 
+
+
             $mandrill = new Mandrill('zxCTtQ5WNKT5OzMM2xUuWw');
             $message = array(
             'html' => $gui,
@@ -184,7 +188,7 @@ class EmailHelper extends View {
                 ),
                 "attachments" => array(
                     array(
-                        'path' => $url_documento,
+                        'content' => $attachment_encoded,
                         'type' => "application/pdf",
                         'name' => $nombre_documento
                     )
