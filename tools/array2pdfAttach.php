@@ -158,7 +158,6 @@ class Array2PDFAttach {
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
             copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
-            print_r('hola');exit;
             copy($ini_ruta_informe, $fin_ruta_informe);
 
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
