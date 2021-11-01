@@ -154,6 +154,7 @@ class Array2PDFAttach {
         } else {
           
           if($adjunta_estadocontable == 1) {
+            print_r('hola');exit;
             $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaTemporalConsejo.pdf";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
