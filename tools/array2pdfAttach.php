@@ -62,6 +62,13 @@ class Array2PDFAttach {
             $archivo2 = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+            
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink($fin_ruta_oblea_consejo);
+            unlink($fin_ruta_informe);
+            unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
+            unlink(FILES_PATH . $archivo_id . "/obleaTemporal.pdf");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
@@ -79,6 +86,10 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
             
             copy($archivo2, $fin_ruta_oblea_consejo);
+
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink($fin_ruta_informe);
           }
         } else {
           if ($flag_anexo == 1) {
@@ -98,6 +109,10 @@ class Array2PDFAttach {
 
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/{$nombre_final}";
@@ -125,6 +140,10 @@ class Array2PDFAttach {
           $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
           $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
           $result = shell_exec($script." 2>&1");
+
+          //ELIMINA ARCHIVOS TEMPORALES
+          unlink($fin_ruta_oblea);
+          unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
         }    
         break;
       default:
@@ -146,6 +165,10 @@ class Array2PDFAttach {
 
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/{$nombre_final}";
@@ -178,6 +201,13 @@ class Array2PDFAttach {
             $archivo2 = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink($fin_ruta_oblea_consejo);
+            unlink($fin_ruta_informe);
+            unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
+            unlink(FILES_PATH . $archivo_id . "/obleaTemporal.pdf");
           } else {
             $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
@@ -191,6 +221,10 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
 
             copy($archivo2, $fin_ruta_oblea_consejo);
+
+            //ELIMINA ARCHIVOS TEMPORALES
+            unlink($fin_ruta_oblea);
+            unlink($fin_ruta_informe);
           }
         }
         break;

@@ -1672,14 +1672,17 @@ class ArchivosController {
     $protocolo = $this->model->traer_intervencion_archivo($archivo_id);
     $protocolo = $protocolo . '_' . date('Y');
     $nombre_documento = $protocolo . "_" . $denominacion . ".pdf";
+    $nombre_documento_consejo = "obleaConsejo_" . $protocolo . "_" . $denominacion . ".pdf";
 
     $detalle_email = "Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
-		if($_FILES['archivo_oblea']['error']==0) {
+		if($_FILES['archivo_oblea']['error'] == 0 AND $_FILES['archivo_oblea_consejo']['error']==0) {
       $archivo_oblea = $_FILES['archivo_oblea'];
+      $archivo_oblea_consejo = $_FILES['archivo_oblea_consejo'];
       $formato = $archivo['type'];
       $tamano = $archivo['size'];
       $limite_filesize = 20 * 1048576;
       FileHandler::save_file($archivo_oblea, $archivo_id, $nombre_documento); 
+      FileHandler::save_file($archivo_oblea_consejo, $archivo_id, $nombre_documento_consejo); 
       $this->envia_email_documento_legalizado('Documento Legalizado/Oblea Disponible', $detalle_email, $archivo_id);
     }
 
