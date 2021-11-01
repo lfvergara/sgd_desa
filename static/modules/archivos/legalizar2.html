@@ -23,17 +23,27 @@
             			<form method="post" action="/{app_name}/archivos/subir_oblea" id="formulario_dropdown" name="formulario_dropdown" enctype="multipart/form-data">
 							<div class="col-lg-12">
 							  	<div class="form-group">
-                  					<label class="col-lg-12 control-label">El documento ha sido legalizado, descargue la oblea de <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{numero_protocolo_file}_{denominacion_file}.pdf" target="_blank">AQUÍ!</a></label>
+                  					<label class="col-lg-12 control-label">DOCUMENTO LEGALIZADO</label>
                 				</div>
 							  	<div class="form-group">
-			                  		<label class="col-lg-12 control-label">Adjuntar Oblea</label>
+                  					<label class="col-lg-12 control-label">Descargue la oblea para el matriculado <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{numero_protocolo_file}_{denominacion_file}.pdf" target="_blank">AQUÍ!</a></label>
+                  					<label class="col-lg-12 control-label">Descargue la oblea para el consejo <a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{numero_protocolo_file}_{denominacion_file}.pdf" target="_blank">AQUÍ!</a></label>
+                				</div>
+							  	<div class="form-group">
+			                  		<label class="col-lg-12 control-label">Adjuntar Oblea Matriculado</label>
 			                  		<div class="col-lg-12">
 			                    		<input type="file" class="form-control" id="archivo_oblea" name="archivo_oblea" accept=".pdf" required="" />
 			                  		</div>
 			                	</div>
+			                	<div class="form-group">
+			                  		<label class="col-lg-12 control-label">Adjuntar Oblea Consejo</label>
+			                  		<div class="col-lg-12">
+			                    		<input type="file" class="form-control" id="archivo_oblea_consejo" name="archivo_oblea_consejo" accept=".pdf" required="" />
+			                  		</div>
+			                	</div>
 			                	<div class="col-lg-12">
 			                  		<input type="hidden" name="archivo_id" value="{archivo_id}">
-			                  		<button type="submit" class="btn btn-info" style="float: right; margin-top: 2%;">Subir Oblea</button>
+			                  		<button type="submit" class="btn btn-info" style="float: right; margin-top: 2%;">Subir Obleas</button>
 			                	</div>
 							</div>
 						</form>
