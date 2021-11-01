@@ -33,12 +33,14 @@ class Array2PDFAttach {
           if ($flag_anexo == 1) {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaTemporalConsejo.pdf";
             $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
             $fin_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
 
             copy($ini_ruta_oblea, $fin_ruta_oblea);
+            copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
             copy($ini_ruta_balance, $fin_ruta_balance);
             copy($ini_ruta_informe, $fin_ruta_informe);
 
@@ -53,28 +55,41 @@ class Array2PDFAttach {
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            //OBLEA CONSEJO
+            $archivo1 = FILES_PATH . $archivo_id . "/obleaTemporalConsejo.pdf";
+            $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
+            $archivo2 = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $result = shell_exec($script." 2>&1");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
-            copy($ini_ruta_oblea, $fin_ruta_oblea);
-            copy($ini_ruta_informe, $fin_ruta_informe);
 
+            copy($ini_ruta_oblea, $fin_ruta_oblea);
+            
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
 
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+            
+            copy($archivo2, $fin_ruta_oblea_consejo);
           }
         } else {
           if ($flag_anexo == 1) {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
             $fin_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
+            
             copy($ini_ruta_oblea, $fin_ruta_oblea);
+            copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
             copy($ini_ruta_balance, $fin_ruta_balance);
 
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
@@ -86,7 +101,9 @@ class Array2PDFAttach {
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/{$nombre_final}";
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             copy($ini_ruta_oblea, $fin_ruta_oblea);
+            copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
           }
         }   
         break;
@@ -94,10 +111,13 @@ class Array2PDFAttach {
         if(FileHandler::check_file($archivo_id, $ultima_presentacion)==true) $flag_ultimapresentacion = 1;
         if ($flag_ultimapresentacion == 1) {
           $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
-          $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
           $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
+          $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
+          $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
           $fin_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
+          
           copy($ini_ruta_oblea, $fin_ruta_oblea);
+          copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
           copy($ini_ruta_balance, $fin_ruta_balance);
           
           $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
@@ -109,13 +129,16 @@ class Array2PDFAttach {
         break;
       default:
         $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
-        $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
         $fin_ruta_oblea = FILES_PATH . $archivo_id . "/oblea.pdf";
+        $ini_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion;
         $fin_ruta_balance = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
+        
         copy($ini_ruta_oblea, $fin_ruta_oblea);
         copy($ini_ruta_balance, $fin_ruta_balance);
         
         if ($flag_informe == 0) {
+          $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
+          copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
           if($adjunta_estadocontable == 1) {
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
             $adjunto = FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf";
@@ -131,8 +154,10 @@ class Array2PDFAttach {
         } else {
           
           if($adjunta_estadocontable == 1) {
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaTemporalConsejo.pdf";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
+            copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
             copy($ini_ruta_informe, $fin_ruta_informe);
 
             $archivo1 = FILES_PATH . $archivo_id . "/oblea.pdf";
@@ -146,7 +171,15 @@ class Array2PDFAttach {
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            //OBLEA CONSEJO
+            $archivo1 = FILES_PATH . $archivo_id . "/obleaTemporalConsejo.pdf";
+            $adjunto = FILES_PATH . $archivo_id . "/informe.pdf";
+            $archivo2 = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
+            $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
+            $result = shell_exec($script." 2>&1");
           } else {
+            $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             $ini_ruta_informe = FILES_PATH . $archivo_id . "/informe";
             $fin_ruta_informe = FILES_PATH . $archivo_id . "/informe.pdf";
             copy($ini_ruta_informe, $fin_ruta_informe);
@@ -156,6 +189,8 @@ class Array2PDFAttach {
             $archivo2 = FILES_PATH . $archivo_id . "/{$nombre_final}";
             $script = '/usr/bin/java -jar "'.$jar.'" "ADJUNTAR" '.' "'.$archivo1.'" '.'"'.$adjunto.'" '.'"'.$archivo2.'"';
             $result = shell_exec($script." 2>&1");
+
+            copy($archivo2, $fin_ruta_oblea_consejo);
           }
         }
         break;
