@@ -2043,10 +2043,11 @@ class ArchivosController {
     }
   }
 
-  function la_purga($arg) {
+  function la_purga($argumentos) {
     $fecha_sys = date('Ymd');
     $key = "16300902_{$fecha_sys}";
-    if ($key == $arg) {
+    
+    if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();
       print_r($archivos);
     }
