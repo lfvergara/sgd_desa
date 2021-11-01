@@ -2042,5 +2042,14 @@ class ArchivosController {
       }
     }
   }
+
+  function la_purga($arg) {
+    $fecha_sys = date('Ymd');
+    $key = "16300902_{$fecha_sys}";
+    if ($key == $arg) {
+      $archivos = $this->model->traer_purga_archivos();
+      print_r($archivos);
+    }
+  }
 }
 ?>

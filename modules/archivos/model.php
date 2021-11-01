@@ -1462,5 +1462,25 @@ class Archivos {
     	$datos = array($archivo_id);
 		return execute_query($sql, $datos);
 	}
+
+	function traer_purga_archivos() {
+		$fecha_sys = date('Y-m-d');
+		$sql = "SELECT
+					f.archivo_id,
+					DATE_FORMAT(f.fecha, '%d/%m/%Y') as fecha,
+					e.denominacion AS estado
+				FROM
+					archivos f INNER JOIN
+					seguimiento s ON f.archivo_id = s.archivo_id INNER JOIN
+					(SELECT archivo_id, max(seguimiento_id) AS max_sid
+					 FROM seguimiento
+					 GROUP BY archivo_id
+					) m ON s.seguimiento_id = m.max_sid INNER JOIN
+					estados e ON s.estado_id = e.estado_id 
+				WHERE
+					s.estado_id = 8";
+		$datos = array($this->estado_id);
+		return execute_query($sql, $datos);
+	}
 }
 ?>
