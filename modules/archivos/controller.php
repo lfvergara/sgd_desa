@@ -2053,12 +2053,12 @@ class ArchivosController {
     if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();
       foreach ($archivos as $tmp_array) {
-
-        print_r($tmp_array['archivo_id']);
+        $archivo_id = $tmp_array['archivo_id'];
+        $directorio_inicial = FILES_PATH . $archivo_id . "/";
+        print_r($directorio_inicial);
         
       }
       exit;
-      $directorio_inicial = URL_PRIVATE . $arg;
       foreach(glob($directorio . "/*") as $archivos) {
             if (is_dir($archivos)){
                 $this->eliminar_directorio($archivos);
