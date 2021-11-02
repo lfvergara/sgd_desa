@@ -2052,9 +2052,9 @@ class ArchivosController {
     
     if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();
-      foreach ($archivos as $clave=>$valor) {
+      foreach ($archivos as $tmp_array) {
 
-        print_r($valor);
+        print_r($tmp_array['archivo_id']);
         
       }
       exit;
