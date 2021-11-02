@@ -2052,8 +2052,24 @@ class ArchivosController {
     
     if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();
-      print_r($archivos);
-    }
+      foreach ($archivos as $clave=>$valor) {
+
+        $archivo_id = $clave['archivo_id'];
+        print_r($archivo_id);
+        
+      }
+      exit;
+      $directorio_inicial = URL_PRIVATE . $arg;
+      foreach(glob($directorio . "/*") as $archivos) {
+            if (is_dir($archivos)){
+                $this->eliminar_directorio($archivos);
+            } else {
+              unlink($archivos);
+            } 
+          }
+
+
+      }
   }
 }
 ?>
