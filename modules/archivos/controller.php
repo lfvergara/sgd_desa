@@ -2075,7 +2075,7 @@ class ArchivosController {
         $array_descarte[] = $comprobante_pago;
 
         foreach(glob($directorio_inicial . "/*") as $documentos) {
-          if (!in_array($documentos, $array_descarte)) {
+          if (in_array($documentos, $array_descarte)) {
             print_r($documentos);
             print '<hr>';
           }
