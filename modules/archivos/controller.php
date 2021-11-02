@@ -2055,17 +2055,19 @@ class ArchivosController {
       foreach ($archivos as $tmp_array) {
         $archivo_id = $tmp_array['archivo_id'];
         $directorio_inicial = FILES_PATH . $archivo_id . "/";
-        print_r($directorio_inicial);
         
+        foreach(glob($directorio_inicial . "/*") as $documentos) {
+          print_r($documentos);
+          /*
+          if (is_dir($archivos)){
+              $this->eliminar_directorio($archivos);
+          } else {
+            unlink($archivos);
+          } 
+          */
+        }
       }
       exit;
-      foreach(glob($directorio . "/*") as $archivos) {
-            if (is_dir($archivos)){
-                $this->eliminar_directorio($archivos);
-            } else {
-              unlink($archivos);
-            } 
-          }
 
 
       }
