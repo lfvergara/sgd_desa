@@ -2054,7 +2054,7 @@ class ArchivosController {
       $archivos = $this->model->traer_purga_archivos();
       foreach ($archivos as $tmp_array) {
         $archivo_id = $tmp_array['archivo_id'];
-        $directorio_inicial = FILES_PATH . $archivo_id . "/";
+        $directorio_inicial = FILES_PATH . $archivo_id;
         
         foreach(glob($directorio_inicial . "/*") as $documentos) {
           print_r($documentos);
