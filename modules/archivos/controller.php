@@ -2058,6 +2058,7 @@ class ArchivosController {
         
         foreach(glob($directorio_inicial . "/*") as $documentos) {
           print_r($documentos);
+          print '<hr>';
           /*
           if (is_dir($archivos)){
               $this->eliminar_directorio($archivos);
