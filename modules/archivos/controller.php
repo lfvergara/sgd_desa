@@ -2054,8 +2054,7 @@ class ArchivosController {
       $archivos = $this->model->traer_purga_archivos();
       foreach ($archivos as $clave=>$valor) {
 
-        $archivo_id = $clave['archivo_id'];
-        print_r($archivo_id);
+        print_r($valor);
         
       }
       exit;
