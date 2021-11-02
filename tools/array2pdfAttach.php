@@ -64,6 +64,7 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
             
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink($fin_ruta_oblea_consejo);
             unlink($fin_ruta_informe);
@@ -88,6 +89,7 @@ class Array2PDFAttach {
             copy($archivo2, $fin_ruta_oblea_consejo);
 
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink($fin_ruta_informe);
           }
@@ -111,6 +113,7 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
 
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
           } else {
@@ -119,6 +122,7 @@ class Array2PDFAttach {
             $fin_ruta_oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_final}";
             copy($ini_ruta_oblea, $fin_ruta_oblea);
             copy($ini_ruta_oblea, $fin_ruta_oblea_consejo);
+            unlink($ini_ruta_oblea);
           }
         }   
         break;
@@ -142,6 +146,7 @@ class Array2PDFAttach {
           $result = shell_exec($script." 2>&1");
 
           //ELIMINA ARCHIVOS TEMPORALES
+          unlink($ini_ruta_oblea);
           unlink($fin_ruta_oblea);
           unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
         }    
@@ -167,12 +172,14 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
 
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink(FILES_PATH . $archivo_id . "/" . $ultima_presentacion . ".pdf");
           } else {
             $ini_ruta_oblea = FILES_PATH . $archivo_id . "/oblea";
             $fin_ruta_oblea = FILES_PATH . $archivo_id . "/{$nombre_final}";
             copy($ini_ruta_oblea, $fin_ruta_oblea);
+            unlink($ini_ruta_oblea);
           }          
         } else {
           
@@ -203,6 +210,7 @@ class Array2PDFAttach {
             $result = shell_exec($script." 2>&1");
 
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink($fin_ruta_oblea_consejo);
             unlink($fin_ruta_informe);
@@ -223,6 +231,7 @@ class Array2PDFAttach {
             copy($archivo2, $fin_ruta_oblea_consejo);
 
             //ELIMINA ARCHIVOS TEMPORALES
+            unlink($ini_ruta_oblea);
             unlink($fin_ruta_oblea);
             unlink($fin_ruta_informe);
           }

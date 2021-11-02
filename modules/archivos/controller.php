@@ -2031,11 +2031,9 @@ class ArchivosController {
     $denominacion = trim($denominacion);
     $protocolo = $this->model->traer_intervencion_archivo($archivo_id);
 
-
     $protocolo = $protocolo . '_' . date('Y');
     $nombre_documento = $protocolo . "_" . $denominacion . ".pdf";
     $url_documento = FILES_PATH . $archivo_id . "/{$nombre_documento}";
-
 
     $datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
     if (!empty($datos_matriculado)) {
@@ -2056,9 +2054,31 @@ class ArchivosController {
         $archivo_id = $tmp_array['archivo_id'];
         $directorio_inicial = FILES_PATH . $archivo_id;
         
+        $this->model->archivo_id = $archivo_id;
+        $archivo = $this->model->get();
+        $denominacion = str_replace(" ", "", $archivo["nombre"]);
+        $denominacion = trim($denominacion);
+        $protocolo = $this->model->traer_intervencion_archivo($archivo_id);
+
+        $protocolo = $protocolo . '_' . date('Y');
+        $nombre_documento = $protocolo . "_" . $denominacion . ".pdf";
+
+        $oblea_consejo = FILES_PATH . $archivo_id . "/obleaConsejo_{$nombre_documento}";
+        $informe = FILES_PATH . $archivo_id . "/informe";
+        $nota = FILES_PATH . $archivo_id . "/nota";
+        $comprobante_pago = FILES_PATH . $archivo_id . "/comprobante_pago";
+
+        $array_descarte = array();
+        $array_descarte[] = $oblea_consejo;
+        $array_descarte[] = $informe;
+        $array_descarte[] = $nota;
+        $array_descarte[] = $comprobante_pago;
+
         foreach(glob($directorio_inicial . "/*") as $documentos) {
-          print_r($documentos);
-          print '<hr>';
+          if (!in_array($documentos, $array_descarte)) {
+            print_r($documentos);
+            print '<hr>';
+          }
           /*
           if (is_dir($archivos)){
               $this->eliminar_directorio($archivos);
