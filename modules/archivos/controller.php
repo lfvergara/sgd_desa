@@ -2076,14 +2076,14 @@ class ArchivosController {
 
         foreach(glob($directorio_inicial . "/*") as $documento) {
           if (!in_array($documento, $array_descarte)) {
-            print_r($documento);
-            print '<hr>';
-            //unlink($documento);
+            //print_r($documento);
+            //print '<hr>';
+            unlink($documento);
           }
         }
       }
-      exit;
     }
+    exit;
   }
 }
 ?>
