@@ -2046,7 +2046,7 @@ class ArchivosController {
 
   function la_purga($argumentos) {
     $fecha_sys = date('Ymd');
-    $key = "16300902_{$fecha_sys}";
+    $key = "16300902";
     
     if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();
@@ -2074,24 +2074,16 @@ class ArchivosController {
         $array_descarte[] = $nota;
         $array_descarte[] = $comprobante_pago;
 
-        foreach(glob($directorio_inicial . "/*") as $documentos) {
-          if (!in_array($documentos, $array_descarte)) {
-            print_r($documentos);
+        foreach(glob($directorio_inicial . "/*") as $documento) {
+          if (!in_array($documento, $array_descarte)) {
+            print_r($documento);
             print '<hr>';
+            //unlink($documento);
           }
-          /*
-          if (is_dir($archivos)){
-              $this->eliminar_directorio($archivos);
-          } else {
-            unlink($archivos);
-          } 
-          */
         }
       }
       exit;
-
-
-      }
+    }
   }
 }
 ?>
