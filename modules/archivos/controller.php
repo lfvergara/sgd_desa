@@ -2047,9 +2047,6 @@ class ArchivosController {
   function la_purga($argumentos) {
     $fecha_sys = date('Ymd');
     $key = "16300902_{$fecha_sys}";
-    $fecha1 = date('Y-m-d');
-    $fecha2 = date("Y-m-d",strtotime($fecha_actual."- 2 days"));
-    print_r($fecha2);exit;
     
     if ($key == $argumentos[0]) {
       $archivos = $this->model->traer_purga_archivos();

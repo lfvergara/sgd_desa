@@ -1464,7 +1464,8 @@ class Archivos {
 	}
 
 	function traer_purga_archivos() {
-		$fecha_sys = date('Y-m-d');
+		$fecha1 = date('Y-m-d');
+    	$fecha2 = date("Y-m-d",strtotime($fecha_actual."- 2 days"));
 		$sql = "SELECT
 					f.archivo_id,
 					DATE_FORMAT(f.fecha, '%d/%m/%Y') as fecha,
@@ -1478,8 +1479,9 @@ class Archivos {
 					) m ON s.seguimiento_id = m.max_sid INNER JOIN
 					estados e ON s.estado_id = e.estado_id 
 				WHERE
-					s.estado_id = 8";
-		$datos = array($this->estado_id);
+					s.estado_id = 8 AND
+					s.fecha <= ?";
+		$datos = array($fecha2);
 		return execute_query($sql, $datos);
 	}
 }
